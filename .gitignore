@@ -1,0 +1,23 @@
+# OS / editor noise
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/
+
+# Build / tool output
+tool/build/
+*.obj
+*.o
+*.exe
+!tool/**/sdrcapture.exe
+
+# Capture output (keep samples small on purpose)
+artifacts/samples/*
+!artifacts/samples/.gitkeep
+
+# Temp
+tmp/
+*.tmp
