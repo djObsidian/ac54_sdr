@@ -1,0 +1,132 @@
+# FindOid — NDIS OID/IOCTL door for rtwlanu.sys command bus
+
+## string anchor 0x14040a4e1: Process commands: %d, Unknown ioctl: %d
+
+---- refs to Process-commands string (0x14040a4e1) ----
+
+---- refs to DAT_1408e5b40 cmd-queue global (0x1408e5b40) ----
+   from 0x14017afb3 in FUN_14017aee4@14017aee4 (READ_WRITE)
+   from 0x14017afc0 in FUN_14017aee4@14017aee4 (WRITE)
+   from 0x14017b0e4 in FUN_14017b0e0@14017b0e0 (READ)
+   from 0x14017b0ed in FUN_14017b0e0@14017b0e0 (DATA)
+   from 0x14017af09 in FUN_14017aee4@14017aee4 (DATA)
+   from 0x14017af22 in FUN_14017aee4@14017aee4 (DATA)
+   from 0x14017af30 in FUN_14017aee4@14017aee4 (WRITE)
+
+====================================================================
+fn referencing cmd-queue global  FUN_14017aee4  @ 0x14017aee4
+====================================================================
+
+undefined8 FUN_14017aee4(longlong param_1,uint param_2,undefined8 *param_3)
+
+{
+  longlong lVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  undefined8 uVar5;
+  undefined8 *puVar6;
+  undefined8 *puVar7;
+  longlong lVar8;
+  undefined8 *puVar9;
+  
+  lVar1 = *(longlong *)(**(longlong **)(param_1 + 0x758) + 0xe70);
+  if (param_2 < 0x150) {
+    FUN_140400cc0(&DAT_1408e5b40,param_3,param_2);
+  }
+  else {
+    lVar8 = 2;
+    puVar6 = (undefined8 *)&DAT_1408e5b40;
+    do {
+      puVar9 = param_3;
+      puVar7 = puVar6;
+      uVar5 = puVar9[1];
+      *puVar7 = *puVar9;
+      puVar7[1] = uVar5;
+      uVar5 = puVar9[3];
+      puVar7[2] = puVar9[2];
+      puVar7[3] = uVar5;
+      uVar5 = puVar9[5];
+      puVar7[4] = puVar9[4];
+      puVar7[5] = uVar5;
+      uVar5 = puVar9[7];
+      puVar7[6] = puVar9[6];
+      puVar7[7] = uVar5;
+      uVar5 = puVar9[9];
+      puVar7[8] = puVar9[8];
+      puVar7[9] = uVar5;
+      uVar5 = puVar9[0xb];
+      puVar7[10] = puVar9[10];
+      puVar7[0xb] = uVar5;
+      uVar5 = puVar9[0xd];
+      puVar7[0xc] = puVar9[0xc];
+      puVar7[0xd] = uVar5;
+      uVar5 = puVar9[0xf];
+      puVar7[0xe] = puVar9[0xe];
+      puVar7[0xf] = uVar5;
+      lVar8 = lVar8 + -1;
+      puVar6 = puVar7 + 0x10;
+      param_3 = puVar9 + 0x10;
+    } while (lVar8 != 0);
+    uVar5 = puVar9[0x11];
+    puVar7[0x10] = puVar9[0x10];
+    puVar7[0x11] = uVar5;
+    uVar5 = puVar9[0x13];
+    puVar7[0x12] = puVar9[0x12];
+    puVar7[0x13] = uVar5;
+    uVar5 = puVar9[0x15];
+    puVar7[0x14] = puVar9[0x14];
+    puVar7[0x15] = uVar5;
+    uVar5 = puVar9[0x17];
+    puVar7[0x16] = puVar9[0x16];
+    puVar7[0x17] = uVar5;
+    uVar2 = *(undefined4 *)((longlong)puVar9 + 0xc4);
+    uVar3 = *(undefined4 *)(puVar9 + 0x19);
+    uVar4 = *(undefined4 *)((longlong)puVar9 + 0xcc);
+    *(undefined4 *)(puVar7 + 0x18) = *(undefined4 *)(puVar9 + 0x18);
+    *(undefined4 *)((longlong)puVar7 + 0xc4) = uVar2;
+    *(undefined4 *)(puVar7 + 0x19) = uVar3;
+    *(undefined4 *)((longlong)puVar7 + 0xcc) = uVar4;
+  }
+  if (DAT_1408e5b24 == 0) {
+    DAT_1408e5b40 = 0;
+  }
+  else if (DAT_1408e5b24 == 1) {
+    DAT_1408e5b40 = DAT_1408e5b24;
+  }
+  FUN_140030860(lVar1 + 0x775798);
+  return 0;
+}
+
+
+====================================================================
+fn referencing cmd-queue global  FUN_14017b0e0  @ 0x14017b0e0
+====================================================================
+
+void FUN_14017b0e0(undefined8 param_1)
+
+{
+  if (DAT_1408e5b40 == 0) {
+    FUN_14017e690(param_1,&DAT_1408e5b40);
+  }
+  return;
+}
+
+
+## 'ZwDeviceIoControlFile' string found at 0x1409047f8
+
+---- refs to ZwDeviceIoControlFile string (0x1409047f8) ----
+
+## OID constant candidates found in code (mov/cmp immediates, 4-byte LE in .text) ##
+  0x40024add  OID=0x01000001  in FUN_1400248cc @0x1400248cc
+  0x400083e6  OID=0x01000002  in FUN_140008350 @0x140008350
+  0x4000f523  OID=0x01000003  in FUN_14000eee0 @0x14000eee0
+  0x40026fbf  OID=0x01000004  in FUN_140026a5c @0x140026a5c
+  0x40035160  OID=0x01000005  in FUN_140035068 @0x140035068
+  0x400470a3  OID=0x01000006  in FUN_140046d50 @0x140046d50
+  0x40032ffa  OID=0x01010000  in FUN_140032c3c @0x140032c3c
+  0x40007511  OID=0x00030000  in FUN_140007460 @0x140007460
+  0x4000a6a7  OID=0x00020000  in FUN_14000a600 @0x14000a600
+  0x401e929b  OID=0x01020000  in FUN_1401e9220 @0x1401e9220
+  0x4006e417  OID=0x01010100  in FUN_14006e358 @0x14006e358
+  0x400c09b2  OID=0x01014100  in FUN_1400c0924 @0x1400c0924

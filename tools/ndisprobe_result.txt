@@ -1,0 +1,6 @@
+[*] enabled 8 privileges (lasterr=1300)
+open(\Device, mask=0x00000009) -> 0xc0000022
+open(\Device, mask=0x00100009) -> 0xc0000022
+open(\Device, mask=0x001f0001) -> 0xc0000022
+open(\Device, mask=0x001f001f) -> 0xc0000022
+=== could not open \Device directory ===

@@ -21,3 +21,13 @@ artifacts/samples/*
 # Temp
 tmp/
 *.tmp
+
+# External reference sources (clone: git clone --depth 1 https://github.com/lwfinger/rtw88 ref/rtw88)
+ref/
+
+# Captures / device-specific dumps
+tools/cap/
+tools/*.bin
+*.cs16
+*.cf32
+

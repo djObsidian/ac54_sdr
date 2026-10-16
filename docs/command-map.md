@@ -287,14 +287,114 @@ handlers with different register values.
 
 ---
 
-## 6. Open items (Stage 2)
+## 6. ✅ RESOLVED (Stage 3.1) — the user-mode→kernel door
 
-1. **User-mode→kernel door**: exact NDIS OID / IOCTL + request buffer layout that
-   fills `DAT_1408e5b40` (cmd_index / arg_count / keyword / args). Strings
-   `Process commands: %d, Unknown ioctl: %d` and `ZwDeviceIoControlFile` are the
-   anchors.
-2. **Sample packing**: confirm bit width + I/Q interleave in `FUN_1403a3c40`
+### 6.1 NDIS OID request handler
+
+`FUN_140018700` @ `0x140018700` is the NDIS vendor-OID request handler:
+
+```c
+NTSTATUS FUN_140018700(PVOID ctx, UINT oid, UINT *inbuf, UINT inlen,
+                       UINT *outlen, PVOID outbuf);
+```
+
+It switches on the 32-bit `oid` value (decompiler shows sign-extended `0xff8180xx`;
+the real 32-bit OID is `0x8180xx`). The **command-bus OIDs** are:
+
+| OID (32-bit) | handler | purpose |
+|---|---|---|
+| **`0x818040`** | `FUN_14017aee4` | **SEND command** (copy user buf → global, queue work-item) |
+| **`0x818041`** | `FUN_14017ae28` | **READ result** (returns ~0xF0–0xD8 bytes of command output) |
+| **`0x818042`** | `FUN_14017adf8` | **POLL done-flag** (`DAT_1408d0290`: 1=done; read-and-clear) |
+| `0x818045` | `FUN_140170a98` | query (in[0]=sel/id, in[1]∈{1,2,4} → dec/hex/char readout) |
+| `0x818046/47/49/51/53` | vtable `ctx+0xc38` (arg 0x14/0x16/0x17) | driver-internal ops |
+| `0x81801c` | `ctx+0xe98` (6 B) | read a 6-byte field |
+| `0x818083` | `ctx+0x61b8e5` (1 B) | read 1 byte |
+| `0x8180a1/a2` | `FUN_1400f5b38` / (0x18 B out) | read 0x18-byte struct |
+| `0x818780/82` | `FUN_140042b80/0x41e30` (0x1bf) | set/get a 0x7f-flag |
+| `0x81684b` | `FUN_140173e8c` (1 B) | read 1 byte |
+| `0x8168fa` | `ctx+0x6354bc` (4 B) | read 4 bytes |
+| `0x0101cb/a2` | `FUN_1400f5b38` | (0x18 B out) |
+| `0x0111c2` | `FUN_1403fc6d8` | ? |
+| `0x0111c9` | `FUN_140172c40` | `in[1]>>4`, `in[0]&0xfffff` |
+
+Unknown OID → `0x00010001` (NDIS_STATUS_UNSUCCESSFUL / `0x10001`).
+
+### 6.2 Send-command path (OID `0x818040`)
+
+`FUN_14017aee4(ctx, inlen, inbuf)`:
+1. `inlen < 0x150` → `RtlCopyMemory(&DAT_1408e5b40, inbuf, inlen)` (else manual copy);
+2. set the "command pending" flag (`DAT_1408e5b24` → `DAT_1408e5b40`);
+3. `FUN_140030860(ctx+0xe70+0x775798)` → **queue a work-item**.
+
+Work-item `FUN_14017b0e0`: `if (pending) FUN_14017e690(ctx, &DAT_1408e5b40);`
+→ dispatcher runs the command, then sets `_DAT_1408d0290 = 1` (**done-flag**).
+
+### 6.3 Command struct layout (the OID `0x818040` input buffer)
+
+`FUN_14017e690(ctx, buf)` parses `buf`:
+
+| offset | field | used by |
+|---|---|---|
+| `+0x00` | reserved (8 B) | — |
+| `+0x08` | `cmd_index` (u32) | **jump-table** path (`< 0x23`) |
+| `+0x0C` | `arg_count` (u32) | all paths (must be `> 1`) |
+| `+0x10` | **token[0]** (16 B) — `"Echo"` / `"fw"` / jump-table keyword | dispatch |
+| `+0x20` | **token[1]** (16 B) — phydm keyword (e.g. `lamode`) / jump-table arg0 | phydm dispatcher |
+| `+0x30` | **token[2]** (16 B) — arg1 | phydm handler |
+| `+0x40` | **token[3]** (16 B) — arg2 | phydm handler |
+| `+0x50` | **token[4]** (16 B) — arg3 | phydm handler |
+| `+0x20 + n·0x10` | **token[n+1]** (16 B) — argn | phydm handler |
+
+- **Dispatch** (`FUN_14017e690`):
+  - `memcmp(buf+0x10, "Echo", 4)==0` → phydm dispatcher `FUN_140386620`
+    (phydm-keyword = `buf+0x20`; args = `buf+0x30,0x40,0x50,…`).
+  - `memcmp(buf+0x10, "fw", 2)==0` → `FUN_14017f96c` (fw control).
+  - else → **jump table**: `handler = (&PTR_FUN_1404dc650)[cmd_index·5]`,
+    `handler(ctx, cmd_index, arg_count, arg_array)` where
+    `arg_array[0]=&buf+0x08`, `arg_array[i]=buf+i·0x10 (i≥1)`.
+- **arg_count** = number of 16-byte token slots from `+0x10` (i.e. `1 + 1 + nargs`).
+  For the phydm path the dispatcher only checks `arg_count > 1`.
+- Tokens are NUL-padded to 16 B. Numeric args are ASCII, parsed by
+  `FUN_14017aff0` (base 10/16/char per mode).
+
+**Worked example** — `Echo lamode 1 0 0 0 0 0 0 0 0 0` (enable LA/IQ dump, 10 args):
+
+```
+off  size  content
++0x00  8    0x0000000000000000
++0x08  4    cmd_index = 0
++0x0C  4    arg_count = 12        ; "Echo"+"lamode"+10 args
++0x10  16   "Echo\0"
++0x20  16   "lamode\0"
++0x30  16   "1\0"                 ; En
++0x40  16   "0\0"                 ; mode
++0x50  16   "0\0"                 ; dbg_bit
++0x60  16   "0\0"                 ; bbmac
++0x70  16   "0\0"                 ; mac_ref
++0x80  16   "0\0"                 ; dma
++0x90  16   "0\0"                 ; trigtime
++0xA0  16   "0\0"                 ; head/refmask
++0xB0  16   "0\0"                 ; dbg_port
++0xC0  16   "0\0"                 ; trig_edge
++0xD0  16   "0\0"                 ; smp_rate
++0xE0  16   "0\0"                 ; cap_num
+```
+
+### 6.4 Read-result path
+
+- **Poll**: OID `0x818042` → returns 4 B = `DAT_1408d0290` (1 = command finished;
+  read-and-clear). Loop until non-zero.
+- **Read**: OID `0x818041` → `FUN_14017ae28` copies the command's text output
+  (built via `vsnprintf` → `FUN_14017afe0` append ring) into the caller buffer;
+  sets `*outlen`. Expect ≤ ~0x100 B per chunk.
+
+### 6.5 Remaining open items
+
+1. **Sample packing**: confirm bit width + I/Q interleave in `FUN_1403a3c40`
    readout (regs `0x8000/0x8004`, 8-byte stride) and how they map to USB MPDU bytes.
-3. **Firmware side**: the H2C commands the FW executes for LA mode (Stage 2 /
-   `docs/firmware.md`), to confirm "raw vs post-digital" (H1/H2).
+2. **IQ RX path**: LA-mode samples are emitted as RX MPDUs over USB bulk
+   (`HalUsbInMpduComplete8812AUsb`) — need the user-mode RX tap (NdisM / NPF /
+   filter driver) to stream them to a file.
+3. **Firmware side**: H2C commands the FW runs for LA mode (optional, `docs/firmware.md`).
 4. **`psd` (0x24)** full arg format — ready-made spectrum for quick validation.

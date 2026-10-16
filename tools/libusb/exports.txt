@@ -1,0 +1,206 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35211.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file D:\workspace\perdolinque\ac54_sdr\tools\libusb\libusb-1.0.dll
+
+File Type: DLL
+
+  Section contains the following exports for libusb-1.0.dll
+
+    00000000 characteristics
+    FFFFFFFF time date stamp
+        0.00 version
+           1 ordinal base
+         178 number of functions
+         178 number of names
+
+    ordinal hint RVA      name
+
+          1    0 00002F20 _libusb_set_option
+          2    1 00002D00 libusb_alloc_streams
+          3    2 00002D00 libusb_alloc_streams@16
+          4    3 00006C90 libusb_alloc_transfer
+          5    4 00006C90 libusb_alloc_transfer@4
+          6    5 00002E60 libusb_attach_kernel_driver
+          7    6 00002E60 libusb_attach_kernel_driver@8
+          8    7 0000A4C0 libusb_bulk_transfer
+          9    8 0000A4C0 libusb_bulk_transfer@24
+         10    9 00007120 libusb_cancel_transfer
+         11    A 00007120 libusb_cancel_transfer@4
+         12    B 00002A00 libusb_claim_interface
+         13    C 00002A00 libusb_claim_interface@8
+         14    D 00002C40 libusb_clear_halt
+         15    E 00002C40 libusb_clear_halt@8
+         16    F 00002510 libusb_close
+         17   10 00002510 libusb_close@4
+         18   11 00009F40 libusb_control_transfer
+         19   12 00009F40 libusb_control_transfer@32
+         20   13 00002E10 libusb_detach_kernel_driver
+         21   14 00002E10 libusb_detach_kernel_driver@8
+         22   15 00002DA0 libusb_dev_mem_alloc
+         23   16 00002DA0 libusb_dev_mem_alloc@8
+         24   17 00002DB0 libusb_dev_mem_free
+         25   18 00002DB0 libusb_dev_mem_free@12
+         26   19 00003A10 libusb_error_name
+         27   1A 00003A10 libusb_error_name@4
+         28   1B 000075E0 libusb_event_handler_active
+         29   1C 000075E0 libusb_event_handler_active@4
+         30   1D 00007560 libusb_event_handling_ok
+         31   1E 00007560 libusb_event_handling_ok@4
+         32   1F 00003380 libusb_exit
+         33   20 00003380 libusb_exit@4
+         34   21 00005BB0 libusb_free_bos_descriptor
+         35   22 00005BB0 libusb_free_bos_descriptor@4
+         36   23 000051F0 libusb_free_config_descriptor
+         37   24 000051F0 libusb_free_config_descriptor@4
+         38   25 00005ED0 libusb_free_container_id_descriptor
+         39   26 00005ED0 libusb_free_container_id_descriptor@4
+         40   27 00001880 libusb_free_device_list
+         41   28 00001880 libusb_free_device_list@8
+         42   29 00008CD0 libusb_free_pollfds
+         43   2A 00008CD0 libusb_free_pollfds@4
+         44   2B 000054D0 libusb_free_ss_endpoint_companion_descriptor
+         45   2C 000054D0 libusb_free_ss_endpoint_companion_descriptor@4
+         46   2D 00005DE0 libusb_free_ss_usb_device_capability_descriptor
+         47   2E 00005DE0 libusb_free_ss_usb_device_capability_descriptor@4
+         48   2F 00002D50 libusb_free_streams
+         49   30 00002D50 libusb_free_streams@12
+         50   31 00006D10 libusb_free_transfer
+         51   32 00006D10 libusb_free_transfer@4
+         52   33 00005CF0 libusb_free_usb_2_0_extension_descriptor
+         53   34 00005CF0 libusb_free_usb_2_0_extension_descriptor@4
+         54   35 00004D20 libusb_get_active_config_descriptor
+         55   36 00004D20 libusb_get_active_config_descriptor@8
+         56   37 00005940 libusb_get_bos_descriptor
+         57   38 00005940 libusb_get_bos_descriptor@8
+         58   39 000018D0 libusb_get_bus_number
+         59   3A 000018D0 libusb_get_bus_number@4
+         60   3B 00004ED0 libusb_get_config_descriptor
+         61   3C 00004ED0 libusb_get_config_descriptor@12
+         62   3D 00005190 libusb_get_config_descriptor_by_value
+         63   3E 00005190 libusb_get_config_descriptor_by_value@12
+         64   3F 00002870 libusb_get_configuration
+         65   40 00002870 libusb_get_configuration@8
+         66   41 00005DF0 libusb_get_container_id_descriptor
+         67   42 00005DF0 libusb_get_container_id_descriptor@12
+         68   43 00002860 libusb_get_device
+         69   44 00002860 libusb_get_device@4
+         70   45 00001A30 libusb_get_device_address
+         71   46 00001A30 libusb_get_device_address@4
+         72   47 00004CD0 libusb_get_device_descriptor
+         73   48 00004CD0 libusb_get_device_descriptor@8
+         74   49 00001700 libusb_get_device_list
+         75   4A 00001700 libusb_get_device_list@8
+         76   4B 00001A40 libusb_get_device_speed
+         77   4C 00001A40 libusb_get_device_speed@4
+         78   4D 00001BC0 libusb_get_max_iso_packet_size
+         79   4E 00001BC0 libusb_get_max_iso_packet_size@8
+         80   4F 00001AE0 libusb_get_max_packet_size
+         81   50 00001AE0 libusb_get_max_packet_size@8
+         82   51 000087B0 libusb_get_next_timeout
+         83   52 000087B0 libusb_get_next_timeout@8
+         84   53 00001A20 libusb_get_parent
+         85   54 00001A20 libusb_get_parent@4
+         86   55 00008CA0 libusb_get_pollfds
+         87   56 00008CA0 libusb_get_pollfds@4
+         88   57 000018E0 libusb_get_port_number
+         89   58 000018E0 libusb_get_port_number@4
+         90   59 000018F0 libusb_get_port_numbers
+         91   5A 000018F0 libusb_get_port_numbers@12
+         92   5B 00001980 libusb_get_port_path
+         93   5C 00001980 libusb_get_port_path@16
+         94   5D 00005270 libusb_get_ss_endpoint_companion_descriptor
+         95   5E 00005270 libusb_get_ss_endpoint_companion_descriptor@12
+         96   5F 00005D00 libusb_get_ss_usb_device_capability_descriptor
+         97   60 00005D00 libusb_get_ss_usb_device_capability_descriptor@12
+         98   61 00005EE0 libusb_get_string_descriptor_ascii
+         99   62 00005EE0 libusb_get_string_descriptor_ascii@16
+        100   63 00005C10 libusb_get_usb_2_0_extension_descriptor
+        101   64 00005C10 libusb_get_usb_2_0_extension_descriptor@12
+        102   65 00003BB0 libusb_get_version
+        103   66 00003BB0 libusb_get_version@0
+        104   67 000086E0 libusb_handle_events
+        105   68 000086E0 libusb_handle_events@4
+        106   69 00008700 libusb_handle_events_completed
+        107   6A 00008700 libusb_handle_events_completed@8
+        108   6B 00008720 libusb_handle_events_locked
+        109   6C 00008720 libusb_handle_events_locked@8
+        110   6D 000086D0 libusb_handle_events_timeout
+        111   6E 000086D0 libusb_handle_events_timeout@8
+        112   6F 000083C0 libusb_handle_events_timeout_completed
+        113   70 000083C0 libusb_handle_events_timeout_completed@12
+        114   71 00003650 libusb_has_capability
+        115   72 00003650 libusb_has_capability@4
+        116   73 00006420 libusb_hotplug_deregister_callback
+        117   74 00006420 libusb_hotplug_deregister_callback@8
+        118   75 00006430 libusb_hotplug_get_user_data
+        119   76 00006430 libusb_hotplug_get_user_data@8
+        120   77 000063C0 libusb_hotplug_register_callback
+        121   78 000063C0 libusb_hotplug_register_callback@36
+        122   79 00002FC0 libusb_init
+        123   7A 00002FC0 libusb_init@4
+        124   7B 00007670 libusb_interrupt_event_handler
+        125   7C 00007670 libusb_interrupt_event_handler@4
+        126   7D 0000A4F0 libusb_interrupt_transfer
+        127   7E 0000A4F0 libusb_interrupt_transfer@24
+        128   7F 00002DC0 libusb_kernel_driver_active
+        129   80 00002DC0 libusb_kernel_driver_active@8
+        130   81 00007720 libusb_lock_event_waiters
+        131   82 00007720 libusb_lock_event_waiters@4
+        132   83 000074B0 libusb_lock_events
+        133   84 000074B0 libusb_lock_events@4
+        134   85 00001FB0 libusb_open
+        135   86 00001FB0 libusb_open@8
+        136   87 00002130 libusb_open_device_with_vid_pid
+        137   88 00002130 libusb_open_device_with_vid_pid@12
+        138   89 000087A0 libusb_pollfds_handle_timeouts
+        139   8A 000087A0 libusb_pollfds_handle_timeouts@4
+        140   8B 00001CF0 libusb_ref_device
+        141   8C 00001CF0 libusb_ref_device@4
+        142   8D 00002AC0 libusb_release_interface
+        143   8E 00002AC0 libusb_release_interface@8
+        144   8F 00002CB0 libusb_reset_device
+        145   90 00002CB0 libusb_reset_device@4
+        146   91 00002EB0 libusb_set_auto_detach_kernel_driver
+        147   92 00002EB0 libusb_set_auto_detach_kernel_driver@8
+        148   93 000029B0 libusb_set_configuration
+        149   94 000029B0 libusb_set_configuration@8
+        150   95 00002EC0 libusb_set_debug
+        151   96 00002EC0 libusb_set_debug@8
+        152   97 00002B60 libusb_set_interface_alt_setting
+        153   98 00002B60 libusb_set_interface_alt_setting@12
+        154   99 00002EF0 libusb_set_log_cb
+        155   9A 00002EF0 libusb_set_log_cb@12
+        156   9B 00002F20 libusb_set_option
+        157   9C 00008980 libusb_set_pollfd_notifiers
+        158   9D 00008980 libusb_set_pollfd_notifiers@16
+        159   9E 00009C00 libusb_setlocale
+        160   9F 00009C00 libusb_setlocale@4
+        161   A0 00009CD0 libusb_strerror
+        162   A1 00009CD0 libusb_strerror@4
+        163   A2 00006FB0 libusb_submit_transfer
+        164   A3 00006FB0 libusb_submit_transfer@4
+        165   A4 00007210 libusb_transfer_get_stream_id
+        166   A5 00007210 libusb_transfer_get_stream_id@4
+        167   A6 00007200 libusb_transfer_set_stream_id
+        168   A7 00007200 libusb_transfer_set_stream_id@8
+        169   A8 00007410 libusb_try_lock_events
+        170   A9 00007410 libusb_try_lock_events@4
+        171   AA 00007740 libusb_unlock_event_waiters
+        172   AB 00007740 libusb_unlock_event_waiters@4
+        173   AC 000074F0 libusb_unlock_events
+        174   AD 000074F0 libusb_unlock_events@4
+        175   AE 00001D20 libusb_unref_device
+        176   AF 00001D20 libusb_unref_device@4
+        177   B0 00007760 libusb_wait_for_event
+        178   B1 00007760 libusb_wait_for_event@8
+
+  Summary
+
+        1000 .data
+        2000 .pdata
+        D000 .rdata
+        1000 .reloc
+        1000 .rsrc
+       19000 .text
