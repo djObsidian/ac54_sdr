@@ -1,0 +1,1356 @@
+
+===== A_BB_IQ_dump (19) =====
+1. [BB Setting] is_fake
+1. [BB Setting] is_fake = ((%d)),  trig_mode = ((%d)), dbg_port = ((0x%x)), Trig_Edge = ((%d)), smp_rate = ((%d)), Trig_Sel = ((0x%x)), Dma_type = ((%d))
+4. [Set MAC IQ dump] 0x%x[7:0] = ((0x%x))
+BB Report Info
+Dbg_port=((0x%x))
+LA Dump finished ---------->
+LA Dump more ---------->
+Release BB dbg_port
+Set dbg_port fail!
+Set dbg_port((0x%x)) success
+Set fake dbg_port success
+[MAC_trig] ref_mask = ((0x%x)), ref_value = ((0x%x)), dbg_port = ((0x%x))
+a.En= ((1)),  b.mode = ((%d)), c.Trig_Sel = ((0x%x)), d.Dma_type = ((%d))
+dbg_port_value = 0x%x
+e.Trig_Time = ((%dus)), f.Dbg_head/mac_ref_mask = ((0x%x)), g.dbg_port = ((0x%x))
+h.Trig_edge = ((%d)), i.smp rate = ((%d MHz)), j.Cap_num = ((%d))
+{BB:dbg_port[bit],BB_MAC:0-ok/1-fail/2-cca,MAC:ref} {DMA type} {TrigTime}
+{DbgPort_head/ref_mask} {dbg_port} {0:P_Edge, 1:N_Edge} {SpRate:0-80M,1-40M,2-20M} {Capture num}
+{dbg_port_idx}
+
+===== B_PSD_FFT (51) =====
+ IOT:Associate to Broadcom AP
+ NumTxBroadcast= %I64d
+0x8db(ADC)/0xc5b[29:25](DAC)
+15. (( %s ))ENV_MONITOR
+============[PSD info]  (%d)============
+==>phy_ADC_CLK_8814A_A-Cut
+==>phy_ADC_CLK_8814A_B-Cut
+ADCSmp_work_item_index = ((%d))
+Ant Det PSD Value
+AntDet(Registry) Num/PSD Value
+BROADCOM
+HALMAC_ScanThreadCallback
+Hal_ReadChannelPlan8822B
+MgntActSet_802_11_WMM_UAPSD
+N6usbInterruptThreadCallback
+NdisReadConfiguration
+PSD Pre-Scan Peak Value
+PSD Pre-Scan result
+PSD Scan Peak Freq
+PSD Scan Peak Value
+PSD Start =>
+PSD Threshold Offset
+PSD finished
+PSD para init
+PSD_SET_FAIL
+Point=%d, psd_dB_data = %d
+Point=%d, psd_raw_data = 0x%08x
+SM2[AgcT/ AdcB/ SwDacSwing(lvl)]
+StaUapsd
+WiFi PSD Cent-Ch/Offset/Span
+[%d] N_cali = %d, PSD = %d
+[TRACE]Wait event(psd)
+[state Error] adc_smp_state != ADCSMP_STATE_SET
+adc_smp_work_item
+adc_smp_work_item_1
+ioHandleThreadCallback
+max_ret_psd_final = %d, max_ret_psd_b_final = %d
+phydm_env_monitor_init
+phydm_rssi_monitor_check
+phydm_rssi_monitor_h2c
+psd_win8821c
+psd_win8822b
+rx_state/mux_state/ADC_MASK_OFDM
+s_dopsd=flase, Not Support Dyn_Elmntr
+sw_avg_time=((%d)), hw_avg_time=((%d)), IQ=((%d)), fft=((%d)), path=((%d)), input =((%d)) ch=((%d)), noise_k=((%d))
+tx_generalThreadCallback
+xxxxxx AntennaDetect(), Ant Count = %d, PSD Val = %d
+xxxxxxxxxxxxxxxx AntennaDetect(), wlpsd_cent_freq=%d,  wlpsd_offset = %d, wlpsd_span = %d, wlpsd_sweep_count = %d
+xxxxxxxxxxxxxxxx PSD Sweep Start!!
+xxxxxxxxxxxxxxxx PSD Sweep Stop!!
+{0} {sw_avg} {hw_avg 0:3} {1:I,2:Q,3:IQ} {fft_point: 128*(1:4)} {path_sel 0~3} {0:ADC, 1:RXIQC} {CH} {noise_k}
+
+===== C_shadow_reg (18) =====
+ 0/1/2/3/4/5 or m/b/r=MAC/BB/RF/PWR_R/PWR_W 
+ 0x29 : Display MAC/PHY shadow register value
+ HEX 0x1236=Read shadow modify map
+ HEX 0x1237=Write shadow modify map
+ HEX 0x1238=Use 8192se.map to update shadow modify table
+ HEX 0x1239=Update shadow modify map to real efuse area
+ PHY register.
+Dump %s PktBuf, Page %d
+Dump 92S register 
+Dump PCIE(GEN1) PHY REG
+Dump PCIE(GEN2) PHY REG
+Dump USB2 PHY REG
+Dump USB3 PHY REG
+EFUSE operate to R/W/Update for Real or Shadow Table
+dumpreg
+dumpreg {0:all, 1:BB, 2:RF, 3:MAC}
+shadow
+shadow operate for RF / BB/ MAC shadow operation
+
+===== D_MP_ant (79) =====
+   2.4G Antenna 1: [%d%s] dBm
+   2.4G Antenna 2: [%d%s] dBm
+   5G Antenna 1: [%d%s, %d%s, %d%s, %d%s] dBm
+   5G Antenna 2: [%d%s, %d%s, %d%s, %d%s] dBm
+ Antenna[%d] %-7s = %d 
+ Antenna[%x] = %d
+ If you do not input type argument, we execute all TX/RX test
+ Return: Is AP mode or In HCT Test
+(Antenna Init is not ready)
+**************Set 8723B Ant, bAntennaAux=%d, bExtSwitch=%d, bTwoAntenna=%d, antennaPos=%d, wifiState=%d
+1-Antenna
+1-antenna
+2-Antenna (Bad-Isolation)
+2-Antenna (Good-Isolation)
+2-antenna
+8723B: First link! Force antenna to  %s
+8723D: First link! Force antenna to  %s
+============[Antenna Detection info]  ============
+Antenna Detection Finish
+AntennaSwitchWorkitem
+AntennaTestTimer
+BtAntennaInHw
+Fix Antenna at (( %s ))
+MP/Ant test mode, support path-B TRX
+Normal mode, not support path-B TRX
+OID_DOT11_CURRENT_RX_ANTENNA
+OID_DOT11_CURRENT_TX_ANTENNA
+OID_DOT11_SUPPORTED_RX_ANTENNA
+OID_DOT11_SUPPORTED_TX_ANTENNA
+Odm Antenna diversity
+RSSI Antenna[0/ 1/ 2/ 3]
+STOP Antenna Diversity
+Test the current ant for (( %d )) ms again
+WIN Config Antenna Diversity
+[ Update Rx-Idle-ant ] 8723B: Fail to set RX antenna due to 0x948 = 0x280
+[ Update Rx-Idle-ant ] 8723B: Fail to set RX antenna due to no link
+[ Update Rx-Idle-ant ] 8723B: Success to set RX antenna
+[BTCoex], **********  Single Antenna, Antenna at Aux Port: S0**********
+[BTCoex], **********  Single Antenna, Antenna at Main Port: S1**********
+[BTCoex], ********** Skip Antenna Path Setup because no change!!**********
+[BTCoex], BTC_ANTENNA_AT_AUX_PORT
+[BTCoex], BTC_ANTENNA_AT_MAIN_PORT
+[BTCoex], Single Antenna, Antenna at Aux Port
+[BTCoex], Single Antenna, Antenna at Main Port
+[ERR]test mode!!
+[Return!!!]   Not Support Antenna Diversity Function
+antenna_test_scan_thread_cb
+antenna_test_scan_workitem_cb
+bRegDefaultAntenna
+phydm_trx_antenna_setting_init
+xxxxxx AntennaDetect(), Notify BT stop le tx by set_bt_trx_mask fail!
+xxxxxx AntennaDetect(), Notify BT stop le tx by set_bt_trx_mask ok!
+xxxxxxxxxxxxxxxx AntennaDetect(), Abort Antenna Detection!! becaus background = %d > thres (%d)
+xxxxxxxxxxxxxxxx AntennaDetect(), Abort!!, Invalid LE channel = %d
+xxxxxxxxxxxxxxxx AntennaDetect(), Antenna Det Fail!!
+xxxxxxxxxxxxxxxx AntennaDetect(), Antenna Det Result from BT (%d-Ant)
+xxxxxxxxxxxxxxxx AntennaDetect(), Antenna Det Success!!
+xxxxxxxxxxxxxxxx AntennaDetect(), Antenna Det Timer is not up! (%d)
+xxxxxxxxxxxxxxxx AntennaDetect(), Antenna Det Timer is up, Try Detect!!
+xxxxxxxxxxxxxxxx AntennaDetect(), Antenna at Aux Port
+xxxxxxxxxxxxxxxx AntennaDetect(), Antenna at Main Port
+xxxxxxxxxxxxxxxx AntennaDetect(), BT Response = Fail
+xxxxxxxxxxxxxxxx AntennaDetect(), BT_LETxTime=%d,  BT_LECh = %d
+xxxxxxxxxxxxxxxx AntennaDetect(), Detect Result = 1-Ant!!
+xxxxxxxxxxxxxxxx AntennaDetect(), Detect Result = 1-Ant, un-certainity!!
+xxxxxxxxxxxxxxxx AntennaDetect(), Detect Result = 2-Ant, Bad-Isolation!!
+xxxxxxxxxxxxxxxx AntennaDetect(), Detect Result = 2-Ant, Good-Isolation!!
+xxxxxxxxxxxxxxxx AntennaDetect(), Max Value: Freq = %d.%d MHz
+xxxxxxxxxxxxxxxx AntennaDetect(), Max Value: Freq = %d.0%d MHz
+xxxxxxxxxxxxxxxx AntennaDetect(), Resume Coex DM
+xxxxxxxxxxxxxxxx AntennaDetect(), Set AFH on, Cent-Ch= %d,  Mask=%d
+xxxxxxxxxxxxxxxx AntennaDetect(), Set Antenna to BT!!
+xxxxxxxxxxxxxxxx AntennaDetect(), Set Antenna to PTA
+xxxxxxxxxxxxxxxx AntennaDetect(), Start Antenna Detection!! becaus background = %d <= thres (%d)
+xxxxxxxxxxxxxxxx AntennaDetect(), Stimulate Coex running
+xxxxxxxxxxxxxxxx AntennaDetect(), Stop Coex DM!!
+xxxxxxxxxxxxxxxx AntennaDetect(), result = %d, fail_count = %d, finish = %s
+xxxxxxxxxxxxxxxx Call AntennaDetect()!!
+xxxxxxxxxxxxxxxx Ext Call AntennaDetect()!!
+
+===== E_cmdbus (100) =====
+ %-35s = H2c(%d)/Ack(%d)
+ 9/11/13: 1=Start to capture
+ Process commands: %d, Unknown ioctl: %d
+ cmd 13 0 0 40 --> DIG high threshold = 40
+ cmd 13 0 1 30 --> DIG low threshold = 30
+ cmd 13 0 10 60(dec)    --> DIG Max rx gain = 0x3c(60)
+ cmd 13 0 2 70 --> DIG HPWR high threshold = 70
+ cmd 13 0 20 80 --> DIG enable
+ cmd 13 0 3 60 --> DIG HPWR low threshold = 60
+ cmd 13 0 30 80 --> DIG disable
+ cmd 13 0 4 0/1  --> DIG DbgMode = 0/1
+ cmd 13 0 5 72  --> DIG Rssi_val = 72
+ cmd 13 0 6 0/1  --> DIG Algorithm by FW false alm=0/ by SW rssi=1
+ cmd 13 0 7 12   --> DIG BackOff value = 12
+ cmd 13 0 9 18(dec)    --> DIG Min rx gain = 0x12(18)
+ cmd 13 1 0 50 --> High threshold = 50~55
+ cmd 13 1 1 10 --> Low threshold 40M = 10~15
+ cmd 13 1 4 01234567 --> RA change high RATA0 value=0x01234567
+ cmd 13 1 4 ffffffff --> RA change middle RATA0 value=0xffffffff
+ cmd 13 2 0 0 --> Enter IPS
+ cmd 13 2 0 1 --> Leave IPS
+ cmd 13 3 0 0/1 --> monitor reg0xc38/disable monitor reg0xc38
+ cmd 13 4 0 0/1 --> disable/enable CTSToSelf
+ cmd 13 4 1 30 --> Th=30~35
+ cmd 16 0 0 -----> don't force TxSC
+ cmd 16 1 2 ---> force TxSC value = 2
+ dbgcmd 19 0 0 0/1 --> RxPathSelection disable/enable
+ dbgcmd 19 0 1 0/1 --> DbgMode OFF/ON
+ dbgcmd 19 0 10/11/12/13 50 --> set rssi A/B/C/D = 50
+ dbgcmd 19 0 2 30 --> set SS_TH_low = 30
+ dbgcmd 19 0 20 0/1 --> testRSSI disable/enable
+ dbgcmd 19 0 21 20 --> set TestRSSITh = 20
+ dbgcmd 19 0 3 15 --> set diff_TH = 15
+ dbgcmd 19 0 4 0/1 --> cck method version1/version2
+============[Coex h2c notify]============
+Coex h2c/c2h overall statistics
+Dump all RF register. --> Cmd Index=5
+Gdbgcmd 1 0 20 -->
+H2C / C2H content
+H2C statistics
+H2C: Byte[%d] = ((0x%x))
+H2CBFEnt
+H2CMR:%bx,%bx
+H2CMU:AdEnt=%bx,mid=%bx
+HandleH2CJoinBssRptWorkItem
+Incorrect cmd index
+Modify dedicated RF register --> Cmd Index=8
+PHYDM h2c[0x40]=0x%x %x %x %x %x %x %x
+PHYDM h2c[0x42]=0x%x %x %x %x %x %x %x
+PHYDM h2c[0x4d]=0x%x %x %x %x %x %x %x
+Phydm Send H2C_ID (( 0x%x))
+Write memory address by word --> Cmd Index=10
+ZwDeviceIoControlFile
+[BTCoex], %s() h2c_0x69 = 0x%x
+[BTCoex], H2C 0x60 content replied by WL FW: H2C_0x60 = [%02x %02x %02x %02x %02x]
+[BTCoex], PS-TDMA H2C cmd =0x%x%08x
+[BTCoex], set h2c 0x69 opcode 12 to turn off 5ms WL slot extend!!
+[BTCoex], set h2c 0x69 opcode 12 to turn on 5ms WL slot extend!!
+[BTCoex],Query BT info!!!! H2C 0x61 = 0x1
+[COL], H2C cmd: 
+[ERR]Seq num mismatch : h2c->%d c2h->%d
+[ERR]Seq num mismatch:h2c->%d c2h->%d
+[ERR]dump h2cq!!
+[ERR]get h2c free space error!
+[ERR]h2c ack cmd id!!
+[ERR]h2c free space!!
+[ERR]h2cq compare!!
+[ERR]init h2cq!
+[ERR]pltfm - sned h2c pkt!!
+[ERR]send h2c
+[ERR]send h2c pkt
+[ERR]send h2c pkt fail!!
+[ERR]send h2c!!
+[ERR]send param h2c
+[ERR]seq num mismatch : h2c->%d c2h->%d
+[FW][H2C=0x49]  fw_trace_en=((%d)), mode =((%d)),  macid=((%d))
+[H2C]  h2c_id=((0x%x))
+[H2C] FW_debug_en: (( %d )), mode: (( %d )), macid: (( %d ))
+[TRACE]Seq num : h2c->%d c2h->%d
+[TRACE]Seq num:h2c->%d c2h->%d
+[TRACE]h2c fs : %d
+[TRACE]halmac h2c ver = %x, fw h2c ver = %x!!
+[TRACE]send h2c-buf full
+[TRACE]seq num : h2c->%d c2h->%d
+ccx_h2c %bx,%bx Period=%wx
+cmd 13 9 0  => Apply Vmatrix.
+cmd 13 9 1  =>  Don't apply Vmatrix.
+cmd 13 9 2  =>  Set to Default.
+h2c TimeOut
+h2c busy
+h2c stopped
+h2c[0x46]=0x%x %x %x %x %x %x %x
+h2creq_enqueue_sema
+halbtc8723b1ant_set_ant_path(): we don't need to wait for H2C command completion because of Fw download fail!!!
+not allow h2c
+phydm_clm_h2c
+phydm_ra_h2c
+set_h2c_pkt_hdr_win8814b_v1
+set_h2c_pkt_hdr_win8821c
+set_h2c_pkt_hdr_win8822b
+
+===== F_hal_8812 (715) =====
+ ============[BT Coexist info 8821C]============
+ ============[BT Coexist info 8822B]============
+ HAL_DATA_TYPE Size = %d = %d.%d%d MB
+ This command is for 8814A IC now!
+*8821A ant swh=2b'10
+..\halusb.c
+04. (( %s ))HAL_RF_TXGAPK
+8821A ant swh=2b'01
+8822B RFE_Init, RFE_type=((%d))
+8822B/8821C Not Support Now!!
+8822b 5g tx current calibration 0x3d7=0x%X 0x3d8=0x%X
+===> ODM_ReadAndConfig_MP_MP_8821A
+===> ODM_ReadAndConfig_MP_mp_8812a
+===> ODM_ReadAndConfig_MP_mp_8814a
+===> ODM_ReadAndConfig_MP_mp_8821c
+===> ODM_ReadAndConfig_MP_mp_8822b
+C2HExtendTxFeedbackHandler_8821C
+C2HExtendTxFeedbackHandler_8822B
+C2HTxBeamformingHandler_8821C
+C2HTxBeamformingHandler_8822B
+ConstructFwChannelInfo_8814A
+Dump_RSVDPAGE_8814A
+GetTxPktBuf
+HAL_MAC_EFUSE_PG_BY_MAP
+HAL_MAC_EFUSE_Parsing_Offload
+HAL_MAC_EFUSE_Read1Byte
+HAL_MAC_MemAlloc
+HAL_SetCorrentChannelAndWirelessModeBeforeScan
+HalGetTxRate8821C
+HalGetTxRate8822B
+HalSetBeamformingConfigSounding8821C
+HalSetBeamformingConfigSounding8822B
+HalSetBeamformingEnter8821C
+HalSetBeamformingEnter8822B
+HalSetBeamformingGIDTab8821C
+HalSetBeamformingGIDTab8822B
+HalSetBeamformingLeave8821C
+HalSetBeamformingLeave8822B
+HalSetBeamformingReset8821C
+HalSetBeamformingReset8822B
+HalSetBeamformingSUWorkAround8822B
+HalSetBeamformingSoundDown8821C
+HalSetBeamformingSoundDown8822B
+HalUsbAllocInResource
+HalUsbAllocOutResource
+HalUsbInInterruptComplete8188EUsb
+HalUsbInInterruptComplete8188FUsb
+HalUsbInInterruptComplete8192EUsb
+HalUsbInInterruptComplete8192FUsb
+HalUsbInInterruptComplete8703BUsb
+HalUsbInInterruptComplete8710BUsb
+HalUsbInInterruptComplete8723BUsb
+HalUsbInInterruptComplete8723DUsb
+HalUsbInInterruptComplete8812AUsb
+HalUsbInInterruptComplete8814AUsb
+HalUsbInInterruptComplete8821AUsb
+HalUsbInInterruptComplete8821CUsb
+HalUsbInInterruptComplete8822BUsb
+HalUsbInMpdu
+HalUsbInMpduComplete8188EUsb
+HalUsbInMpduComplete8188FUsb
+HalUsbInMpduComplete8192EUsb
+HalUsbInMpduComplete8192FUsb
+HalUsbInMpduComplete8703BUsb
+HalUsbInMpduComplete8710BUsb
+HalUsbInMpduComplete8723BUsb
+HalUsbInMpduComplete8723DUsb
+HalUsbInMpduComplete8812AUsb
+HalUsbInMpduComplete8814AUsb
+HalUsbInMpduComplete8821AUsb
+HalUsbInMpduComplete8821CUsb
+HalUsbInMpduComplete8822BUsb
+InitializeAdapter8821CUsb
+InitializeAdapter8822BUsb
+PHY config 8822B
+PHY_GetTxPowerIndex_8812A
+PHY_GetTxPowerIndex_8821A
+RTL8812A
+RTL8814A
+RTL8821A
+RTL8821C
+RTL8822B
+Realtek RTL8812AU Wireless LAN USB NIC                                     
+Realtek RTL8814AU Wireless LAN USB NIC                                     
+Realtek RTL8821CU Wireless LAN USB NIC                                     
+Realtek RTL8822BU Wireless LAN USB NIC                                     
+RtCheckForHangWorkItemCallback8812
+RtCheckForHangWorkItemCallback8821A
+SetBeamformDownloadNDPA_8812(): There is an adapter is sending beacon.
+SetDownLoadFwRsvdPagePkt_8814A
+SetFwRsvdPagePkt_8812A
+SetFwRsvdPagePkt_8814A
+SetFwRsvdPagePkt_8821A
+SetFwRsvdPagePkt_8821C
+SetFwRsvdPagePkt_8822B
+TxFillCmdDesc8188EUsb
+TxFillCmdDesc8188FUsb
+TxFillCmdDesc8192EUsb
+TxFillCmdDesc8192FUsb
+TxFillCmdDesc8710BUsb
+TxFillCmdDesc8723BUsb
+TxFillCmdDesc8723DUsb
+TxFillCmdDesc8812AUsb
+TxFillCmdDesc8814AUsb
+TxFillCmdDesc8821CUsb
+TxFillCmdDesc8822BUsb
+TxFillDescriptor8822BUsb
+TxPktBufMode
+[%s] not 8812 or 8821A, return
+[8821C] AntDiv: Default
+[8821C] AntDiv: HW diversity
+[8821C] AntDiv: SW diversity
+[8822B] Update RFE PINs: CH:%d, T/RX_path:{ 0x%x, 0x%x}, cut_ver:%d, rfe_type:%d
+[BTCoex], **********  halbtc8821a1ant_init_hw_config (RF Off)**********
+[BTCoex], **********  halbtc8821a1ant_init_hw_config (wifi_only)**********
+[BTCoex], **********  halbtc8821a2ant_init_hw_config (RF Off)**********
+[BTCoex], **********  halbtc8821a2ant_init_hw_config (wifi_only)**********
+[BTCoex], Under 5G, halbtc8814a2ant_coex_all_off!!
+[Debug] (_InitMacConfigure_8822B) 0x608 = %X
+[ERR]read_buf_win8814b error = %x
+[Return!!!] 8812A  Not Supprrt This AntDiv type
+[TRACE]8821C pwr seq ver = %s
+[TRACE]8822B pwr seq ver = %s
+[TRACE]halmac_mac_power_switch_win8814b_usb pwr
+[TRACE]halmac_mac_power_switch_win8821c_sdio pwr
+_DownloadFWToTxPktBuffer_8188F
+_DownloadFWToTxPktBuffer_8710B
+_DownloadFWToTxPktBuffer_8723D
+_NoRxAggregation_8812A
+_NoRxAggregation_8814A
+_NoRxAggregation_8821A
+_NoRxAggregation_8821C
+_NoRxAggregation_8822B
+_ParsingRxAggregation_8812A
+_ParsingRxAggregation_8814A
+_ParsingRxAggregation_8821A
+_ParsingRxAggregation_8821C
+_ParsingRxAggregation_8822B
+_ProcessSegregatedPackets_8812A
+_ProcessSegregatedPackets_8814A
+_ProcessSegregatedPackets_8821A
+_ProcessSegregatedPackets_8821C
+_ProcessSegregatedPackets_8822B
+_QueryPacketAttributes_8812A
+_QueryPacketAttributes_8814A
+_QueryPacketAttributes_8821A
+_QueryPacketAttributes_8821C
+_QueryPacketAttributes_8822B
+_QueryPacket_8812A
+_QueryPacket_8814A
+_QueryPacket_8821A
+_QueryPacket_8821C
+_QueryPacket_8822B
+_SegregateDmaAggPackets_8812A
+_SegregateDmaAggPackets_8814A
+_SegregateDmaAggPackets_8821A
+_SegregateDmaAggPackets_8821C
+_SegregateDmaAggPackets_8822B
+_WriteFWtoTxPktBufAndDMAtoIRAM_8188F
+_WriteFWtoTxPktBufAndDMAtoIRAM_8710B
+_WriteFWtoTxPktBufAndDMAtoIRAM_8723D
+_WriteFWtoTxPktBufAndIDDMAtoIRAM_8192F
+_WriteFWtoTxPktBuf_8723B
+_phy_lc_calibrate_8814a
+add_ch_info_win8821c
+add_ch_info_win8822b
+add_extra_ch_info_win8821c
+add_extra_ch_info_win8822b
+auto_refclk_cal_8821c_pcie
+cfg_bcn_space_win8821c
+cfg_bcn_space_win8822b
+cfg_bssid_win8814b_v1
+cfg_bssid_win8821c
+cfg_bssid_win8822b
+cfg_bw_win8814b_v1
+cfg_bw_win8821c
+cfg_bw_win8822b
+cfg_ch_bw_win8821c
+cfg_ch_bw_win8822b
+cfg_ch_win8821c
+cfg_ch_win8822b
+cfg_csi_rate_win8814b_v1
+cfg_csi_rate_win8821c
+cfg_csi_rate_win8822b
+cfg_drv_info_8821c
+cfg_drv_info_8822b
+cfg_drv_info_win8814b_v1
+cfg_drv_rsvd_pg_num_win8814b_v1
+cfg_drv_rsvd_pg_num_win8821c
+cfg_drv_rsvd_pg_num_win8822b
+cfg_edca_para_win8814b_v1
+cfg_edca_para_win8821c
+cfg_edca_para_win8822b
+cfg_efuse_auto_check_win8814b_v1
+cfg_efuse_auto_check_win8821c
+cfg_efuse_auto_check_win8822b
+cfg_la_mode_win8814b_v1
+cfg_la_mode_win8821c
+cfg_la_mode_win8822b
+cfg_mac_addr_win8814b_v1
+cfg_mac_addr_win8821c
+cfg_mac_addr_win8822b
+cfg_max_dl_size_win8814b_v1
+cfg_max_dl_size_win8821c
+cfg_max_dl_size_win8822b
+cfg_multicast_addr_win8814b_v1
+cfg_multicast_addr_win8821c
+cfg_multicast_addr_win8822b
+cfg_mumimo_win8814b_v1
+cfg_mumimo_win8821c
+cfg_mumimo_win8822b
+cfg_net_type_win8814b_v1
+cfg_net_type_win8821c
+cfg_net_type_win8822b
+cfg_pri_ch_idx_win8821c
+cfg_pri_ch_idx_win8822b
+cfg_rx_ignore_win8814b_v1
+cfg_rxfifo_expand_mode_win8814b_v1
+cfg_rxfifo_expand_mode_win8821c
+cfg_rxfifo_expand_mode_win8822b
+cfg_sdio_rx_agg_win8821c
+cfg_sdio_rx_agg_win8822b
+cfg_sdio_tx_page_threshold_win8821c
+cfg_sdio_tx_page_threshold_win8822b
+cfg_sounding_win8814b_v1
+cfg_sounding_win8821c
+cfg_sounding_win8822b
+cfg_transmitter_addr_win8814b_v1
+cfg_transmitter_addr_win8821c
+cfg_transmitter_addr_win8822b
+cfg_tsf_rst_win8821c
+cfg_tsf_rst_win8822b
+cfg_txagg_sdio_align_win8821c
+cfg_txagg_sdio_align_win8822b
+cfg_txbf_win8814b_v1
+cfg_txbf_win8821c
+cfg_txbf_win8822b
+cfg_usb_rx_agg_win8814b_v1
+cfg_usb_rx_agg_win8821c
+cfg_usb_rx_agg_win8822b
+ch_map_parser_win8814b_v1
+check_fw_status_win8814b_v1
+check_fw_status_win8821c
+check_fw_status_win8822b
+chk_txdesc_win8814b_v1
+chk_txdesc_win8821c
+chk_txdesc_win8822b
+clear_cam_entry_win8814b_v1
+clear_cam_entry_win8821c
+clear_cam_entry_win8822b
+clear_ch_info_win8821c
+clear_ch_info_win8822b
+config_phydm_parameter_init_8821c
+config_phydm_parameter_init_8822b
+config_phydm_read_rf_reg_8821c
+config_phydm_read_txagc_8821c
+config_phydm_switch_agc_tab_8822b
+config_phydm_switch_band_8821c
+config_phydm_switch_band_8822b
+config_phydm_switch_bandwidth_8821c
+config_phydm_switch_bandwidth_8822b
+config_phydm_switch_channel_8821c
+config_phydm_switch_channel_8822b
+config_phydm_trx_mode_8822b
+config_phydm_write_rf_reg_8821c
+config_phydm_write_txagc_8821c
+config_security_win8814b_v1
+config_security_win8821c
+config_security_win8822b
+ctrl_ch_switch_win8821c
+ctrl_ch_switch_win8822b
+ctrl_pwr_tracking_win8821c
+ctrl_pwr_tracking_win8822b
+del_sounding_win8814b_v1
+del_sounding_win8821c
+del_sounding_win8822b
+dl_drv_rsvd_page_win8814b_v1
+dl_drv_rsvd_page_win8821c
+dl_drv_rsvd_page_win8822b
+download_firmware_win8814b_v1
+download_firmware_win8821c
+download_firmware_win8822b
+download_flash_win8821c
+download_flash_win8822b
+drv_fwctrl_win8821c
+drv_fwctrl_win8822b
+dump_efuse_map_bt_win8814b_v1
+dump_efuse_map_bt_win8821c
+dump_efuse_map_bt_win8822b
+dump_efuse_map_win8814b_v1
+dump_efuse_map_win8821c
+dump_efuse_map_win8822b
+dump_fifo_win8814b_v1
+dump_fifo_win8821c
+dump_fifo_win8822b
+dump_log_efuse_map_win8814b_v1
+dump_log_efuse_map_win8821c
+dump_log_efuse_map_win8822b
+ex_halbtc8821c1ant_power_on_setting
+ex_halbtc8821c2ant_power_on_setting
+ex_halbtc8822b1ant_power_on_setting
+ex_halbtc8822b2ant_power_on_setting
+fast_edca_cfg_win8814b_v1
+fast_edca_cfg_win8821c
+fast_edca_cfg_win8822b
+free_download_firmware_win8821c
+free_download_firmware_win8822b
+get_efuse_available_size_win8814b_v1
+get_efuse_available_size_win8821c
+get_efuse_available_size_win8822b
+get_efuse_size_win8814b_v1
+get_efuse_size_win8821c
+get_efuse_size_win8822b
+get_hw_value_8821c
+get_hw_value_8822b
+get_hw_value_win8814b_v1
+get_hw_value_win8821c
+get_hw_value_win8822b
+get_log_efuse_size_win8814b_v1
+get_log_efuse_size_win8821c
+get_log_efuse_size_win8822b
+get_mac_addr_win8814b_v1
+get_mac_addr_win8821c
+get_mac_addr_win8822b
+get_real_pkt_id_win8821c
+get_real_pkt_id_win8822b
+get_sdio_tx_addr_8821c
+get_sdio_tx_addr_8822b
+get_usb_bulkout_id_win8814b_v1
+get_usb_bulkout_id_win8821c
+get_usb_bulkout_id_win8822b
+get_used_cam_entry_num_win8814b_v1
+get_used_cam_entry_num_win8821c
+get_used_cam_entry_num_win8822b
+get_version_win8814b_v1
+get_version_win8821c
+get_version_win8822b
+hal8812ausbrxdesc.c
+hal8814ausbrxdesc.c
+hal8821ausbrxdesc.c
+hal8821cusbrxdesc.c
+hal8822busbrxdesc.c
+hal_Associate_8188EU
+hal_Associate_8188FU
+hal_Associate_8192EU
+hal_Associate_8192FU
+hal_Associate_8703BU
+hal_Associate_8710BU
+hal_Associate_8723BU
+hal_Associate_8723DU
+hal_Associate_8812AU
+hal_Associate_8814AU
+hal_Associate_8821AU
+hal_Associate_8821CU
+hal_Associate_8822BU
+hal_com_txbf_beamform_init
+hal_com_txbf_clk_work_item_callback
+hal_com_txbf_enter_work_item_callback
+hal_com_txbf_fw_ndpa_timer_callback
+hal_com_txbf_fw_ndpa_work_item_callback
+hal_com_txbf_get
+hal_com_txbf_leave_work_item_callback
+hal_com_txbf_rate_work_item_callback
+hal_com_txbf_set
+hal_com_txbf_status_work_item_callback
+hal_mac_BTEfusePhy2Logical
+hal_txbf_8192e_download_ndpa
+hal_txbf_8192e_enter
+hal_txbf_8192e_fw_tx_bf
+hal_txbf_8192e_fw_txbf_cmd
+hal_txbf_8192e_leave
+hal_txbf_8192e_rf_mode
+hal_txbf_8192e_status
+hal_txbf_8814a_enter
+hal_txbf_8814a_get_nrx
+hal_txbf_8814a_get_ntx
+hal_txbf_8814a_get_tx_rate
+hal_txbf_8814a_status
+hal_txbf_8822b_enter
+hal_txbf_8822b_status
+hal_txbf_jaguar_clk_8812a
+hal_txbf_jaguar_download_ndpa
+hal_txbf_jaguar_enter
+hal_txbf_jaguar_fw_txbf
+hal_txbf_jaguar_fw_txbf_cmd
+hal_txbf_jaguar_leave
+hal_txbf_jaguar_patch
+hal_txbf_jaguar_rf_mode
+hal_txbf_jaguar_status
+halbtc8821c1ant_init_hw_config
+halbtc8821c1ant_set_tdma
+halbtc8821c1ant_set_tdma_timer_base
+halbtc8821c1ant_write_scbd
+halbtc8821c2ant_init_hw_config
+halbtc8821c2ant_power_save_state
+halbtc8821c2ant_set_antdiv_hwsw
+halbtc8821c2ant_set_tdma
+halbtc8821c2ant_set_tdma_timer_base
+halbtc8821c2ant_write_scbd
+halbtc8822b1ant_init_hw_config
+halbtc8822b1ant_mimo_ps
+halbtc8822b1ant_set_tdma
+halbtc8822b1ant_set_tdma_timer_base
+halbtc8822b1ant_write_scbd
+halbtc8822b2ant_init_hw_config
+halbtc8822b2ant_power_save_state
+halbtc8822b2ant_set_tdma
+halbtc8822b2ant_set_tdma_timer_base
+halbtc8822b2ant_write_scbd
+init_edca_cfg_8821c
+init_edca_cfg_8822b
+init_edca_cfg_win8814b_v1
+init_low_pwr_win8814b_v1
+init_mac_cfg_win8814b_v1
+init_mac_cfg_win8821c
+init_mac_cfg_win8822b
+init_pcie_cfg_win8814b_v1
+init_protocol_cfg_8821c
+init_protocol_cfg_8822b
+init_sdio_cfg_win8821c
+init_sdio_cfg_win8822b
+init_system_cfg_8821c
+init_system_cfg_8822b
+init_system_cfg_win8814b_v1
+init_trx_cfg_8814b
+init_trx_cfg_8821c
+init_trx_cfg_8822b
+init_usb_cfg_win8814b_v1
+init_usb_cfg_win8821c
+init_usb_cfg_win8822b
+init_wmac_cfg_8821c
+init_wmac_cfg_8822b
+init_wmac_cfg_win8814b_v1
+iqgen setting fail:8814A
+mac_debug_win8814b_v1
+mac_debug_win8821c
+mac_debug_win8822b
+mac_pwr_switch_pcie_8814b
+mac_pwr_switch_pcie_8821c
+mac_pwr_switch_pcie_8822b
+mac_pwr_switch_sdio_8821c
+mac_pwr_switch_sdio_8822b
+mac_pwr_switch_usb_8814b
+mac_pwr_switch_usb_8821c
+mac_pwr_switch_usb_8822b
+mask_log_efuse_win8814b_v1
+mask_log_efuse_win8821c
+mask_log_efuse_win8822b
+mu_bfee_entry_del_win8814b_v1
+mu_bfee_entry_del_win8821c
+mu_bfee_entry_del_win8822b
+mu_bfee_entry_init_win8814b_v1
+mu_bfee_entry_init_win8821c
+mu_bfee_entry_init_win8822b
+mu_bfer_entry_del_win8814b_v1
+mu_bfer_entry_del_win8821c
+mu_bfer_entry_del_win8822b
+mu_bfer_entry_init_win8814b_v1
+mu_bfer_entry_init_win8821c
+mu_bfer_entry_init_win8822b
+odm_read_and_config_mp_8812a_agc_tab
+odm_read_and_config_mp_8812a_agc_tab_diff
+odm_read_and_config_mp_8812a_mac_reg
+odm_read_and_config_mp_8812a_phy_reg
+odm_read_and_config_mp_8812a_phy_reg_mp
+odm_read_and_config_mp_8812a_phy_reg_pg
+odm_read_and_config_mp_8812a_phy_reg_pg_asus
+odm_read_and_config_mp_8812a_phy_reg_pg_nec
+odm_read_and_config_mp_8812a_radioa
+odm_read_and_config_mp_8812a_radiob
+odm_read_and_config_mp_8812a_txpwr_lmt
+odm_read_and_config_mp_8814a_agc_tab
+odm_read_and_config_mp_8814a_mac_reg
+odm_read_and_config_mp_8814a_phy_reg
+odm_read_and_config_mp_8814a_phy_reg_mp
+odm_read_and_config_mp_8814a_phy_reg_pg
+odm_read_and_config_mp_8814a_phy_reg_pg_type0
+odm_read_and_config_mp_8814a_phy_reg_pg_type2
+odm_read_and_config_mp_8814a_phy_reg_pg_type3
+odm_read_and_config_mp_8814a_phy_reg_pg_type4
+odm_read_and_config_mp_8814a_phy_reg_pg_type5
+odm_read_and_config_mp_8814a_phy_reg_pg_type7
+odm_read_and_config_mp_8814a_phy_reg_pg_type8
+odm_read_and_config_mp_8814a_radioa
+odm_read_and_config_mp_8814a_radiob
+odm_read_and_config_mp_8814a_radioc
+odm_read_and_config_mp_8814a_radiod
+odm_read_and_config_mp_8814a_txpwr_lmt
+odm_read_and_config_mp_8814a_txpwr_lmt_type0
+odm_read_and_config_mp_8814a_txpwr_lmt_type1
+odm_read_and_config_mp_8814a_txpwr_lmt_type2
+odm_read_and_config_mp_8814a_txpwr_lmt_type3
+odm_read_and_config_mp_8814a_txpwr_lmt_type5
+odm_read_and_config_mp_8814a_txpwr_lmt_type7
+odm_read_and_config_mp_8814a_txpwr_lmt_type8
+odm_read_and_config_mp_8821a_agc_tab
+odm_read_and_config_mp_8821a_mac_reg
+odm_read_and_config_mp_8821a_phy_reg
+odm_read_and_config_mp_8821a_phy_reg_pg
+odm_read_and_config_mp_8821a_radioa
+odm_read_and_config_mp_8821a_txpwr_lmt_8811a_u_fem
+odm_read_and_config_mp_8821a_txpwr_lmt_8811a_u_ipa
+odm_read_and_config_mp_8821a_txpwr_lmt_8821a
+odm_read_and_config_mp_8821a_txpwr_lmt_8821a_sar_5mm
+odm_read_and_config_mp_8821a_txpwr_lmt_8821a_sar_8mm
+odm_read_and_config_mp_8821c_agc_tab
+odm_read_and_config_mp_8821c_agc_tab_diff
+odm_read_and_config_mp_8821c_mac_reg
+odm_read_and_config_mp_8821c_phy_reg
+odm_read_and_config_mp_8821c_phy_reg_mp
+odm_read_and_config_mp_8821c_phy_reg_pg
+odm_read_and_config_mp_8821c_phy_reg_pg_type0x28
+odm_read_and_config_mp_8821c_radioa
+odm_read_and_config_mp_8821c_txpwr_lmt
+odm_read_and_config_mp_8822b_agc_tab
+odm_read_and_config_mp_8822b_mac_reg
+odm_read_and_config_mp_8822b_phy_reg
+odm_read_and_config_mp_8822b_phy_reg_pg
+odm_read_and_config_mp_8822b_phy_reg_pg_type12
+odm_read_and_config_mp_8822b_phy_reg_pg_type15
+odm_read_and_config_mp_8822b_phy_reg_pg_type16
+odm_read_and_config_mp_8822b_phy_reg_pg_type17
+odm_read_and_config_mp_8822b_phy_reg_pg_type18
+odm_read_and_config_mp_8822b_phy_reg_pg_type2
+odm_read_and_config_mp_8822b_phy_reg_pg_type3
+odm_read_and_config_mp_8822b_phy_reg_pg_type4
+odm_read_and_config_mp_8822b_phy_reg_pg_type5
+odm_read_and_config_mp_8822b_radioa
+odm_read_and_config_mp_8822b_radiob
+odm_read_and_config_mp_8822b_txpwr_lmt
+odm_read_and_config_mp_8822b_txpwr_lmt_type12
+odm_read_and_config_mp_8822b_txpwr_lmt_type15
+odm_read_and_config_mp_8822b_txpwr_lmt_type16
+odm_read_and_config_mp_8822b_txpwr_lmt_type17
+odm_read_and_config_mp_8822b_txpwr_lmt_type18
+odm_read_and_config_mp_8822b_txpwr_lmt_type2
+odm_read_and_config_mp_8822b_txpwr_lmt_type3
+odm_read_and_config_mp_8822b_txpwr_lmt_type4
+odm_read_and_config_mp_8822b_txpwr_lmt_type5
+odm_s0s1_sw_ant_div_init_8821a
+odm_trx_hw_ant_div_init_8812a
+odm_trx_hw_ant_div_init_8821c
+pcie_switch_8822b
+pg_efuse_by_map_win8814b_v1
+pg_efuse_by_map_win8821c
+pg_efuse_by_map_win8822b
+pg_num_parser_win8821c
+pg_num_parser_win8822b
+phy_cfg_pcie_8821c
+phy_cfg_pcie_8822b
+phy_cfg_usb_8821c
+phy_cfg_usb_8822b
+phydm 8822b cck rx path selection start
+phydm_8822b_sutxbfer_workaroud
+phydm_cmn_sta_info_update_8822B
+phydm_dynamic_nbi_switch_8814a
+phydm_init_hw_info_by_rfe_type_8821c
+phydm_rfe_8822b_setting
+phydm_s0s1_sw_ant_div_init_8821c
+phydm_spur_nbi_setting_8814a
+phydm_watchdog_8822B
+phydm_write_txagc_1byte_8821c
+pinmux_free_func_8821c
+pinmux_free_func_8822b
+pinmux_get_func_8821c
+pinmux_get_func_8822b
+pinmux_set_func_8821c
+pinmux_set_func_8822b
+pinmux_wl_led_mode_win8821c
+pinmux_wl_led_mode_win8822b
+pre_init_system_cfg_win8814b_v1
+pre_init_system_cfg_win8821c
+pre_init_system_cfg_win8822b
+proc_ctrl_ch_switch_win8821c
+proc_ctrl_ch_switch_win8822b
+proc_send_general_info_win8821c
+proc_send_general_info_win8822b
+proc_send_phydm_info_win8821c
+proc_send_phydm_info_win8822b
+read_cam_entry_win8814b_v1
+read_cam_entry_win8821c
+read_cam_entry_win8822b
+read_efuse_bt_win8814b_v1
+read_efuse_bt_win8821c
+read_efuse_bt_win8822b
+read_flash_win8821c
+read_flash_win8822b
+read_logical_efuse_win8814b_v1
+read_logical_efuse_win8821c
+read_logical_efuse_win8822b
+register_api_win8814b_v1
+register_api_win8821c
+register_api_win8822b
+reset_ofld_feature_win8814b_v1
+reset_ofld_feature_win8821c
+reset_ofld_feature_win8822b
+reset_wifi_fw_win8814b_v1
+reset_wifi_fw_win8821c
+reset_wifi_fw_win8822b
+rqpn_parser_win8821c
+rqpn_parser_win8822b
+rtl8812AU\AGC_TAB.txt
+rtl8812AU\MAC_REG.txt
+rtl8812AU\PHY_REG.txt
+rtl8812AU\PHY_REG_PG.txt
+rtl8812AU\RadioA.txt
+rtl8812AU\RadioB.txt
+rtl8812AU\TXPWR_LMT.txt
+rtl8812AU\TxPowerTrack.txt
+rtl8812AU\rtl8812Ufw.bin
+rtl8812AU\rtl8812UfwBT.bin
+rtl8812AU\rtl8812Ufwww.bin
+rtl8814au\AGC_TAB.txt
+rtl8814au\MAC_REG.txt
+rtl8814au\PHY_REG.txt
+rtl8814au\PHY_REG_PG.txt
+rtl8814au\RadioA.txt
+rtl8814au\RadioB.txt
+rtl8814au\RadioC.txt
+rtl8814au\RadioD.txt
+rtl8814au\TXPWR_LMT.txt
+rtl8814au\TxPowerTrack.txt
+rtl8814au\rtl8814Afw.bin
+rtl8814au\rtl8814Afwww.bin
+rtl8814bu\AGC_TAB.txt
+rtl8814bu\MAC_REG.txt
+rtl8814bu\PHY_REG.txt
+rtl8821AU\AGC_TAB.txt
+rtl8821AU\MAC_REG.txt
+rtl8821AU\PHY_REG.txt
+rtl8821AU\PHY_REG_PG.txt
+rtl8821AU\RadioA.txt
+rtl8821AU\RadioB.txt
+rtl8821AU\TXPWR_LMT.txt
+rtl8821AU\TxPowerTrack.txt
+rtl8821AU\rtl8821Ufw.bin
+rtl8821AU\rtl8821UfwBT.bin
+rtl8821AU\rtl8821Ufwww.bin
+rtl8821cu\AGC_TAB.txt
+rtl8821cu\AGC_TAB_DIFF.txt
+rtl8821cu\MAC_REG.txt
+rtl8821cu\PHY_REG.txt
+rtl8821cu\PHY_REG_PG.txt
+rtl8821cu\RadioA.txt
+rtl8821cu\TXPWR_LMT.txt
+rtl8821cu\TxPowerTrack.txt
+rtl8821cu\rtl8821Cfw.bin
+rtl8821cu\rtl8821Cfwspic.bin
+rtl8821cu\rtl8821Cfwww.bin
+rtl8822bu\AGC_TAB.txt
+rtl8822bu\MAC_REG.txt
+rtl8822bu\PHY_REG.txt
+rtl8822bu\PHY_REG_PG.txt
+rtl8822bu\RadioA.txt
+rtl8822bu\RadioB.txt
+rtl8822bu\TXPWR_LMT.txt
+rtl8822bu\TxPowerTrack.txt
+rtl8822bu\rtl8822Bfw.bin
+rtl8822bu\rtl8822Bfwww.bin
+rw_bcn_ctrl_win8814b_v1
+rw_bcn_ctrl_win8821c
+rw_bcn_ctrl_win8822b
+rx_cut_amsdu_cfg_win8814b_v1
+sdio_hw_info_win8821c
+sdio_hw_info_win8822b
+send_bt_coex_cmd_win8821c
+send_bt_coex_cmd_win8822b
+send_bt_coex_win8821c
+send_bt_coex_win8822b
+send_general_info_win8821c
+send_general_info_win8822b
+set_hw_value_8821c
+set_hw_value_8822b
+set_hw_value_win8814b_v1
+set_hw_value_win8821c
+set_hw_value_win8822b
+start_iqk_win8821c
+start_iqk_win8822b
+su_bfee_entry_del_win8814b_v1
+su_bfee_entry_del_win8821c
+su_bfee_entry_del_win8822b
+su_bfee_entry_init_win8814b_v1
+su_bfee_entry_init_win8821c
+su_bfee_entry_init_win8822b
+su_bfer_entry_del_win8814b_v1
+su_bfer_entry_del_win8821c
+su_bfer_entry_del_win8822b
+su_bfer_entry_init_win8814b_v1
+su_bfer_entry_init_win8821c
+su_bfer_entry_init_win8822b
+tx_allowed_sdio_8821c
+tx_allowed_sdio_8822b
+tx_desc_chksum_win8814b_v1
+tx_desc_chksum_win8821c
+tx_desc_chksum_win8822b
+txfifo_is_empty_win8821c
+txfifo_is_empty_win8822b
+update_oqt_free_space_8821c
+update_oqt_free_space_8822b
+update_packet_win8821c
+update_packet_win8822b
+update_sdio_free_page_8821c
+update_sdio_free_page_8822b
+verify_platform_api_win8814b_v1
+verify_platform_api_win8821c
+verify_platform_api_win8822b
+write_cam_win8814b_v1
+write_cam_win8821c
+write_cam_win8822b
+write_efuse_bt_win8814b_v1
+write_efuse_bt_win8821c
+write_efuse_bt_win8822b
+write_log_efuse_win8814b_v1
+write_log_efuse_win8821c
+write_log_efuse_win8822b
+
+===== G_fw (236) =====
+ 0x0F : TX FW INFO
+ Arg1 --> 0/1/2~??= Driver/Firmware/Original
+ Arg1 = (Decimal),  Read Lbus_Reg = 6/7/8=SCHE/WMAC/FW2HW/
+ Arg1 = (Decimal),  Write Lbus_Reg = 9/10/11=SCHE/WMAC/FW2HW/
+ Arg1 = 2(Decimal) Use TX_CMD to Control FW to collect TX Rate History
+ Arg1 = 4(Decimal) Send RSSI to FW
+ Arg1 = 5(Decimal) Send TX Power Tracking event to FW
+ BIT 3    PHY_RFW
+ Current TX FW info
+ FW DM CTRL 0--RX_CMD_PACKET-----------------------
+ FW DM CTRL 1--Rate Adaptive-----------------------
+ FW DM CTRL 2--Debug Port Switch-----------------------
+ FW Local Buf = HALFW = %d = %d.%d%d MB
+ FW Local Buf = NumLocalFWBuf(%d) * LEN(%d) = %d = %d.%d%d MB
+ FW Local Buf = NumLocalFWBuf(%d) * RT_TX_LOCAL_BUFFER(%d) = %d = %d.%d%d MB
+ If you do not input type argument, we will display some FW info
+ Type=1 FW Dynamic Control --> Switch to drv dbg mode at first
+ [fwbuf  ] (Arg1) (Arg2) (Arg3)
+ [fwctrl  ] (Arg1) (Arg2)
+ [fwdm  ] <Type> <Arg1> (Arg...)
+ print fw help
+%s: FW delete BFee entry %d
+****** FW Settings ******
+22. (( %s ))FW_DBG_TRACE
+==== FW Debug Commmands ====
+============[Fw mechanism] (before Manual) ============
+============[Fw mechanism]============
+Adapter->bFWReady
+BT Info[wifi fw]
+BtFwSupport
+CLM FW Trigger: {3} {1:drv, 2:fw}
+Clear all fw debug components
+Cnt TDMA_Togg/Lk5ms/Lk5ms_off/fw
+CoexVer/ FwVer/ PatchVer
+CoexVer/ FwVer/ PatchVer/ phydmver
+ConstructFwChannelInfo_8188E
+ConstructFwChannelInfo_8188F
+ConstructFwChannelInfo_8192E
+ConstructFwChannelInfo_8192F
+ConstructFwChannelInfo_8703B
+ConstructFwChannelInfo_8710B
+ConstructFwChannelInfo_8723B
+ConstructFwChannelInfo_8723D
+DLFWBlockSize
+Dump FW buffer
+FFFFWWWW
+FW Control --> Cmd_Idx = 16
+FW Dynamic Control --> Cmd_Idx = 18
+FW Level: Fix rate[%d]:
+FW Loaded/ FW Ver/ FW Sub Ver
+FW Ver
+FW fix TX rate[id =%d], %dM, Rate(%d)=
+FW-IQK
+FWIQK start
+FWIQK start v18!!!
+FWOffload
+FW_FirmwareDownload
+FWfix, M%bx, R%bx, BW%bx 
+Firmware for Flash
+Firmware for NIC
+Firmware for NIC BT
+Firmware for WoW
+Force TxFwInfo --> Cmd_Idx = 17
+Fw Fix Rate
+FwClockOffTimer
+FwClockOffWorkItem
+FwDebugWorkItem
+FwDwRsvdPageTimer
+FwFromHdr
+FwIPSLevel
+FwPsClockOnWorkitemCallback
+GPIOChangeRFWorkItem
+IO_LOAD_FW
+IQK All/ OK/ Fail/AutoLoad/FWDL
+IQKFWOffload
+MultiChannelAdjustTsfWorkItem
+MultiChannelReqTSFWorkItem
+MultiChannelSyncHwTsfWorkItem
+Ndis6LeaveCallbackOfWorkItem
+Num of list to FW
+Power Mode/ IPS/ FwPsMode/ LowPwr
+Power Status/ IPS/ FwPsMode
+Power Status/ IPS/ FwPsMode/ LowPower
+Print Firmware CMD Table.
+PwrOn/PreLoadFw/InitHw/InitCoexDm
+ROM_LOAD_FW
+RomDLFwEnable
+SetFwRsvdPagePkt_8188E
+SetFwRsvdPagePkt_8188F
+SetFwRsvdPagePkt_8188F() : NULL DATA0 = %d
+SetFwRsvdPagePkt_8188F() : NULL DATA1 = %d
+SetFwRsvdPagePkt_8192E
+SetFwRsvdPagePkt_8703B
+SetFwRsvdPagePkt_8710B
+SetFwRsvdPagePkt_8723B
+SetFwRsvdPagePkt_8723D
+W_FW/ B_FW/ Phy
+W_FW/ B_FW/ Phy/ Kt
+[%s] FW delete_idx is wrong!!!!!
+[%s]FW reset BFee entry %d
+[%s]sound_period_sw=%d, sound_period_fw=%d
+[BTCoex], %s == FW for 1Ant AP mode
+[BTCoex], %s == FW for AP mode
+[BTCoex], %s set FW Dac Swing level = %d
+[BTCoex], BT Scoreboard change notify by WL FW c2h, 0xaa = 0x%02x, 0xab = 0x%02x
+[BTCoex], FW for 1Ant AP mode
+[BTCoex], FW for AP mode
+[BTCoex], FW write 0x64=0x%x
+[BTCoex], WiFi Fw Dbg info = %d %d %d %d %d %d %d %d (len = %d)
+[BTCoex], WiFi Fw Dbg info = %d %d %d %d %d %d (len = %d)
+[BTCoex], bt_info reply by WL FW
+[ERR]FW size error!
+[ERR]REG_HALMAC_FW_DBG6 !=0
+[ERR]chk fw chksum!!
+[ERR]dump efsue drv/fw
+[ERR]fw bin malloc!!
+[ERR]fw chksum!!
+[ERR]fw pc
+[ERR]fw status(err):%X
+[ERR]fw status(fatal):%X
+[ERR]iddma dlfw!!
+[ERR]no dl fw!!
+[ERR]send fw pkt!!
+[FW DBG Msg] %s
+[FW Dbg Queue Overflow] %s
+[FW Dbg Queue error: wrong C2H length] %s
+[FW Msg] Invalid cmd length (( %d )) >12
+[FW fix TX Rate] {en, macid,bw,rate}={%d, %d, %d, 0x%x}
+[FW] (( UP))  Nsc=(( %d )), N_High=(( %d )), RateUp_Waiting=(( %d )), RateUp_Fail=(( %d ))
+[FW] ((AP RPT))  PASS=((%d)), RTY_NUM=((%d)), DROP=((%d)), TOTAL=((%d))
+[FW] ((AP RPT))  macid=((%d)), BUPDATE[macid]=((%d))
+[FW] ((AP RPT))  pass=((%d)), rty_num=((%d)), drop=((%d)), total=((%d))
+[FW] ((DOWN))  Nsc=(( %d )), N_Low=(( %d ))
+[FW] ((HOLD))  Nsc=((%d)), N_High=((%d)), N_Low=((%d)), Reset_CNT=((%d))
+[FW] Check RA  total=((%d)),  drop=((0x%x)), TXRPT_TRY_bit=((%x)), bNoisy=((%x))
+[FW] Check RA macid= ((%d)), MediaStatus=((%d)), Dis_RA=((%d)),  try_bit=((0x%x))
+[FW] Fast_RA (( DOWN ))  total=((%d)),  total>>1=((%d)), R4+R3+R2 = ((%d)), RateDownHold = ((%d))
+[FW] Fast_RA (( Reset Tx Rpt )) RA_CNT=((%d))
+[FW] Fast_RA (( UP ))  total_acc=((%d)),  total_acc>>1=((%d)), R4+R3+R2 = ((%d)), RateDownHold = ((%d))
+[FW] Fast_RA (( UP )) ((rate Down Hold))  RA_CNT=((%d))
+[FW] Fast_RA (( UP )) ((tota_accl<5 skip))  RA_CNT=((%d))
+[FW] RA_CNT=((%d))  Max_device=((%d))--------------------------->
+[FW] RER_CNT   PCR_ori =(( %d )),  ratio_ori =(( %d )), pcr_updown_bitmap =(( 0x%x )), pcr_var_diff =(( %d ))
+[FW] RSSI=(( %d )), ra_stage = (( %d ))
+[FW] RTY[0,1,2,3]=[ %d , %d , %d , %d ]
+[FW] RTY[4]=[ %d ], drop=(( %d )), total=(( %d )), current_rate=((0x %x ))
+[FW] pcr_mean =(( %d )), PCR_VAR =(( %d )), offset =(( %d )), decision_offset_p =(( %d ))
+[FW] pcr_shift_value =(( %s%d )), rate_down_threshold =(( %d )), rate_up_threshold =(( %d ))
+[FW] penality_idx=(( %d ))
+[FW][AP RPT]  ((1)), SPE_STATIS=((0x%x))---------->
+[FW][AP RPT]  MACID1[%d], PASS=((%d)),  DROP=((%d))
+[FW][AP RPT]  MACID1[%d], TOTAL=((%d)),  RTY=((%d))
+[FW][AP RPT]  MACID2[%d], TOTAL=((%d)),  RTY=((%d))
+[FW][AP RPT]  MACID2[%d],, PASS=((%d)),  DROP=((%d))
+[FW][AP RPT]  RTY_all=((%d))
+[FW][CLM][%d, %d] = {%d, %d, %d, %d}
+[FW][INIT_RA_INFO] Ra_init, RA_SKIP_CNT = (( %d ))
+[FW][RateDownStep]  ((rate Down)), macid=((%d)), rate1=((0x%x)),  rate2=((0x%x)), BW=((%d))
+[FW][RateUp]  ((Highest rate->return)), macid=((%d))  Nsc=((%d))
+[FW][RateUp]  ((rate UP)), rate_1=((0x%x)), rate_2=((0x%x)), BW=((%d)), Try_Bit=((%d))
+[FW][RateUp]  ((rate UP)), up_rate_tmp=((0x%x)), rate_idx=((0x%x)), SGI_en=((%d)),  SGI=((%d))
+[FW][Try Done]  ((try succsess )) macid=((%d)), Try_Done_cnt=((%d))
+[FW][Try Done]  ((try)) macid=((%d)), Try_Done_cnt=((%d)),  rate_2=((%d)),  try_succes=((%d))
+[FW][general][%d, %d, %d] = {%d, %d, %d, %d}
+[RTKFW, SEQ=%d]: %s
+[Send to FW] PWDB=%d, ofdm_pkt=%d, cck_pkt=%d
+[TRACE]=== FW info ===
+[TRACE]Dlfw OK, enable CPU
+[TRACE]fw rc = %d
+[WARN]fw status(warn):%X
+_DownloadFW_IDDmaDLFW
+bFwCtrlLPS
+bFwCtrlPwrOff
+beamform_SetHalSUTxBFWorkAroundTimer
+beamform_SetHalSUTxBFWorkAroundWorkItemCallback
+beamforming_start_fw
+clm_fw_result_acc=%d, clm_fw_result_cnt=%d
+cnt TDMA_Togg/LK5ms/LK5ms_off/fw
+cosa delay 10ms for pAdapter->bFWReady=%d
+fw not read
+fwLoaded/ fwVer/ loadType
+fw_dbg
+fw_offload_ability = %x
+fwctrl
+fwctrl_request_evt_handler
+fwctrl_return_c2h_evt
+fwctrl_return_c2h_ret
+fwctrl_return_fwctrl_request
+fwofflad, wrong init type!!
+pTxFwInfo->AllowAggregation=%d
+pTxFwInfo->CtsEnable=%d
+pTxFwInfo->EnableCPUDur=%d
+pTxFwInfo->RtsBandwidth=%d
+pTxFwInfo->RtsEnable=%d
+pTxFwInfo->RtsHT=%d
+pTxFwInfo->RtsRate =%d
+pTxFwInfo->RtsSTBC =%d
+pTxFwInfo->RtsShort =%d
+pTxFwInfo->RtsSubcarrier =%d
+pTxFwInfo->RxAMD=%ld
+pTxFwInfo->RxMF=%ld
+pTxFwInfo->Short=%d
+pTxFwInfo->TxAGCOffset=%ld
+pTxFwInfo->TxAGCSign =%ld
+pTxFwInfo->TxBandwidth=%d
+pTxFwInfo->TxHT=%d
+pTxFwInfo->TxRate=0x%02x
+pTxFwInfo->TxSubCarrier =%d
+phydm_beamforming_clear_entry_fw
+phydm_beamforming_end_period_fw
+rtl8188E\rtl8188Efw.bin
+rtl8188E\rtl8188EfwS.bin
+rtl8188E\rtl8188EfwSww.bin
+rtl8188E\rtl8188Efwww.bin
+rtl8188FU\rtl8188Ffw.bin
+rtl8188FU\rtl8188Ffwww.bin
+rtl8192EU\rtl8192EUfw.bin
+rtl8192EU\rtl8192EUfwww.bin
+rtl8192FU\rtl8192Ffw.bin
+rtl8192FU\rtl8192Ffwspic.bin
+rtl8192FU\rtl8192Ffwww.bin
+rtl8703BU\rtl8703Bfw.bin
+rtl8703BU\rtl8703Bfwww.bin
+rtl8710BU\rtl8710BUfw.bin
+rtl8710BU\rtl8710BUfwspic.bin
+rtl8710BU\rtl8710BUfwww.bin
+rtl8723BU\rtl8723Bfw.bin
+rtl8723BU\rtl8723Bfwww.bin
+rtl8723DU\rtl8723DUfw.bin
+rtl8723DU\rtl8723DUfwww.bin
+send_fw_ht_ndpa_packet
+send_fw_vht_ndpa_packet
+txbf_fw_ndpa_timer
+txbf_fw_ndpa_work_item
+{2} {en} {macid} {bw} {rate}: fw fix rate
+{3: MNTR mode sel} {1: driver, 2. FW}
+
+===== H_chan_rate (122) =====
+  Channel Plan ID (%d)
+ * [Low BW 20M] HT MCS[%d :%d ] = {%d, %d, %d, %d, %d, %d, %d, %d}
+ *[Low BW 20M] VHT-%d ss MCS[0:9] = {%d, %d, %d, %d, %d, %d, %d, %d, %d, %d}
+ *[Low BW 40M] VHT-%d ss MCS[0:9] = {%d, %d, %d, %d, %d, %d, %d, %d, %d, %d}
+ 0x01 : Print 20/40M info
+ =======     Channel list Info     ======= 
+ =======     DFS Available Channel List Info     ======= 
+ =======  Final Legal Channel list  ======= 
+ Arg1 --> 0/1/2=Thresh High/Low40M/Low20M
+ Arg1 --> 3/4/5/6=RATR0 Value High/Middle/Low40M/Low20M
+ CurrentChannel = %d
+ bCurShortGI20MHz =%x
+ bCurShortGI40MHz =%x
+#### PWR_BY_RATE_TABLE_%05d #### BEGIN
+#### PWR_BY_RATE_TABLE_%05d #### EOF
+$$$ finfo->channel = %d, p2pDeviceListenChnl[%d] = %d
+%s ======> channel=%d, table_sel=%d
+%s, set_result = 0x%x, channel = %d
+%s: Fail to switch bandwidth (bw: %d, primary ch: %d)
+%s: Fail to switch bandwidth (bw: %d, primary ch: %d), because writing RF register is fail
+%s: Fail to switch channel (ch: %d), because writing RF register is fail
+%s: Success to switch bandwidth (bw: %d, primary ch: %d)
+%s: Success to switch channel (ch: %d)
+* [Low BW 20M] HT MCS[%d :%d ] = {%d, %d, %d, %d, %d, %d, %d, %d}
+*[Low BW 20M] VHT-%d ss MCS[0:9] = {%d, %d, %d, %d, %d, %d, %d, %d, %d, %d}
+*[Low BW 40M] VHT-%d ss MCS[0:9] = {%d, %d, %d, %d, %d, %d, %d, %d, %d, %d}
+20/40MHz
+20_40MHz
+Active scan: Channels
+BW40M, Primary CH at LSB
+BW40M, Primary CH at USB
+BW40MHzFor2G
+BW40MHzFor5G
+CHANNEL_WIDTH_160
+CHANNEL_WIDTH_40
+CHANNEL_WIDTH_80
+CHANNEL_WIDTH_80_80
+CHANNEL_WIDTH_MAX
+CHNL_IsValidByChannel
+COMP_MULTICHANNEL
+Channel
+Channel List 2.4G: 
+Channel List 5G: 
+Channel plan
+Channel5G
+ChannelFromIE
+ChannelPlan
+ChannelPlan2G
+ChannelPlan5G
+DFS- manual set opchannel to 1
+DFS_Master_Channel
+FAIL_COMMON_CHANNEL_NOT_ARRIVED
+FAIL_NO_COMMON_CHANNELS
+ForceGoTxData20MBw
+MULTICHANNEL_QUEUE_FOR_EXTCLIENT
+MULTICHANNEL_QUEUE_FOR_EXTGO
+MULTICHANNEL_QUEUE_FOR_EXTSTA
+Mode/ Channel/ Bandwidth
+MultiChannelActionTimer
+MultiChannelActionTimerReqTSF
+MultiChannelActionTimerSwitchChnlandBW
+MultiChannelAddGoConnection
+MultiChannelC2HWorkItem
+MultiChannelComputeNextChannelSwitchTime
+MultiChannelDisableEnableHwQueue
+MultiChannelFcsMode
+MultiChannelFcsNoA
+MultiChannelGetReferencedCentralClock
+MultiChannelRedirectPacketToSpecificQueue
+MultiChannelSendNullDataFrameToEnterPowerSave
+MultiChannelStopChannelSwitch
+MultiChannelSwitchChannelWorkItem
+MultiChannelSwitchChannelWorkItemCallback
+MultiChannelSwitchChnlandBWWorkItem
+MultiChannelSyncHwTsfToBssid
+MultiChannelSyncHwTsfToBssidCheckBeaconReceived
+MultiChannelTranslateQueueIdToTxPauseCommand
+MultiChannelTxFeedbackCallback
+MultiChannelUpdateSoftwareTsf
+MultiChannel_ErrorHandle
+MultichannelEnableGoQueue
+N63CIndicateGOOperatingChannel
+Not BW40M, USB + LSB
+OID_DOT11_AVAILABLE_CHANNEL_LIST
+OID_DOT11_CHANNEL_AGILITY_ENABLED
+OID_DOT11_CHANNEL_AGILITY_PRESENT
+OID_DOT11_CURRENT_CHANNEL
+OID_DOT11_DATA_RATE_MAPPING_TABLE
+OID_DOT11_WFD_DEVICE_LISTEN_CHANNEL
+PHY_MapChannelPlan
+Passive scan: Channels
+Path(%s), Band(%s), RateSection(%s), BandWidth(%s), Rate(%s)
+RtConstructChannelList
+Support 40M
+WFDOpChannel
+WFDPeerOpChannel
+Wifi channel informed to BT
+[%s]: Fail to switch bandwidth (bw: %d, primary ch: %d)
+[%s]: Fail to switch bandwidth (bw: %d, primary ch: %d), because writing RF register is fail
+[%s]: Fail to switch channel (AGC) (ch: %d)
+[%s]: Fail to switch channel (RF18) (ch: %d)
+[%s]: Fail to switch channel (ch: %d), because writing RF register is fail
+[%s]: Fail to switch channel (fc_area) (ch: %d)
+[%s]: Success to switch bandwidth (bw: %d, primary ch: %d)
+[%s]: Success to switch channel (ch: %d)
+[ERR]channel[%d] = %d
+[WARN]Channel ID does not match!!
+[kordan] (pChnlListEntry->ChannelNum, LastConnectedBandwidth, LastConnectedCenterFrequency) = (%d, %d, %d)
+bandwidth
+channel
+chnl/ bandwidth/ freq
+config_phydm_switch_bandwidth_8192f
+config_phydm_switch_channel_8192f
+d^CHANNEL_WIDTH_20
+dot11CurrentChannelBandWidth
+dot11CurrentChannelNumber
+error channel
+is_round_up = ((%d)), finish_addr=((0x%x * 8Byte)), Start_Addr = ((0x%x * 8Byte)), smp_number = ((%d))
+phydm_dynamic_spur_det_eliminate:channel = %d, band_width = %d
+rssi/ chnl/ bandwidth/ freq
+smp_cnt = ((%d))
+{en} {CH} {pr_ch_idx 1/2/3/4/9/10} {0:20M,1:40M,2:80M}
