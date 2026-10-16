@@ -4,7 +4,8 @@
 RTL8812BU, чтобы использовать адаптер как SDR (приёмник, спектр, и в перспективе — TX),
 по методологии [djObsidian/wifi-sdr](https://github.com/djObsidian/wifi-sdr).
 
-Статус: **план, исполнение не начиналось.**
+Статус: **Этап 0 + Этап 1 (разработка командной шины) завершены.**
+Карта команд: `docs/command-map.md`. IQ-dump = `Echo lamode ...` (phydm idx 0x11).
 
 ---
 
@@ -123,20 +124,20 @@ RTL8812BU, чтобы использовать адаптер как SDR (при
 - **Критерий готовности:** карта устройства + список всех SDR-строк из драйвера
       сохранена в `docs/strings.md`.
 
-### Этап 1 — Вскрытие командной шины в Ghidra (2–4 дня)
-- [ ] Загрузить `rtwlanu.sys` в Ghidra, настроить дисассемблер (x86-64, NDIS miniport).
-- [ ] Найти **дескриптор IOCTL / NDIS handler**: следом от `ZwDeviceIoControlFile`
-      и строки `Process commands: %d, Unknown ioctl: %d`.
-- [ ] Восстановить **таблицу команд** (cmd index → обработчик). Ориентиры:
-      `cmd 13 3 ...`, `9/11/13: 1=Start to capture`, `Arg1 --> 0=0xc38 monitor`.
-- [ ] Найти обработчики: `Set MAC IQ dump`, `BB Setting`, `PSD`, `dumpreg`,
-      `shadow operate`, `MP/Ant test`.
-- [ ] Для каждого: извлечь **формат запроса** (структура аргументов),
-      **формат ответа/буфера**, **куда пишутся IQ-отсчёты** (DMA desc, `Dump %s PktBuf`).
-- [ ] Определить **IOCTL-коды** и **расположение DMA-буферов** в пользовательском
-      адресном пространстве.
-- **Критерий готовности:** таблица `cmd → IOCTL → args → out-buffer` в
-  `docs/command-map.md` + адреса функций в Ghidra.
+### Этап 1 — Вскрытие командной шины в Ghidra (2–4 дня) ✅
+- [x] Загрузить `rtwlanu.sys` в Ghidra (x86-64, Windows PE), автоанализ (~150 MB DB).
+- [x] Найти **дескриптор IOCTL / NDIS handler**: `FUN_14017b0e0` (work-item) →
+      `FUN_14017e690` (диспетчер). Магии: `"Echo"` → phydm, `"fw"` → fw, иначе jump-table.
+- [x] Восстановить **ОБЕ таблицы команд** (cmd → обработчик):
+      - 35 «debug»-команд (`r4/w4/dm/uidbg/...`), таблица `0x1404dc650`, шаг 40 B.
+      - 49 «phydm»-команд (`lamode/dumpreg/psd/dbgport/...`), таблица `0x14066d560`.
+- [x] Найти обработчики: **`lamode`(IQ-dump) `FUN_1403a4770`**, `dumpreg FUN_1403888a0`,
+      `psd FUN_1403b9eb0`, `dbgport FUN_14038af80`, MP/Ant `FUN_14039c700`, `cfg_la_mode`.
+- [x] Формат запроса IQ-dump + runtime flow (work-item → poll → readout → USB MPDU).
+- [ ] (→ Этап 2) Точный IOCTL/OID + буфер-маппинг; битность/интерливинг I/Q;
+      H2C-команды в прошивке.
+- **Критерий готовности:** ✅ `docs/command-map.md` + `ghidra_xrefs.txt` +
+  `decompiled.txt` + `cmd_table.txt` + `phydm_cmd_names.txt` + адреса функций.
 
 ### Этап 2 — Разбор прошивки (параллельно с Этапом 1, 2–3 дня)
 - [ ] Достать `rtl8812Ufw.bin` (из пакета Realtek / linux-firmware `rtw88/rtl8812a_fw.bin`).

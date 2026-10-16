@@ -1,0 +1,191 @@
+# Ghidra XREF report for rtwlanu.sys
+# program: rtwlanu.sys
+### KEY: Process commands  @ 0x14040a4e1
+    (no direct xref to this exact address)
+### KEY: Unknown ioctl  @ 0x14040a4f7
+    (no direct xref to this exact address)
+### KEY: Set MAC IQ dump  @ 0x1404329c4
+    (no direct xref to this exact address)
+### KEY: BB Setting  @ 0x140432c24
+    (no direct xref to this exact address)
+### KEY: BB Setting  @ 0x140432c84
+    (no direct xref to this exact address)
+### KEY: is_fake  @ 0x140432c30
+    (no direct xref to this exact address)
+### KEY: is_fake  @ 0x140432c90
+    (no direct xref to this exact address)
+### KEY: trig_mode  @ 0x140432ca3
+    (no direct xref to this exact address)
+### KEY: smp_rate  @ 0x140432ce0
+    (no direct xref to this exact address)
+### KEY: Trig_Edge  @ 0x140432ccc
+    (no direct xref to this exact address)
+### KEY: Trig_Sel  @ 0x140432cf3
+    (no direct xref to this exact address)
+### KEY: Trig_Sel  @ 0x140432f21
+    (no direct xref to this exact address)
+### KEY: Dma_type  @ 0x140432d08
+    (no direct xref to this exact address)
+### KEY: Dma_type  @ 0x140432f38
+    (no direct xref to this exact address)
+### KEY: Cap_num  @ 0x140432fe1
+    (no direct xref to this exact address)
+### KEY: dbg_port  @ 0x140429e6b
+    (no direct xref to this exact address)
+### KEY: dbg_port  @ 0x140429e80
+    xref from 0x14038994b  in  FUN_140389910 @140389910  (DATA)
+### KEY: dbg_port  @ 0x14042c5e1
+    (no direct xref to this exact address)
+### KEY: dbg_port  @ 0x1404329a6
+    (no direct xref to this exact address)
+### KEY: dbg_port  @ 0x140432c09
+    (no direct xref to this exact address)
+### KEY: dbg_port  @ 0x140432c44
+    (no direct xref to this exact address)
+### KEY: dbg_port  @ 0x140432c64
+    (no direct xref to this exact address)
+### KEY: dbg_port  @ 0x140432cb7
+    (no direct xref to this exact address)
+### KEY: dbg_port  @ 0x140432dbb
+    (no direct xref to this exact address)
+### KEY: dbg_port  @ 0x140432e1a
+    (no direct xref to this exact address)
+### KEY: dbg_port  @ 0x140432f8e
+    (no direct xref to this exact address)
+### KEY: LA Dump finished  @ 0x140432af0
+    xref from 0x1403a3b2c  in  FUN_1403a3920 @1403a3920  (DATA)
+### KEY: LA Dump more  @ 0x140432b10
+    xref from 0x1403a3b70  in  FUN_1403a3920 @1403a3920  (DATA)
+### KEY: Release BB dbg_port  @ 0x140429e60
+    xref from 0x14038b362  in  FUN_14038b320 @14038b320  (DATA)
+### KEY: Incorrect cmd index  @ 0x1404115e0
+    xref from 0x14017e7b5  in  FUN_14017e690 @14017e690  (DATA)
+### KEY: dumpreg  @ 0x14042c2a0
+    xref from 0x140388934  in  FUN_1403888a0 @1403888a0  (DATA)
+    xref from 0x14038893e  in  FUN_1403888a0 @1403888a0  (DATA)
+### KEY: PSD Pre-Scan Peak  @ 0x1404182d0
+    xref from 0x140323c7a  in  FUN_1403238c0 @1403238c0  (DATA)
+    xref from 0x1402c72d6  in  FUN_1402c6db4 @1402c6db4  (DATA)
+    xref from 0x1403314c8  in  FUN_14033110c @14033110c  (DATA)
+### KEY: PSD Scan Peak Freq  @ 0x140418390
+    xref from 0x140323d2b  in  FUN_1403238c0 @1403238c0  (DATA)
+    xref from 0x1402c73c5  in  FUN_1402c6db4 @1402c6db4  (DATA)
+    xref from 0x140331579  in  FUN_14033110c @14033110c  (DATA)
+### KEY: PSD Scan Peak Value  @ 0x140418350
+    xref from 0x140323b0b  in  FUN_1403238c0 @1403238c0  (DATA)
+    xref from 0x140323cfe  in  FUN_1403238c0 @1403238c0  (DATA)
+    xref from 0x1402c738e  in  FUN_1402c6db4 @1402c6db4  (DATA)
+    xref from 0x140331359  in  FUN_14033110c @14033110c  (DATA)
+    xref from 0x14033154c  in  FUN_14033110c @14033110c  (DATA)
+### KEY: psd_raw_data  @ 0x1404185ea
+    (no direct xref to this exact address)
+### KEY: psd_dB_data  @ 0x140420e9a
+    (no direct xref to this exact address)
+### KEY: fft_point  @ 0x140436c5a
+    (no direct xref to this exact address)
+### KEY: path_sel  @ 0x140436c71
+    (no direct xref to this exact address)
+### KEY: RXIQC  @ 0x140436c89
+    (no direct xref to this exact address)
+### KEY: MP/Ant test mode  @ 0x140430f10
+    xref from 0x14039cb89  in  FUN_14039c700 @14039c700  (DATA)
+### KEY: path-B TRX  @ 0x140430f2a
+    (no direct xref to this exact address)
+### KEY: path-B TRX  @ 0x140430f59
+    (no direct xref to this exact address)
+### KEY: Test the current ant  @ 0x14042e630
+    xref from 0x14038fb07  in  FUN_14038f800 @14038f800  (DATA)
+### KEY: Phydm Send H2C_ID  @ 0x14042f040
+    xref from 0x14039464c  in  FUN_140394580 @140394580  (DATA)
+    xref from 0x140394656  in  FUN_140394580 @140394580  (DATA)
+### KEY: dump h2cq  @ 0x1404237d5
+    (no direct xref to this exact address)
+### KEY: phydm_rssi_monitor_h2c  @ 0x140434840
+    xref from 0x1403b1775  in  FUN_1403b1720 @1403b1720  (DATA)
+    xref from 0x1403b18c7  in  FUN_1403b1720 @1403b1720  (DATA)
+### KEY: is_round_up  @ 0x140432840
+    xref from 0x1403a3d6b  in  FUN_1403a3c40 @1403a3c40  (DATA)
+### KEY: is_round_up  @ 0x1404328e0
+    xref from 0x1403a3dc4  in  FUN_1403a3c40 @1403a3c40  (DATA)
+### KEY: finish_addr  @ 0x14043280b
+    (no direct xref to this exact address)
+### KEY: finish_addr  @ 0x140432856
+    (no direct xref to this exact address)
+### KEY: finish_addr  @ 0x1404328a9
+    (no direct xref to this exact address)
+### KEY: finish_addr  @ 0x1404328f6
+    (no direct xref to this exact address)
+### KEY: Start_Addr  @ 0x140432914
+    (no direct xref to this exact address)
+### KEY: smp_number  @ 0x140432933
+    (no direct xref to this exact address)
+### KEY: cfg_la_mode  @ 0x140424730
+    xref from 0x14034d2c8  in  FUN_14034d280 @14034d280  (DATA)
+    xref from 0x14034d2d1  in  FUN_14034d280 @14034d280  (DATA)
+    xref from 0x14034d310  in  FUN_14034d280 @14034d280  (DATA)
+### KEY: cfg_la_mode  @ 0x140426130
+    xref from 0x14035f798  in  FUN_14035f750 @14035f750  (DATA)
+    xref from 0x14035f7a1  in  FUN_14035f750 @14035f750  (DATA)
+    xref from 0x14035f7e0  in  FUN_14035f750 @14035f750  (DATA)
+### KEY: cfg_la_mode  @ 0x140426be0
+    xref from 0x14036cce8  in  FUN_14036cca0 @14036cca0  (DATA)
+    xref from 0x14036ccf1  in  FUN_14036cca0 @14036cca0  (DATA)
+    xref from 0x14036cd30  in  FUN_14036cca0 @14036cca0  (DATA)
+### KEY: SetFwRsvdPagePkt_8812A  @ 0x140415e40
+    xref from 0x140219874  in  FUN_1402197c8 @1402197c8  (DATA)
+### KEY: hal_Associate_8812AU  @ 0x14040d4f0
+    xref from 0x14016df54  in  FUN_14016da80 @14016da80  (DATA)
+    xref from 0x14016df9a  in  FUN_14016da80 @14016da80  (DATA)
+    xref from 0x14016dfe0  in  FUN_14016da80 @14016da80  (DATA)
+### KEY: TxFillCmdDesc8812AUsb  @ 0x140415eb0
+    xref from 0x140221cfa  in  FUN_140221c80 @140221c80  (DATA)
+### KEY: HalUsbInMpduComplete8812AUsb  @ 0x140415fb0
+    xref from 0x140223409  in  FUN_140223398 @140223398  (DATA)
+### KEY: odm_read_and_config_mp_8812a_phy_reg_pg_asus  @ 0x140437d30
+    xref from 0x1403d43b2  in  FUN_1403d4380 @1403d4380  (DATA)
+### KEY: Start to capture  @ 0x14044f3a9
+    (no direct xref to this exact address)
+### KEY: cmd 13 3 0 0/1  @ 0x14044dafd
+    (no direct xref to this exact address)
+### KEY: cmd 16 1 2  @ 0x14044e48e
+    (no direct xref to this exact address)
+### KEY: dbgcmd 19  @ 0x14044e9af
+    (no direct xref to this exact address)
+### KEY: dbgcmd 19  @ 0x14044e9e8
+    (no direct xref to this exact address)
+### KEY: dbgcmd 19  @ 0x14044ea11
+    (no direct xref to this exact address)
+### KEY: dbgcmd 19  @ 0x14044ea3d
+    (no direct xref to this exact address)
+### KEY: dbgcmd 19  @ 0x14044ea67
+    (no direct xref to this exact address)
+### KEY: dbgcmd 19  @ 0x14044ea9e
+    (no direct xref to this exact address)
+### KEY: dbgcmd 19  @ 0x14044ead7
+    (no direct xref to this exact address)
+### KEY: dbgcmd 19  @ 0x14044eb0a
+    (no direct xref to this exact address)
+### KEY: shadow operate  @ 0x14044fe70
+    xref from 0x1404dca98  in  (non-fn)  (DATA)
+### KEY: shadow modify map  @ 0x14044fcee
+    (no direct xref to this exact address)
+### KEY: shadow modify map  @ 0x14044fd15
+    (no direct xref to this exact address)
+### KEY: shadow modify map  @ 0x14044fd79
+    (no direct xref to this exact address)
+### KEY: dumpreg  @ 0x14066d692
+    (no direct xref to this exact address)
+### KEY: MP/Ant test mode  @ 0x140593268
+    (no direct xref to this exact address)
+### KEY: MP/Ant test mode  @ 0x1405be418
+    (no direct xref to this exact address)
+### KEY: path-B TRX  @ 0x140593282
+    (no direct xref to this exact address)
+### KEY: path-B TRX  @ 0x1405932a9
+    (no direct xref to this exact address)
+### KEY: path-B TRX  @ 0x1405be432
+    (no direct xref to this exact address)
+### KEY: path-B TRX  @ 0x1405be459
+    (no direct xref to this exact address)
+### KEY: ZwDeviceIoControlFile  @ 0x1409047f8
+    (no direct xref to this exact address)

@@ -1,0 +1,65 @@
+===== dm (Dynamic Control) @ 0x140175820 FUN_140175820 =====
+
+undefined8 FUN_140175820(undefined8 param_1,undefined4 param_2,int param_3,longlong param_4)
+
+{
+  int iVar1;
+  ulonglong uVar2;
+  uint local_res18 [4];
+  int local_18;
+  undefined1 local_14 [12];
+  
+  if (param_3 < 3) {
+    FUN_14017b6e0(param_2);
+    return 4;
+  }
+  FUN_14017aff0(*(undefined8 *)(param_4 + 8),2,&local_18);
+  FUN_14017aff0(*(undefined8 *)(param_4 + 0x10),2,local_14);
+  if (param_3 == 3) {
+    local_res18[0] = 1;
+  }
+  else {
+    FUN_14017aff0(*(undefined8 *)(param_4 + 0x18),1,local_res18);
+    if (local_res18[0] == 0) {
+      return 0;
+    }
+  }
+  uVar2 = (ulonglong)local_res18[0];
+  iVar1 = local_18;
+  do {
+    FUN_1400426c0(param_1,iVar1,local_14[0]);
+    iVar1 = iVar1 + 1;
+    uVar2 = uVar2 - 1;
+  } while (uVar2 != 0);
+  return 0;
+}
+
+
+
+===== CALLERS =====
+
+-- callers of FUN_14017e690 --
+   from 0x1408f18e4  in (non-fn)  (DATA)
+   from 0x14017b0f4  in FUN_14017b0e0@14017b0e0  (UNCONDITIONAL_CALL)
+   from 0x14017adf0  in thunk_FUN_14017e690@14017adf0  (UNCONDITIONAL_JUMP)
+
+-- callers of FUN_140175820 --
+   from 0x1408f162c  in (non-fn)  (DATA)
+   from 0x14043c00c  in (non-fn)  (DATA)
+   from 0x1404dc830  in (non-fn)  (DATA)
+
+-- callers of FUN_1403a3920 --
+   from 0x1408ff330  in (non-fn)  (DATA)
+   from 0x14043da3c  in (non-fn)  (DATA)
+   from 0x1403a3912  in FUN_1403a38e0@1403a38e0  (UNCONDITIONAL_CALL)
+
+-- callers of FUN_1403a3c40 --
+   from 0x1408ff348  in (non-fn)  (DATA)
+   from 0x14043da44  in (non-fn)  (DATA)
+   from 0x1403a3a75  in FUN_1403a3920@1403a3920  (UNCONDITIONAL_CALL)
+
+-- callers of FUN_1403a3800 --
+   from 0x1408ff318  in (non-fn)  (DATA)
+   from 0x14043da34  in (non-fn)  (DATA)
+   from 0x1403a4b72  in FUN_1403a4770@1403a4770  (UNCONDITIONAL_CALL)
+   from 0x1403a3baa  in FUN_1403a3920@1403a3920  (UNCONDITIONAL_CALL)

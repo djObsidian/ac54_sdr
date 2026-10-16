@@ -1,0 +1,18 @@
+# NDIS entry path for rtwlanu.sys debug commands
+
+=== callers of 0x14017b0e0 (FUN_14017b0e0) ===
+   from 0x1408f1758 in (non-fn) (DATA)
+   from 0x14043c068 in (non-fn) (DATA)
+   from 0x1402a3c27 in FUN_1402a3a40@1402a3a40 (DATA)
+   from 0x14020bf48 in FUN_14020bd20@14020bd20 (DATA)
+   from 0x14025367a in FUN_1402534d0@1402534d0 (DATA)
+   from 0x1401f77f7 in FUN_1401f7610@1401f7610 (DATA)
+   from 0x140262d9f in FUN_140262be0@140262be0 (DATA)
+   from 0x1401e667f in FUN_1401e64c0@1401e64c0 (DATA)
+   from 0x14021da3e in FUN_14021d870@14021d870 (DATA)
+   from 0x140279afd in FUN_140279950@140279950 (DATA)
+   from 0x140231cde in FUN_140231b10@140231b10 (DATA)
+   from 0x1402b5e10 in FUN_1402b5c20@1402b5c20 (DATA)
+   from 0x1401d1206 in FUN_1401d1040@1401d1040 (DATA)
+   from 0x140290a28 in FUN_1402908a0@1402908a0 (DATA)
+   from 0x14024443f in FUN_1402442b0@1402442b0 (DATA)

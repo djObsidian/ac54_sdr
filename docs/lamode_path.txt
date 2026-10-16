@@ -1,0 +1,180 @@
+# lamode (IQ dump) trigger path + LA-start config
+
+-- callers of lamode (IQ dump cmd) --
+   from 0x1408ff384  in (non-fn)  (DATA)
+   from 0x14043da58  in (non-fn)  (DATA)
+   from 0x140386a44  in FUN_140386620@140386620  (UNCONDITIONAL_CALL)
+
+-- callers of LA start (register config) --
+   from 0x1408ff318  in (non-fn)  (DATA)
+   from 0x14043da34  in (non-fn)  (DATA)
+   from 0x1403a4b72  in FUN_1403a4770@1403a4770  (UNCONDITIONAL_CALL)
+   from 0x1403a3baa  in FUN_1403a3920@1403a3920  (UNCONDITIONAL_CALL)
+
+-- callers of uidbg (CMD 6) --
+   from 0x1408f1650  in (non-fn)  (DATA)
+   from 0x14043c018  in (non-fn)  (DATA)
+   from 0x1404dc718  in (non-fn)  (DATA)
+
+====================================================================
+uidbg (CMD 6)  @ 0x140175bc0  FUN_140175bc0
+====================================================================
+
+undefined8 FUN_140175bc0(longlong param_1,undefined8 param_2,int param_3,longlong param_4)
+
+{
+  ushort uVar1;
+  uint uVar2;
+  uint uVar3;
+  uint uVar4;
+  uint uVar5;
+  uint uVar6;
+  uint uVar7;
+  uint local_res8 [2];
+  uint local_res18 [4];
+  uint local_48 [4];
+  
+  uVar7 = local_res18[0];
+  uVar4 = 2;
+  if (param_3 == 1) {
+    uVar1 = *(ushort *)(param_1 + 0xe90);
+    uVar3 = 0;
+    local_res18[0] = 0;
+    uVar2 = local_res18[0];
+    if ((uVar1 < 0x2f) && ((0x700700700000U >> ((ulonglong)uVar1 & 0x3f) & 1) != 0)) {
+      uVar7 = uVar4;
+      uVar6 = 0xff;
+    }
+    else {
+      uVar7 = uVar4;
+      uVar6 = 0xff;
+      if (5 < (ushort)(uVar1 - 0x17)) {
+        uVar6 = 0x2e;
+      }
+    }
+  }
+  else if (param_3 == 2) {
+    FUN_14017aff0(*(undefined8 *)(param_4 + 8),1,local_res18);
+    uVar2 = local_res18[0];
+    uVar1 = *(ushort *)(param_1 + 0xe90);
+    local_res18[0] = 0;
+    uVar7 = uVar2 + 1;
+    uVar3 = uVar2;
+    if ((uVar1 < 0x2f) && ((0x700700700000U >> ((ulonglong)uVar1 & 0x3f) & 1) != 0)) {
+      uVar6 = 0xff;
+    }
+    else {
+      uVar6 = 0xff;
+      if (5 < (ushort)(uVar1 - 0x17)) {
+        uVar6 = 0x2e;
+      }
+    }
+  }
+  else {
+    if (param_3 == 3) {
+      FUN_14017aff0(*(undefined8 *)(param_4 + 8),1,local_res18);
+      FUN_14017aff0(*(undefined8 *)(param_4 + 0x10),2,local_res8);
+      local_48[0] = local_res8[0];
+    }
+    else {
+      if (param_3 != 4) {
+        local_res18[0] = local_res8[0];
+        uVar6 = local_48[0];
+        uVar2 = local_res8[0];
+        uVar3 = uVar7;
+        goto LAB_140175d4f;
+      }
+      FUN_14017aff0(*(undefined8 *)(param_4 + 8),1,local_res18);
+      FUN_14017aff0(*(undefined8 *)(param_4 + 0x10),2,local_res8);
+      FUN_14017aff0(*(undefined8 *)(param_4 + 0x18),2,local_48);
+    }
+    uVar7 = local_res18[0] + 1;
+    uVar6 = local_48[0] + 1;
+    uVar2 = local_res18[0];
+    uVar3 = local_res18[0];
+    local_res18[0] = local_res8[0];
+  }
+LAB_140175d4f:
+  uVar5 = local_res18[0];
+  if ((*(ushort *)(param_1 + 0xe90) < 0x2f) &&
+     ((0x700700700000U >> ((ulonglong)*(ushort *)(param_1 + 0xe90) & 0x3f) & 1) != 0)) {
+    if ((uVar2 == 4) && (param_3 != 1)) {
+      uVar3 = 0;
+      uVar7 = 4;
+    }
+LAB_140175d76:
+    if (4 < uVar7) {
+      return 1;
+    }
+    if (uVar2 != 2) goto joined_r0x000140175da9;
+  }
+  else {
+    if ((uVar2 != 2) || (param_3 == 1)) goto LAB_140175d76;
+    uVar3 = 0;
+    uVar7 = uVar4;
+  }
+  if (param_3 != 1) {
+    uVar3 = 0;
+    uVar7 = uVar4;
+  }
+joined_r0x000140175da9:
+  for (; uVar3 < uVar7; uVar3 = uVar3 + 1) {
+    FID_conflict_StringCchPrintfA(&DAT_1408d02a0,200,"\r\n\r\n RF-%c",(ulonglong)(uVar3 + 0x41));
+    FUN_1401803b4(&DAT_1408d02a0);
+    uVar4 = uVar5;
+    for (; uVar5 < uVar6; uVar5 = uVar5 + 1) {
+      if ((uVar5 & 3) == 0) {
+        FID_conflict_StringCchPrintfA
+                  (&DAT_1408d02a0,200,"\r\n0x%08lX%01s\t",(ulonglong)uVar5,&LAB_14040a720);
+        FUN_1401803b4(&DAT_1408d02a0);
+      }
+      uVar4 = FUN_140172c40(param_1,(char)uVar3,(ulonglong)uVar5,0xfffff);
+      FID_conflict_StringCchPrintfA
+                (&DAT_1408d02a0,200,"%08lX\t%01s",(ulonglong)uVar4,&LAB_14040a720);
+      FUN_1401803b4(&DAT_1408d02a0);
+      uVar4 = local_res18[0];
+    }
+    uVar5 = uVar4;
+  }
+  return 0;
+}
+
+
+====================================================================
+LA start (register config)  @ 0x1403a3800  FUN_1403a3800
+====================================================================
+
+void FUN_1403a3800(longlong param_1,undefined1 param_2,undefined4 param_3,undefined1 param_4,
+                  undefined4 param_5)
+
+{
+  char cVar1;
+  
+  *(undefined4 *)(param_1 + 0xb344) = param_5;
+  *(undefined1 *)(param_1 + 0xb338) = param_2;
+  *(undefined4 *)(param_1 + 0xb33c) = param_3;
+  *(undefined1 *)(param_1 + 0xb340) = param_4;
+  if (*(int *)(param_1 + 0xb330) == 0) {
+    if (*(int *)(param_1 + 0xb320) == 0) {
+      cVar1 = FUN_1403a3bd0();
+      if (cVar1 == '\0') goto LAB_1403a38bd;
+    }
+    *(undefined4 *)(param_1 + 0xb330) = 1;
+    DbgPrintEx(0x50,0,"[LA Set Success] LA_State=((%d))\n",1);
+    DbgPrintEx(0x50,0,"ADCSmp_work_item_index = ((%d))\n",*(undefined1 *)(param_1 + 0xb359));
+    if (*(char *)(param_1 + 0xb359) != '\0') {
+      thunk_FUN_140030860(param_1 + 0xb3d8);
+      *(undefined1 *)(param_1 + 0xb359) = 0;
+      return;
+    }
+    thunk_FUN_140030860(param_1 + 0xb370);
+    *(undefined1 *)(param_1 + 0xb359) = 1;
+    return;
+  }
+LAB_1403a38bd:
+                    /* WARNING: Could not recover jumptable at 0x0001403a38d5. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  DbgPrintEx(0x50,0,"[LA Set Fail] LA_State=((%d))\n",*(undefined4 *)(param_1 + 0xb330));
+  return;
+}
+

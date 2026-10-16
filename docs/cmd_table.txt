@@ -1,0 +1,226 @@
+# Realtek debug command dispatch table @ 0x1404dc650
+# dispatcher: FUN_14017e690 ; array of 40-byte structs
+# struct: +0x00 handler | +0x08 data | +0x10 name_str | +0x18 idx_str | +0x20 flag
+# NOTE: user-facing command number = (array index) + 1
+
+CMD  1 (idx  0): handler=0x000140175050 FUN_140175050@140175050 | data=0x00014044c360 | flag=0x1
+       name : "Read memory address by Double Word		
+ [r4  ] <Addr> (Size)		
+ <Addr> : Readable memory address"
+       idxtag: "
+ Command index = 1"
+CMD  2 (idx  1): handler=0x000140175300 FUN_140175300@140175300 | data=0x00014044c438 | flag=0x1
+       name : "Write memory address by Dword		
+ [w4  ] <Addr> <Data> (Size)		
+ <Addr> : Writable memory addre"
+       idxtag: "
+ Command index = 2"
+CMD  3 (idx  2): handler=0x000140175450 FUN_140175450@140175450 | data=0x00014044c540 | flag=0x1
+       name : "Read NIC adapter		
+ [rada  ] <??> <??> (??)		
+ <??> : 		
+ <??> : 		
+ (??) : 
+"
+       idxtag: "
+ Command index = 3"
+CMD  4 (idx  3): handler=0x0001401758c0 FUN_1401758c0@1401758c0 | data=0x00014044c5c0 | flag=0x1
+       name : "Write NIC adapter		
+ [wada  ] <??> <??> (??)		
+ <??> : 		
+ <??> : 		
+ (??) : 
+"
+       idxtag: "
+ Command index = 4"
+CMD  5 (idx  4): handler=0x000140175ba0 FUN_140175ba0@140175ba0 | data=0x00014044c640 | flag=0x1
+       name : "Dump all RF register. --> Cmd Index=5		
+ rfd (RF-Path) (Addr_Start) (Addr_End)		
+ <RF-Path> : "
+       idxtag: "
+ Command index = 5"
+CMD  6 (idx  5): handler=0x000140175bc0 FUN_140175bc0@140175bc0 | data=0x00014044c7f8 | flag=0x1
+       name : "for utility debug page use only		
+ uidbg <Type>		
+ Type = 0x01~....		
+ 0x01 : Print 20/40M in"
+       idxtag: "
+ Command index = 6"
+CMD  7 (idx  6): handler=0x000140175f90 FUN_140175f90@140175f90 | data=0x00014044cee0 | flag=0x1
+       name : "Change debug print flag		
+ dbgf [Flag_Type] [dbg_type] [dbg_comp_bit]		
+ [Flag_Type] : Decimal"
+       idxtag: "
+ Command index = 7"
+CMD  8 (idx  7): handler=0x000140177270 FUN_140177270@140177270 | data=0x00014044d0f0 | flag=0x1
+       name : "Modify dedicated RF register --> Cmd Index=8		
+ rfm <RF-Path> <Addr_Start> (Addr_End) <Data>		"
+       idxtag: "
+ Command index = 8"
+CMD  9 (idx  8): handler=0x000140175e80 FUN_140175e80@140175e80 | data=0x00014044d2a8 | flag=0x1
+       name : "Read memory address by word		
+ [r2  ] <Addr> (Size)		
+ Please refer to [r4]
+"
+       idxtag: "
+ Cmd_Idx = 9"
+CMD 10 (idx  9): handler=0x0001401754f0 FUN_1401754f0@1401754f0 | data=0x00014044d310 | flag=0x1
+       name : "Write memory address by word --> Cmd Index=10		
+ [w2  ] <Addr> <Data> (Size)		
+ Please refer t"
+       idxtag: "
+ Cmd_Idx = 10"
+CMD 11 (idx 10): handler=0x000140175640 FUN_140175640@140175640 | data=0x00014044d3a0 | flag=0x1
+       name : "Read memory address by char		
+ [r1  ] <Addr> (Size)		
+ Please refer to [r4]
+"
+       idxtag: "
+ Cmd_Idx = 11"
+CMD 12 (idx 11): handler=0x0001401756e0 FUN_1401756e0@1401756e0 | data=0x00014044d410 | flag=0x1
+       name : "Write memory address by char		
+ [w1  ] <Addr> <Data> (Size)		
+ Please refer to [w4]
+"
+       idxtag: "
+ Cmd_Idx = 12"
+CMD 13 (idx 12): handler=0x000140175820 FUN_140175820@140175820 | data=0x00014044d488 | flag=0x2
+       name : "Dynamic Control --> Cmd_Idx = 13		
+ [dm  ] <Type> <Arg1> (Arg...)		
+ -------------------------"
+       idxtag: "
+ Cmd_Idx = 13"
+CMD 14 (idx 13): handler=0x0001401773e0 FUN_1401773e0@1401773e0 | data=0x00014044dc18 | flag=0x2
+       name : "Dynamic dummy --> Cmd_Idx = 14		
+ ...... Future use 
+"
+       idxtag: "
+ Cmd_Idx = 14"
+CMD 15 (idx 14): handler=0x00014013bcb0 FUN_14013bcb0@14013bcb0 | data=0x00014044dc68 | flag=0x2
+       name : "Display TX Rate History --> Cmd_Idx = 15		
+ [txrahis  ] (Arg1) (Arg2)		
+ ---------------------"
+       idxtag: "
+ Cmd_Idx = 15"
+CMD 16 (idx 15): handler=0x0001401775a0 FUN_1401775a0@1401775a0 | data=0x00014044dfe8 | flag=0x2
+       name : "FW Control --> Cmd_Idx = 16		
+ [fwctrl  ] (Arg1) (Arg2)		
+ -------------------------		
+ If yo"
+       idxtag: "
+ Cmd_Idx = 16"
+CMD 17 (idx 16): handler=0x00014013bcb0 FUN_14013bcb0@14013bcb0 | data=0x00014044e3b8 | flag=0x2
+       name : "Force TxFwInfo --> Cmd_Idx = 17		
+ [ForTFI] (Arg1) (Arg2)		
+ -------------------------		
+ Arg"
+       idxtag: "
+ Cmd_Idx = 17"
+CMD 18 (idx 17): handler=0x000140177980 FUN_140177980@140177980 | data=0x00014044e500 | flag=0x2
+       name : "FW Dynamic Control --> Cmd_Idx = 18		
+ [fwdm  ] <Type> <Arg1> (Arg...)		
+ --------------------"
+       idxtag: "
+ Cmd_Idx = 18"
+CMD 19 (idx 18): handler=0x000140177530 FUN_140177530@140177530 | data=0x00014044e848 | flag=0x2
+       name : "Rx Path Selection Control --> Cmd_Idx = 19		
+ [rxPathSel] <Type> <Arg1> (Arg...)		
+ ----------"
+       idxtag: "
+ Cmd_Idx = 19"
+CMD 20 (idx 19): handler=0x0001401779b0 FUN_1401779b0@1401779b0 | data=0x00014044eb48 | flag=0x1
+       name : "Verification Console		
+ [vera  ] (Arg1) (Arg2) (Arg3) (Arg4)		
+ -------------------------		
+ "
+       idxtag: "
+ Cmd_Idx = 20"
+CMD 21 (idx 20): handler=0x0001401779d0 FUN_1401779d0@1401779d0 | data=0x00014044eef0 | flag=0x3
+       name : "Support dbg cmd for 92SE verify		
+ [verify  ] (Arg1) (Arg2) (Arg3)		
+ ------------------------"
+       idxtag: "
+ Cmd_Idx = 21"
+CMD 22 (idx 21): handler=0x00014013bcb0 FUN_14013bcb0@14013bcb0 | data=0x00014044f5e8 | flag=0x3
+       name : "Dump FW buffer		
+ [fwbuf  ] (Arg1) (Arg2) (Arg3)		
+ -------------------------		
+ Dump TX/RX b"
+       idxtag: "
+ Cmd_Idx = 22"
+CMD 23 (idx 22): handler=0x00014013bcb0 FUN_14013bcb0@14013bcb0 | data=0x00014044f878 | flag=0x1
+       name : "Security control console		
+ [sec  ] (Arg1) (Arg2) (Arg3)		
+ -------------------------		
+ Chan"
+       idxtag: "
+ Cmd_Idx = 23"
+CMD 24 (idx 23): handler=0x00014013bcb0 FUN_14013bcb0@14013bcb0 | data=0x00014044fa38 | flag=0x3
+       name : "Dump 92S register 		
+ [regdump  ] (Arg1) (Arg2) (Arg3)		
+ -------------------------		
+ Arg1 ="
+       idxtag: "
+ Cmd_Idx = 24"
+CMD 25 (idx 24): handler=0x00014013bcb0 FUN_14013bcb0@14013bcb0 | data=0x00014044fae8 | flag=0x3
+       name : "Reset 92S HW block		
+ [reset  ] (Arg1) 		
+ -------------------------		
+ Arg1 = (Decimal) ALL/"
+       idxtag: "
+ Cmd_Idx = 25"
+CMD 26 (idx 25): handler=0x00014013bcb0 FUN_14013bcb0@14013bcb0 | data=0x00014044fb98 | flag=0x1
+       name : "EEPROM operate to R/W 		
+ [eepr  ] <Addr> (Size)		
+ <Addr>: HEX 0=Read, 0x1234=Write		
+ (SIze"
+       idxtag: "
+ Cmd_Idx = 26"
+CMD 27 (idx 26): handler=0x00014013bcb0 FUN_14013bcb0@14013bcb0 | data=0x00014044fc20 | flag=0x1
+       name : "EFUSE operate to R/W/Update for Real or Shadow Table		
+ <Arg1>: HEX		
+ 0-0x1FF=Read,
+		
+ 0x1"
+       idxtag: "
+ Cmd_Idx = 27"
+CMD 28 (idx 27): handler=0x000140177ae0 FUN_140177ae0@140177ae0 | data=0x00014044fe68 | flag=0x1
+       name : "shadow operate for RF / BB/ MAC shadow operation		
+ <Arg1>: DEC or CHAR		
+ 0/1/2/3/4/5 or m/b/"
+       idxtag: "
+ Cmd_Idx = 28"
+CMD 29 (idx 28): handler=0x000140178290 FUN_140178290@140178290 | data=0x00014044ffd0 | flag=0x1
+       name : "debug control operation
+"
+       idxtag: "
+ Cmd_Idx = 29"
+CMD 30 (idx 29): handler=0x000140179910 FUN_140179910@140179910 | data=0x000140450008 | flag=0x1
+       name : "USB PHY read 1 byte Arg1=Start_addr Arg2=Length
+"
+       idxtag: "
+ Cmd_Idx = 30"
+CMD 31 (idx 30): handler=0x00014017a4e0 FUN_14017a4e0@14017a4e0 | data=0x000140450058 | flag=0x1
+       name : "USB PHY write 1 byte Arg1=Start_addr Arg2=Value
+"
+       idxtag: "
+ Cmd_Idx = 31"
+CMD 32 (idx 31): handler=0x00014017a650 FUN_14017a650@14017a650 | data=0x0001404500a8 | flag=0x1
+       name : "TX/RX shortcut Arg1=TX/RX/Counter Arg2=Enable/Disable
+"
+       idxtag: "
+ Cmd_Idx = 32"
+CMD 33 (idx 32): handler=0x00014017a720 FUN_14017a720@14017a720 | data=0x000140450100 | flag=0x1
+       name : "Support dbg cmd for batch indicate		
+ [BatchIndicate  ] (Arg1) (Arg2)		
+ ---------------------"
+       idxtag: "
+ Cmd_Idx = 33"
+CMD 34 (idx 33): handler=0x00014017a7b0 FUN_14017a7b0@14017a7b0 | data=0x00014044baf0 | flag=0x100000065
+       name : "
+ Error cmd string"
+       idxtag: "
+ Error dbg flag"
+CMD 35 (idx 34): handler=0x00014017add0 FUN_14017add0@14017add0 | data=0x000000000000 | flag=0x140450598
+       name : "help"
+       idxtag: "Dbg cmd help"
