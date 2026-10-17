@@ -426,10 +426,15 @@ static int rtw_set_channel(uint8_t ch, uint8_t bw)
     if (ch > 144) r18 |= BIT(18); else if (ch >= 80) r18 |= BIT(17);
     r18 |= (bw == BW40) ? BIT(11) : (bw == BW80) ? BIT(10) : (BIT(11) | BIT(10));
     if (g2) be = 0;
-    else if (ch >= 36 && ch <= 64) be = low_band[(ch - 36) >> 1];
-    else if (ch >= 100 && ch <= 144) be = middle_band[(ch - 100) >> 1];
-    else if (ch >= 149 && ch <= 177) be = high_band[(ch - 149) >> 1];
-    else { fprintf(stderr, "bad channel %d\n", ch); return -1; }
+    else {
+        const uint8_t *tb; int n, idx;
+        if (ch <= 64)       { tb = low_band;    n = 15; idx = (ch < 36 ? 0 : (ch - 36) >> 1); }
+        else if (ch <= 144) { tb = middle_band; n = 23; idx = (ch < 100 ? 0 : (ch - 100) >> 1); }
+        else                { tb = high_band;   n = 15; idx = (ch - 149) >> 1; if (ch < 149) idx = 0; }
+        if (idx >= n) idx = n - 1;
+        if (tb[idx] == 0xff) idx = idx > 0 ? idx - 1 : idx + 1;   /* invalid slot -> neighbour */
+        be = tb[idx];
+    }
     rf_write(0, 0xbe, BIT(17) | BIT(16) | BIT(15), be);
     rf_write(0, 0xdf, BIT(18), ch == 144 ? 1 : 0);
     rf_write(0, 0x18, RFREG_MASK, r18);
@@ -446,6 +451,7 @@ static int rtw_set_channel(uint8_t ch, uint8_t bw)
     set_channel_cca(ch, bw);
     set_channel_rfe(ch);
     Sleep(5);
+    if (rs.verbose)
     printf("[ch] ch=%d bw=%d  RF18 A=0x%05x B=0x%05x  ADCCLK=0x%08x\n", ch, 20 << bw,
            rf_read(0, 0x18, RFREG_MASK), rf_read(1, 0x18, RFREG_MASK), rd32(0x8ac));
     return 0;

@@ -1,5 +1,109 @@
 # HANDOFF — ASUS USB-AC54 (RTL8822BU) SDR via USB
 
+## Session 4 (2026-10-17): USB3 verified; continuous IQ NOT implemented
+
+- Built and ran `tools/usb3.exe` (rtw88 switch sequence). Hardware now reports
+  **bcdUSB=0300, EP0=512, EP84 maxpacket=1024, SS companion present,
+  0xff=0x20, 0xc4=0x00080400**. `usb3.exe status` is read-only.
+- Windows rebound the new enumeration to `netrtwlanu.inf` (Wi-Fi), so libusb
+  returned NOT_SUPPORTED. Reapplied the **existing** Zadig package `oem16.inf`
+  with `bind_winusb.exe C:\Windows\INF\oem16.inf` through UAC. Package number
+  is machine-specific: inspect `pnputil /enum-devices /instanceid
+  "USB\VID_0B05&PID_1841\123456" /drivers` before reusing on another PC.
+  No reboot was needed. Replug can return to USB2; run usb3 again and then init.
+- Full `init.exe ch=11` succeeded. **SuperSpeed EP0 reads >=512 B failed**
+  (512 -> STALL, 1024/4096 -> timeout); 504/508 B worked. `la.h` now uses
+  504-byte chunks on USB3 and 4096 on USB2, selecting each TXFF page once.
+  20/20 snapshots: 1203 ms; 100/100: 5750 ms, 13,107,200 bytes;
+  SHA256 comparison confirmed 100 distinct snapshot blocks.
+  This is ~17 snapshots/s, NOT the previously predicted 30-50+.
+- `la.exe` now reports completed captures and exits nonzero on capture/file errors.
+- `mk.bat` discovers installed MSVC/SDK (this PC has VS18 and SDK 10.0.26100.0).
+  Rebuilt usb3, bind_winusb, bulkprobe, la, spyserver successfully.
+  SpyServer smoke test over localhost received three int16 IQ messages at
+  decimation 5 after retuning to 2462 MHz (still snapshot-loop semantics).
+- `bulkprobe.exe seconds=5 la=0` queues 8 x 64 KB asynchronous EP84 transfers,
+  sets RX DMA burst size for current USB speed and MAC RX filters, and restores
+  changed registers after cancellation. One run received 20,187 bytes in 65
+  completions, initially only: RX descriptors + 802.11 frames, **not IQ**.
+- `bulkprobe.exe seconds=5 la=1` additionally arms LA without firing a trigger:
+  **0 bytes**, LA register `0x800064cb` at end. This tests a candidate route,
+  not all possible hardware configurations; it does not prove impossibility.
+- WinUSB supports continuous asynchronous bulk reads. The USB3 feature named
+  "bulk streams" (stream IDs) is a different feature and is not required here.
+  Sources: https://learn.microsoft.com/en-us/windows/win32/api/winusb/nf-winusb-winusb_readpipe
+  and https://techcommunity.microsoft.com/blog/microsoftusbblog/using-winusb-for-usb-3-0-superspeed-devices-on-windows-8/270761/
+- Realtek LA source and HALMAC definitions examined:
+  https://github.com/morrownr/88x2bu-20210702/blob/main/hal/phydm/phydm_adc_sampling.c
+  and `hal/halmac/halmac_bit2.h`, `halmac_reg2.h` (downloaded under ignored tmp/).
+  The known 8822B path captures into TX packet RAM and reads after trigger stop.
+  No working ADC-to-RX-bulk route identified. FWFF request bit31 at 0x29c and
+  RX_DBG_SEL bit7 at 0x290 are defined for other chips, **not 8822B**: do not
+  assume those newer-chip mechanisms apply here.
+- **Outstanding user request:** genuine continuous IQ, without repeated snapshots.
+  Requires discovering/implementing a device-side route from ADC/TX RAM to USB
+  with overrun and continuity verification, potentially custom firmware.
+  Host queuing alone does not provide that route. Existing SpyServer still loops
+  snapshots; its startup now explicitly says so. Do not call this real-time RF.
+  Minimum documented LA rate 80/128 MHz needs 5 MB/s at 8 B/sample, already above
+  measured EP0 snapshot readout (~2.3 MB/s including capture overhead).
+
+## Historical session 3 / original USB3 plan (superseded above)
+
+**Session 3 (2026-10-17): WORKS IN SDR++.** `tools/spyserver.exe` pretends to be a SpyServer;
+SDR++ (Source = SpyServer, 127.0.0.1:5555) shows live spectrum/waterfall, retune from the UI works
+(checked by the user). **NEXT TASK: switch the chip to USB 3.0** (see section right below).
+
+## ▶ NEXT: switch to USB 3.0 (SuperSpeed)
+
+Bottleneck now = reading the 128 KB LA buffer through EP0 control transfers at USB 2.0:
+~125 ms/snapshot → ~11.5 snapshots/s (snapshot = 410 µs of air). On SuperSpeed EP0 (512 B packets,
+lower latency) expect ~10–20 ms → 30–50+ snapshots/s → much denser waterfall.
+(Still snapshot-based: continuous 40 MS/s is impossible over EP0 regardless of USB speed.)
+
+Facts (hardware + rtw88 `usb.c`):
+- RTL8812BU = USB variant of 8822B; Linux `rtw8822bu` lists `0b05:1841` ("ASUS USB-AC55 B1").
+  Realtek USB3 chips ALWAYS enumerate as USB 2.0 first; the driver switches them to USB 3.
+- Current state: `REG_SYS_CFG2+3 (0xFF) = 0x80` (≠ 0x20 → High Speed),
+  `REG_PAD_CTRL2 (0xC4) = 0x00100000` (BIT20 USB3_USB2_TRANSITION = can switch, [19:18]=0 never tried),
+  efuse logical 0x06 = 0xa1 → bit7 `usb_mode_switch = 1` (allowed).
+- Procedure = `rtw_usb_switch_mode_new()` (ref/rtw88/usb.c:1146), to implement as `usb3.exe`:
+  ```
+  if (rd8(0xFF) == 0x20) -> already USB3, done
+  pad = rd32(0xC4); require pad & (BIT20 | 3<<18)
+  if (((pad >> 18) & 3) == 2) -> already tried: port is USB2 only
+  wr8(0x10C3, rd8(0x10C3) & ~1)            // REG_SW_MDIO+3: enable IO wrapper timeout (8822B)
+  pad = (pad & ~(3<<18)) | (2<<18) | BIT16 // USB23_SW_MODE = U3, RSM_EN_V1
+  wr32(0xC4, pad); wr8(0xC5, 4)
+  wr16(0x04, rd16(0x04) | BIT9)            // APFM_OFFMAC
+  Sleep(1); wr32(0xC4, rd32(0xC4) | BIT17) // NO_PDN_CHIPOFF_V1
+  -> device disconnects and re-enumerates as SuperSpeed (USB transfers may error out: expected)
+  ```
+- After switch: check descriptors (bcdUSB 3.x, maxpacket 1024 bulk, EP0 512), WinUSB binding
+  (Windows may treat it as a new device instance → re-run Zadig for `0b05:1841` if needed),
+  then re-run full `init.exe` (power cycle sequence) and measure `la.exe n=20` time.
+- rtw88 then also does `rtw_usb_phy_cfg(rtwdev, USB_SPEED_SUPER)` (usb3_para table from
+  `phy_para_table_8822b`) — port it if transfers are unstable. Replug returns the chip to USB 2.0.
+- Other possible speedups after USB3: async/queued control transfers (libusb async), check if
+  the device accepts >4096 B per transfer (window is 4 KB, so probably not useful).
+
+## SDR++ usage (works)
+```
+cd tools
+mk.bat spyserver
+spyserver.exe                 (does full chip init itself; init=0 to skip; port=5555)
+```
+SDR++: Source = SpyServer, host 127.0.0.1, port 5555, Connect, pick sample rate
+(40 / 20 / 10 / 5 / 2.5 / 1.25 MS/s), Play. 2.4 GHz: tune directly.
+5 GHz: SpyServer frequencies are uint32 → set Source "Offset" = 4000 MHz (server maps f < 2 GHz → f + 4 GHz).
+Implementation (`tools/spyserver.c`): capture thread (retune to 5 MHz channel raster → LA snapshot →
+DC removal → digital shift by residual → windowed-sinc FIR decimation → loop buffer with crossfaded
+ends); network thread streams the newest loop buffer at real-time rate (snapshot repeated until the next
+one). Formats int16 / uint8 / float. No gain control (MaximumGainIndex = 0) yet.
+Protocol test client: `python ss_client.py 2462e6 1 2` (freq, decim, seconds).
+
+---
+
 **Session 2 (2026-10-17): RAW RF I/Q CAPTURE WORKS.** Chip is brought up from scratch over
 WinUSB/libusb (no Realtek driver, no firmware), tuned to any 2.4/5 GHz channel, and the
 LA-mode (ADC sampling) block dumps 16384 × 12-bit I/Q samples @ 40 MS/s per snapshot.

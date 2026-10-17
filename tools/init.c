@@ -17,6 +17,7 @@ int main(int argc, char **argv)
     int ch = (int)opt(argc, argv, "ch", 6), bw = (int)opt(argc, argv, "bw", 0);
     if (rtw_open()) return 1;
     rtw_detect();
+    rs.verbose = 1;
     if (opt(argc, argv, "pwr", 1) && rtw_power_on()) { fprintf(stderr, "power on failed\n"); return 1; }
     if (rtw_read_efuse()) { fprintf(stderr, "efuse read failed\n"); return 1; }
     long rfe = opt(argc, argv, "rfe", -1);

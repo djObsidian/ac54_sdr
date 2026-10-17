@@ -20,8 +20,8 @@ static int rtw_open(void)
 {
     if (libusb_init(&g_ctx) != 0) { fprintf(stderr, "libusb_init failed\n"); return -1; }
     g_h = libusb_open_device_with_vid_pid(g_ctx, RTW_VID, RTW_PID);
-    if (!g_h) { fprintf(stderr, "device %04x:%04x not found / not openable\n", RTW_VID, RTW_PID); return -1; }
-    if (libusb_claim_interface(g_h, 0) != 0) { fprintf(stderr, "claim iface 0 failed\n"); return -1; }
+    if (!g_h) { fprintf(stderr, "device %04x:%04x not found / not openable\n", RTW_VID, RTW_PID); libusb_exit(g_ctx); g_ctx = NULL; return -1; }
+    if (libusb_claim_interface(g_h, 0) != 0) { fprintf(stderr, "claim iface 0 failed\n"); libusb_close(g_h); libusb_exit(g_ctx); g_h = NULL; g_ctx = NULL; return -1; }
     return 0;
 }
 
@@ -29,6 +29,7 @@ static void rtw_close(void)
 {
     if (g_h) { libusb_release_interface(g_h, 0); libusb_close(g_h); }
     if (g_ctx) libusb_exit(g_ctx);
+    g_h = NULL; g_ctx = NULL;
 }
 
 static uint32_t rd(uint32_t a, int l)
