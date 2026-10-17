@@ -1,0 +1,32 @@
+[
+  {
+    "requested_mhz": 2413.25,
+    "client_hz": 2413250000,
+    "tone_mhz": 2414.25,
+    "fs_hz": 5000000,
+    "peak_hz": 1034851.07421875,
+    "local_snr_db": 64.64986960741,
+    "samples_analyzed": 4997120,
+    "passed": true
+  },
+  {
+    "requested_mhz": 5161.25,
+    "client_hz": 1161250000,
+    "tone_mhz": 5162.25,
+    "fs_hz": 5000000,
+    "peak_hz": 1076965.33203125,
+    "local_snr_db": 76.67309387382475,
+    "samples_analyzed": 5062656,
+    "passed": true
+  },
+  {
+    "requested_mhz": 5883.75,
+    "client_hz": 1883750000,
+    "tone_mhz": 5884.75,
+    "fs_hz": 5000000,
+    "peak_hz": 1085510.25390625,
+    "local_snr_db": 45.88760811636036,
+    "samples_analyzed": 4997120,
+    "passed": true
+  }
+]

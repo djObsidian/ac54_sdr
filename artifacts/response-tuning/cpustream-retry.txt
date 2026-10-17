@@ -1,0 +1,20 @@
+Firmware halfwords=842 banks=2440 rate=20000000
+[pwr] SYS_CFG1=0x0c493d37 cut=3 rf=2T2R  CR=0xff
+[pwr] already on -> power cycle
+[pwr] on: CR=0x00ff SYS_FUNC_EN=0xdc1c 0x04=0x20030092
+[efuse] id=0x8129 rfe_option=2 xtal_k=0x1d mac=4c:ed:fb:b6:ff:d7
+[phy] tables loaded: 2905 writes, 687 ms
+[phy] RF A: 0x00=0x35d00 0x18=0x10d24  RF B: 0x00=0x35d00 0x18=0x10d24
+Custom RAM firmware verified: 2248 bytes
+CPU state seq=2440 target=1730604 frac=0 deadline=1730997 error=0 start=1730604 end=1730782 remaining=0
+packet 0 begin=1730620 end=1730658 duration=38 us
+packet 1 begin=1730659 end=1730698 duration=39 us
+packet 2 begin=1730699 end=1730742 duration=43 us
+packet 3 begin=1730743 end=1730782 duration=39 us
+packet 4 begin=1730783 end=1730787 duration=4 us
+OK samples=19988480 RF_s=0.999424 wall_s=1.000401 max_bank_us=195 overlaps=9760 freshness=2438
+[pwr] SYS_CFG1=0x0c493d37 cut=3 rf=2T2R  CR=0xff
+[pwr] already on -> power cycle
+[pwr] on: CR=0x00ff SYS_FUNC_EN=0xdc1c 0x04=0x20030092
+[phy] tables loaded: 2905 writes, 672 ms
+[phy] RF A: 0x00=0x35d00 0x18=0x10d24  RF B: 0x00=0x35d00 0x18=0x10d24

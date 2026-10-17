@@ -1,0 +1,33 @@
+{
+  "started_utc": "2026-10-17T16:10:16.530711+00:00",
+  "uri": "usb:4.1.5",
+  "channels": [
+    175,
+    176,
+    177
+  ],
+  "tx_gain_db": -10.0,
+  "dds_scale": 0.25,
+  "fs_hz": 40000000,
+  "bw": "BW20",
+  "path": "A",
+  "snapshots_per_state": 3,
+  "offsets_hz": [
+    1000000,
+    2000000
+  ],
+  "criteria": {
+    "min_local_snr_db": 15,
+    "min_on_off_db": 6,
+    "max_abs_error_hz": 150000,
+    "max_movement_error_hz": 4882.8125
+  },
+  "source_revision": "1102e650fbe17048920a6e87a1d4033b9435efb0",
+  "binary_sha256": {
+    "init.exe": "4db52b71a489ec62e2ac37326830a7292d205a659c3b2752884dc855ecf62f9a",
+    "la.exe": "1551b65d381a8e6e5c1e1d889be336471d9d05ad28306a6b9123cc47fb6ac4e8",
+    "reg.exe": "abbadde911c9cad993f3a300e48e81397242c5025aa3913d212e59bc6412ede7",
+    "libusb-1.0.dll": "7cbf37e76dae9c840c7e8dbf7348ee8897dcc86c8ba45e46ada60b89411569f7"
+  },
+  "finished_utc": "2026-10-17T16:10:25.972755+00:00"
+}

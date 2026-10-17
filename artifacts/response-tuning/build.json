@@ -1,0 +1,11 @@
+{
+  "source_revision": "1102e650fbe17048920a6e87a1d4033b9435efb0",
+  "binary_sha256": {
+    "init.exe": "4db52b71a489ec62e2ac37326830a7292d205a659c3b2752884dc855ecf62f9a",
+    "reg.exe": "abbadde911c9cad993f3a300e48e81397242c5025aa3913d212e59bc6412ede7",
+    "la.exe": "1551b65d381a8e6e5c1e1d889be336471d9d05ad28306a6b9123cc47fb6ac4e8",
+    "cpustream.exe": "4e4efd560a430b28edd0a770f52d9b146c475a237d57875d3c4ff21d8f8cbb22",
+    "spyserver.exe": "3e4a5599347099877b8088538ebf50b5fbc82c277ac1df6fcabc72d1e9b46bf4",
+    "libusb-1.0.dll": "7cbf37e76dae9c840c7e8dbf7348ee8897dcc86c8ba45e46ada60b89411569f7"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "('cf-ad9361-dds-core-lpc', 'altvoltage0', 'scale', True)": "0.000000",
+  "('cf-ad9361-dds-core-lpc', 'altvoltage1', 'scale', True)": "0.000000",
+  "('cf-ad9361-dds-core-lpc', 'altvoltage2', 'scale', True)": "0.000000",
+  "('cf-ad9361-dds-core-lpc', 'altvoltage3', 'scale', True)": "0.000000",
+  "('ad9361-phy', 'voltage0', 'hardwaregain', True)": "-10.000000",
+  "('ad9361-phy', 'voltage0', 'rf_port_select', True)": "A",
+  "('ad9361-phy', 'altvoltage1', 'powerdown', True)": "0",
+  "('cf-ad9361-dds-core-lpc', 'altvoltage0', 'frequency', True)": "9279985",
+  "('cf-ad9361-dds-core-lpc', 'altvoltage0', 'phase', True)": "90000",
+  "('cf-ad9361-dds-core-lpc', 'altvoltage0', 'raw', True)": "1",
+  "('cf-ad9361-dds-core-lpc', 'altvoltage2', 'frequency', True)": "9279985",
+  "('cf-ad9361-dds-core-lpc', 'altvoltage2', 'phase', True)": "0",
+  "('cf-ad9361-dds-core-lpc', 'altvoltage2', 'raw', True)": "1",
+  "('ad9361-phy', 'altvoltage1', 'frequency', True)": "2450000000"
+}

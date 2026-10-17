@@ -1,0 +1,16 @@
+{
+  "expected_centers": 160,
+  "acquired_centers": 160,
+  "confirmed_centers": 159,
+  "missing_channels": [],
+  "unconfirmed_channels": [
+    177
+  ],
+  "analysis": "Anchor at +2 MHz; search +1-MHz carrier within two FFT bins of common oscillator offset",
+  "criteria": {
+    "min_local_snr_db": 15,
+    "min_on_off_db": 6,
+    "max_abs_error_hz": 150000,
+    "max_movement_error_hz": 4882.8125
+  }
+}

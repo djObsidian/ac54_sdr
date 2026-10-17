@@ -1,0 +1,810 @@
+{
+  "confirmed_centers": 160,
+  "all_requested_centers_confirmed": true,
+  "main_pass_confirmed": 159,
+  "additional_confirmed_from_edge_retest": [
+    177
+  ],
+  "centers": [
+    {
+      "channel": 1,
+      "center_mhz": 2412,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 2,
+      "center_mhz": 2417,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 3,
+      "center_mhz": 2422,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 4,
+      "center_mhz": 2427,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 5,
+      "center_mhz": 2432,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 6,
+      "center_mhz": 2437,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 7,
+      "center_mhz": 2442,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 8,
+      "center_mhz": 2447,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 9,
+      "center_mhz": 2452,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 10,
+      "center_mhz": 2457,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 11,
+      "center_mhz": 2462,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 12,
+      "center_mhz": 2467,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 13,
+      "center_mhz": 2472,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 14,
+      "center_mhz": 2484,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 32,
+      "center_mhz": 5160,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 33,
+      "center_mhz": 5165,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 34,
+      "center_mhz": 5170,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 35,
+      "center_mhz": 5175,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 36,
+      "center_mhz": 5180,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 37,
+      "center_mhz": 5185,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 38,
+      "center_mhz": 5190,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 39,
+      "center_mhz": 5195,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 40,
+      "center_mhz": 5200,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 41,
+      "center_mhz": 5205,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 42,
+      "center_mhz": 5210,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 43,
+      "center_mhz": 5215,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 44,
+      "center_mhz": 5220,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 45,
+      "center_mhz": 5225,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 46,
+      "center_mhz": 5230,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 47,
+      "center_mhz": 5235,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 48,
+      "center_mhz": 5240,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 49,
+      "center_mhz": 5245,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 50,
+      "center_mhz": 5250,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 51,
+      "center_mhz": 5255,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 52,
+      "center_mhz": 5260,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 53,
+      "center_mhz": 5265,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 54,
+      "center_mhz": 5270,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 55,
+      "center_mhz": 5275,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 56,
+      "center_mhz": 5280,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 57,
+      "center_mhz": 5285,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 58,
+      "center_mhz": 5290,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 59,
+      "center_mhz": 5295,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 60,
+      "center_mhz": 5300,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 61,
+      "center_mhz": 5305,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 62,
+      "center_mhz": 5310,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 63,
+      "center_mhz": 5315,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 64,
+      "center_mhz": 5320,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 65,
+      "center_mhz": 5325,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 66,
+      "center_mhz": 5330,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 67,
+      "center_mhz": 5335,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 68,
+      "center_mhz": 5340,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 69,
+      "center_mhz": 5345,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 70,
+      "center_mhz": 5350,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 71,
+      "center_mhz": 5355,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 72,
+      "center_mhz": 5360,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 73,
+      "center_mhz": 5365,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 74,
+      "center_mhz": 5370,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 75,
+      "center_mhz": 5375,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 76,
+      "center_mhz": 5380,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 77,
+      "center_mhz": 5385,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 78,
+      "center_mhz": 5390,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 79,
+      "center_mhz": 5395,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 80,
+      "center_mhz": 5400,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 81,
+      "center_mhz": 5405,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 82,
+      "center_mhz": 5410,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 83,
+      "center_mhz": 5415,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 84,
+      "center_mhz": 5420,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 85,
+      "center_mhz": 5425,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 86,
+      "center_mhz": 5430,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 87,
+      "center_mhz": 5435,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 88,
+      "center_mhz": 5440,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 89,
+      "center_mhz": 5445,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 90,
+      "center_mhz": 5450,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 91,
+      "center_mhz": 5455,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 92,
+      "center_mhz": 5460,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 93,
+      "center_mhz": 5465,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 94,
+      "center_mhz": 5470,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 95,
+      "center_mhz": 5475,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 96,
+      "center_mhz": 5480,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 97,
+      "center_mhz": 5485,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 98,
+      "center_mhz": 5490,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 99,
+      "center_mhz": 5495,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 100,
+      "center_mhz": 5500,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 101,
+      "center_mhz": 5505,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 102,
+      "center_mhz": 5510,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 103,
+      "center_mhz": 5515,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 104,
+      "center_mhz": 5520,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 105,
+      "center_mhz": 5525,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 106,
+      "center_mhz": 5530,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 107,
+      "center_mhz": 5535,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 108,
+      "center_mhz": 5540,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 109,
+      "center_mhz": 5545,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 110,
+      "center_mhz": 5550,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 111,
+      "center_mhz": 5555,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 112,
+      "center_mhz": 5560,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 113,
+      "center_mhz": 5565,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 114,
+      "center_mhz": 5570,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 115,
+      "center_mhz": 5575,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 116,
+      "center_mhz": 5580,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 117,
+      "center_mhz": 5585,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 118,
+      "center_mhz": 5590,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 119,
+      "center_mhz": 5595,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 120,
+      "center_mhz": 5600,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 121,
+      "center_mhz": 5605,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 122,
+      "center_mhz": 5610,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 123,
+      "center_mhz": 5615,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 124,
+      "center_mhz": 5620,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 125,
+      "center_mhz": 5625,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 126,
+      "center_mhz": 5630,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 127,
+      "center_mhz": 5635,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 128,
+      "center_mhz": 5640,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 129,
+      "center_mhz": 5645,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 130,
+      "center_mhz": 5650,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 131,
+      "center_mhz": 5655,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 132,
+      "center_mhz": 5660,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 133,
+      "center_mhz": 5665,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 134,
+      "center_mhz": 5670,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 135,
+      "center_mhz": 5675,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 136,
+      "center_mhz": 5680,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 137,
+      "center_mhz": 5685,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 138,
+      "center_mhz": 5690,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 139,
+      "center_mhz": 5695,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 140,
+      "center_mhz": 5700,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 141,
+      "center_mhz": 5705,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 142,
+      "center_mhz": 5710,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 143,
+      "center_mhz": 5715,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 144,
+      "center_mhz": 5720,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 145,
+      "center_mhz": 5725,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 146,
+      "center_mhz": 5730,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 147,
+      "center_mhz": 5735,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 148,
+      "center_mhz": 5740,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 149,
+      "center_mhz": 5745,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 150,
+      "center_mhz": 5750,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 151,
+      "center_mhz": 5755,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 152,
+      "center_mhz": 5760,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 153,
+      "center_mhz": 5765,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 154,
+      "center_mhz": 5770,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 155,
+      "center_mhz": 5775,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 156,
+      "center_mhz": 5780,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 157,
+      "center_mhz": 5785,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 158,
+      "center_mhz": 5790,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 159,
+      "center_mhz": 5795,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 160,
+      "center_mhz": 5800,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 161,
+      "center_mhz": 5805,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 162,
+      "center_mhz": 5810,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 163,
+      "center_mhz": 5815,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 164,
+      "center_mhz": 5820,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 165,
+      "center_mhz": 5825,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 166,
+      "center_mhz": 5830,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 167,
+      "center_mhz": 5835,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 168,
+      "center_mhz": 5840,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 169,
+      "center_mhz": 5845,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 170,
+      "center_mhz": 5850,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 171,
+      "center_mhz": 5855,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 172,
+      "center_mhz": 5860,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 173,
+      "center_mhz": 5865,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 174,
+      "center_mhz": 5870,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 175,
+      "center_mhz": 5875,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 176,
+      "center_mhz": 5880,
+      "evidence": "response-tuning/analyzed.json"
+    },
+    {
+      "channel": 177,
+      "center_mhz": 5885,
+      "evidence": "response-tuning-edge/analyzed.json"
+    }
+  ]
+}

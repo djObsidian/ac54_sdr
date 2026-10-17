@@ -1,5 +1,25 @@
 # HANDOFF — ASUS USB-AC54 (RTL8822BU) SDR via USB
 
+## RF tuning validated (2026-10-17, latest)
+
+All 160 centers mapped by SpyServer were checked with Pluto TX1 off/+1/+2 MHz:
+channels 1..14 and every integer channel 32..177, BW20/path A, 40-MSPS LA snapshots.
+159 centers passed the main sweep at TX attenuation 20 dB; channel 177 / 5885 MHz
+passed a repeat at attenuation 10 dB (initial +1-MHz SNR 13 dB was below the 15-dB gate).
+Final analysis pairs the +1/+2-MHz carriers to avoid stronger nearby sidebands;
+original independent-peak results remain available. This establishes tone
+reception at those centers on this adapter, not uniform sensitivity/filter
+response or continuous streaming at every frequency.
+SpyServer live=0 digital tuning also passed at 2413.25/5161.25/5883.75 MHz,
+including both signs of residual shift and the 4-GHz client offset.
+One CPU 20-MSPS control failed on a USB deadline; its repeat passed for 1 s,
+19,988,480 samples with overlap/freshness and saved-file checks.
+See [tuning report](docs/tuning-range.md), `artifacts/response-tuning/coverage.json`,
+`artifacts/response-tuning-edge/` and `artifacts/response-tuning-spy/`.
+Repeat with `tools/validate_tuning.py`, `tools/analyze_tuning.py` and
+`tools/validate_spy_tuning.py`. Instruments restored; DDS muted.
+`cpustream` remains hardcoded to 2462 MHz/BW20. Earlier RF notes below are historical.
+
 ## OTA response measured (2026-10-17, latest)
 
 See [docs/frequency-response.md](docs/frequency-response.md) and
@@ -16,7 +36,7 @@ Raw captures remain local/ignored; CSV, JSON, logs and PNG are versionable.
 Pluto DDS muted at completion. Initial probe exposed iio_attr -q suppressing
 readback; fixed before the saved main sweep; initial Pluto settings restored.
 
-## RF coverage and remaining validation (2026-10-17, before OTA sweep)
+## Earlier RF coverage notes (2026-10-17, before tuning validation; historical)
 
 - Current `cpustream` is hardcoded to channel11 / 2462 MHz / BW20. Its
   20-MSPS minute-long validation does not validate other RF channels or widths.

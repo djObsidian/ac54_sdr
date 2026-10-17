@@ -1,0 +1,134 @@
+[
+  {
+    "channel": 175,
+    "center_mhz": 5875,
+    "passed": true,
+    "rf18_a": "0x50daf",
+    "rf18_b": "0x50daf",
+    "movement_error_hz": 976.5625,
+    "muted": {
+      "file": "ch175_off.bin",
+      "samples": 49152,
+      "clip_fraction": 0.0,
+      "capture": "3/3 snapshot(s) in 140 ms -> C:\\workspace\\vibeslop\\ac54_sdr\\artifacts\\response-tuning-edge\\ch175_off.bin"
+    },
+    "tones": [
+      {
+        "offset_hz": 1000000,
+        "file": "ch175_on1.bin",
+        "samples": 49152,
+        "clip_fraction": 0.0,
+        "capture": "3/3 snapshot(s) in 188 ms -> C:\\workspace\\vibeslop\\ac54_sdr\\artifacts\\response-tuning-edge\\ch175_on1.bin",
+        "peak_hz": 1086425.78125,
+        "error_hz": 86425.78125,
+        "power_dbfs": -25.07573894879919,
+        "local_snr_db": 25.52541506430262,
+        "on_off_db": 33.86032259501847,
+        "acquisition_peak_hz": 1086425.78125,
+        "search_center_hz": 1087402.34375,
+        "search_half_width_hz": 4882.8125
+      },
+      {
+        "offset_hz": 2000000,
+        "file": "ch175_on2.bin",
+        "samples": 49152,
+        "clip_fraction": 0.0,
+        "capture": "3/3 snapshot(s) in 140 ms -> C:\\workspace\\vibeslop\\ac54_sdr\\artifacts\\response-tuning-edge\\ch175_on2.bin",
+        "peak_hz": 2087402.34375,
+        "error_hz": 87402.34375,
+        "power_dbfs": -21.623532313626228,
+        "local_snr_db": 36.60671964291795,
+        "on_off_db": 35.690724357976684
+      }
+    ],
+    "acquisition_passed": true
+  },
+  {
+    "channel": 176,
+    "center_mhz": 5880,
+    "passed": true,
+    "rf18_a": "0x50db0",
+    "rf18_b": "0x50db0",
+    "movement_error_hz": 976.5625,
+    "muted": {
+      "file": "ch176_off.bin",
+      "samples": 49152,
+      "clip_fraction": 0.0,
+      "capture": "3/3 snapshot(s) in 172 ms -> C:\\workspace\\vibeslop\\ac54_sdr\\artifacts\\response-tuning-edge\\ch176_off.bin"
+    },
+    "tones": [
+      {
+        "offset_hz": 1000000,
+        "file": "ch176_on1.bin",
+        "samples": 49152,
+        "clip_fraction": 0.0,
+        "capture": "3/3 snapshot(s) in 157 ms -> C:\\workspace\\vibeslop\\ac54_sdr\\artifacts\\response-tuning-edge\\ch176_on1.bin",
+        "peak_hz": 1086425.78125,
+        "error_hz": 86425.78125,
+        "power_dbfs": -28.005971997227647,
+        "local_snr_db": 23.501052094561786,
+        "on_off_db": 32.31631928470615,
+        "acquisition_peak_hz": 1086425.78125,
+        "search_center_hz": 1087402.34375,
+        "search_half_width_hz": 4882.8125
+      },
+      {
+        "offset_hz": 2000000,
+        "file": "ch176_on2.bin",
+        "samples": 49152,
+        "clip_fraction": 0.0,
+        "capture": "3/3 snapshot(s) in 141 ms -> C:\\workspace\\vibeslop\\ac54_sdr\\artifacts\\response-tuning-edge\\ch176_on2.bin",
+        "peak_hz": 2087402.34375,
+        "error_hz": 87402.34375,
+        "power_dbfs": -28.191106521824235,
+        "local_snr_db": 30.917362777506238,
+        "on_off_db": 30.606596666844162
+      }
+    ],
+    "acquisition_passed": true
+  },
+  {
+    "channel": 177,
+    "center_mhz": 5885,
+    "passed": true,
+    "rf18_a": "0x50db1",
+    "rf18_b": "0x50db1",
+    "movement_error_hz": 976.5625,
+    "muted": {
+      "file": "ch177_off.bin",
+      "samples": 49152,
+      "clip_fraction": 0.0,
+      "capture": "3/3 snapshot(s) in 141 ms -> C:\\workspace\\vibeslop\\ac54_sdr\\artifacts\\response-tuning-edge\\ch177_off.bin"
+    },
+    "tones": [
+      {
+        "offset_hz": 1000000,
+        "file": "ch177_on1.bin",
+        "samples": 49152,
+        "clip_fraction": 0.0,
+        "capture": "3/3 snapshot(s) in 156 ms -> C:\\workspace\\vibeslop\\ac54_sdr\\artifacts\\response-tuning-edge\\ch177_on1.bin",
+        "peak_hz": 1086425.78125,
+        "error_hz": 86425.78125,
+        "power_dbfs": -31.43713704540522,
+        "local_snr_db": 20.79141484108693,
+        "on_off_db": 23.405704451025457,
+        "acquisition_peak_hz": 1086425.78125,
+        "search_center_hz": 1087402.34375,
+        "search_half_width_hz": 4882.8125
+      },
+      {
+        "offset_hz": 2000000,
+        "file": "ch177_on2.bin",
+        "samples": 49152,
+        "clip_fraction": 0.0,
+        "capture": "3/3 snapshot(s) in 172 ms -> C:\\workspace\\vibeslop\\ac54_sdr\\artifacts\\response-tuning-edge\\ch177_on2.bin",
+        "peak_hz": 2087402.34375,
+        "error_hz": 87402.34375,
+        "power_dbfs": -32.39932467123619,
+        "local_snr_db": 26.268810729383574,
+        "on_off_db": 23.141828589736573
+      }
+    ],
+    "acquisition_passed": true
+  }
+]
