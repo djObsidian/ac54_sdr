@@ -1,5 +1,379 @@
 # HANDOFF — ASUS USB-AC54 (RTL8822BU) SDR via USB
 
+## RF coverage and remaining validation (2026-10-17)
+
+- Current `cpustream` is hardcoded to channel11 / 2462 MHz / BW20. Its
+  20-MSPS minute-long validation does not validate other RF channels or widths.
+- Earlier snapshot files exist for channels1/4/7/11/36/149. Channel11 OFDM
+  spectrum was observed; these files are not a calibrated sensitivity or
+  filter-response sweep. Do not interpret the historical "any channel" claim
+  below as measured coverage of every frequency.
+- `spyserver.c` maps 2.4 GHz to channel1..13 (2412..2472 MHz, 5-MHz raster)
+  or channel14 (2484 MHz). Its 5-GHz mapping accepts channel32..177
+  (5160..5885 MHz, 5-MHz raster), but that software range is not proven usable
+  RF coverage. Baseband/RF tables distinguish 36..64, 100..144, and149..177.
+  Residual frequency tuning is performed digitally. No out-of-band coverage
+  or direct arbitrary-Hz synthesizer tuning has been established.
+- `rtwinit.h` has BW5/10/20/40/80 register configurations. Only BW20 capture
+  has established ADC behavior (40 MSPS; rate0 repeats samples). Actual filter
+  passbands, rejection, and ADC clocks for other bandwidths remain unmeasured.
+  Observed Wi-Fi OFDM occupancy around +/-8.5 MHz is not a filter measurement.
+- LA rate reduction is sample selection, with no demonstrated anti-alias
+  filtering at that tap. A 20-MSPS transport must not be advertised as a
+  calibrated, alias-free 20-MHz receiver. Map the tap relative to RF/DFIR and
+  measure response/aliasing with a known swept tone.
+- Remaining: RF channel/bandwidth sweep and gain control; I/Q orientation,
+  DC/IQ imbalance and clock calibration; dual-path formats; integrate the CPU
+  streaming path into SpyServer (currently the older DDMA path); expose channel
+  and width in the new streamer, with explicit validity bounds and retune gaps.
+
+## Active investigation: working CPU firmware, RAW_IO, live 40 MSPS bursts (2026-10-17)
+
+Custom RAM firmware now works: preserve vendor IMEM startup through 0x230,
+including CP0 initialization, and append MIPS16e2 code using LUI/ADDI addresses.
+`tools/cpufw.h` uploads and verifies IMEM, starts CPU, and supports recovery.
+No flash or efuse writes. `fw_inspect.py` produces the required ignored
+`tmp/vendor-imem.bin` from the pinned local vendor NIC source.
+
+`cpustream.c` schedules opposite-bank C2H using hardware microsecond counter
+0x568 (CPU address 0xb8640568). CPU arms ADC and accumulates fractional bank
+periods exactly. MAC RX remains enabled. Host checks deadlines, packet order,
+overlap, and per-ring freshness before emitting any bank.
+
+Validated before RAW_IO: **5 MSPS for 30 seconds**, 149,995,520 samples,
+29.999104 RF seconds / 30.000504 wall seconds, max bank 1239 us,
+91,550 overlap checks and 18,308 freshness checks. `tools/cpu-5-30s.txt`.
+CCK-on at 10 MSPS produced entire banks of constant IQ; these are rejected.
+Optional CCK disable (0x808 bit28 clear) removes that observed failure mode.
+
+Critical USB improvement: original DLL 1.0.23 lacked RAW_IO. Official libusb
+1.0.30 VS2022 MS64 DLL is now at `tools/libusb-1.0.dll`; old DLL saved at
+`tmp/libusb-1.0.23-backup.dll`. Download is the official GitHub v1.0.30 7z.
+DLL SHA256: 7CBF37E76DAE9C840C7E8DBF7348EE8897DCC86C8BA45E46ADA60B89411569F7.
+`cpubench 10000 16128 1`: **402.415 MB/s**, every PRBS packet verified, versus
+~295 MB/s without RAW_IO. This benchmark is static memory, not live ADC.
+RAW_IO uses 65536-byte host transfers; API is dynamically resolved, so old
+import library still works. System driver is unchanged.
+
+With RAW_IO + CCK off, original seven-packet CPU streamer passed 3 seconds
+at both **10 and 20 MSPS** (`cpu-raw-10.txt`, `cpu-raw-20.txt`).
+The five-packet streamer also passed **20 MSPS for 30 seconds**:
+599,998,464 samples, 29.999923 RF / 30.001263 wall seconds, max bank 274 us,
+292,968 overlaps and 73,240 freshness checks (`cpu-raw-20-30s.txt`).
+Current profiled build captured `tools/cap/cpu-20-raw.cs16`: 59,998,208
+samples / 2.999910 RF seconds; max bank 250 us (`cpu-20-file.txt`).
+Final profiled build passed **20 MSPS for 60 seconds**:
+1,199,996,928 samples, 59.999846 RF / 60.001338 wall seconds, max bank325 us,
+585,936 overlap checks, 146,482 freshness checks, CPU error0.
+Log: `tools/cpu-20-60s.txt`. CPU and PHY restored afterward.
+Independent saved-file check: 59,998,208 samples, one-ring-lag IQ equality
+0.0000007335556, 6,243,934 unique IQ values (`cpu-20-file-check.txt`).
+This recording is not a frozen-ring replay. `git diff --check` passes.
+At 40 MSPS, six-packet variant passed **0.661504 s / 26,460,160 samples**
+before a deadline failure (`cpu-raw-40-guard2.txt`). This is NOT sustained
+40 MSPS success. Current optimization uses four overlapping data packets
+plus one combined saved-prefix/timing packet; start/end guards are 2% each.
+QDEPTH=32; RAW_IO and process/thread priority raised. Queues128/256 did not help.
+Latest five-packet variants still hit occasional deadlines within <1 s.
+Do not disable deadline or freshness checks to claim success.
+
+Concrete blocker measured by the on-chip timer: C2H packets normally take
+38..45 us, but one took 369 us (`cpu-raw-40-profile.txt`), another 325 us
+with 256 queued host reads (`cpu-raw-40-q256.txt`). This exceeds the entire
+204.8-us opposite-bank window at 40 MSPS. RAW_IO fixes average throughput,
+not these outliers. USB/DMA aggregation modes both returned separate packets
+and ~402 MB/s, with no improvement (`cpu-agg1.txt`, `cpu-agg2.txt`).
+Disabling USB U1/U2 via standard CLEAR_FEATURE after initialization, verified
+by GET_STATUS changing 000c->0000, still failed the deadline at bank1146
+(`cpu-raw-40-nolpm-verified.txt`). Original feature state is restored on exit.
+Current host transfer buffer is 16384 bytes, packet payload16352, saved prefix
+224 bytes, first direct offset200, overlap24 bytes. Largest packet16376 bytes
+is short of a full USB transfer, avoiding an extra zero-length completion.
+
+CPU packing measured separately in `cpupackbench.c`: discarding upper 32 bits
+of each 64-bit word reaches only 3.803 MSPS for clock selectors 0/2 and
+2.799 MSPS for 1/3. All outputs PRBS-verified. Software packing on this path
+cannot carry 40 MSPS. Next work: improve USB scheduling/headroom or identify
+hardware buffering/aggregation that does not collide with active LA bank.
+
+Commands from `tools`: `mk.bat cpustream`, then
+`cpustream RATE SECONDS OUTPUT NOCCK RAW [DISABLE_USB_U1_U2]`,
+e.g. `cpustream 2 30 NUL 1 1`.
+RAW defaults to 1. Rate1=40M, rate2=20M, rate3=10M, rate4=5M.
+Each experiment resets CPU/PHY afterward. Never access hardware concurrently.
+
+## C2H bank collision isolated and avoided (2026-10-17)
+
+`corruptprobe.c` isolates descriptor writes from C2H, with MAC RX enabled.
+At rate=6, it snapshots a stable 512-byte range through EP0 before/after each
+operation. Baseline reads and descriptor-only writes: 20 trials each, zero
+payload changes. C2H can return different IQ AND leave zero words in SRAM.
+Stopping LA before C2H removes this effect (40 trials, zero mismatches).
+More specifically, at 16 ms after arming, ADC writes bank 0:
+- `corruptprobe 2 50 0 0`: 45 SRAM words changed, 44 bulk mismatches.
+- `corruptprobe 2 50 0 1`: zero SRAM or bulk mismatches in the opposite bank.
+RXDMA arbitration bit 0 at 0x10c did not fix same-bank corruption.
+Initial rate=7 diagnostic was invalid: it did not provide the assumed stable
+26-ms ring. Current diagnostic uses rate=6 only and rejects late trials.
+
+New `bankstream.c` reads each completed 64-KiB bank while ADC writes the other.
+The prefix comes through EP0 so no C2H descriptor crosses into the active bank.
+Each direct packet has 32 exact-overlap samples; per-bank freshness and fixed
+start/completion deadlines are enforced. No pauses, filler, or rate hiding.
+Transport helpers extracted to `directio.h`, also used by `faststream.c`.
+
+Validated `bankstream rate=5 seconds=30 async=1 out=NUL`:
+**74,997,760 samples; 29.999104 s RF / 30.000490 s wall; max bank fetch
+2.240 ms; 45,775 overlap checks; 9,153 freshness checks.**
+Log: `tools/bank-2p5-30s.txt`. This is new real 2.5 MSPS evidence; the old
+frozen-ring runs below remain retracted. Three-second files:
+`cap/bank-1p25.cs16` (3,743,744 samples) and `cap/bank-2p5.cs16`
+(7,495,680 samples); independent one-ring-lag equality fractions
+0.0000013414 and 0.0000005348 respectively.
+At this earlier host-scheduled stage, 5 MSPS exceeded the bank deadline (~1.33 ms to fetch
+against 1.31 ms available), so it is not validated. 40 MSPS remains open.
+
+The next path at that stage (now implemented above) was embedded CPU scheduling:
+access/packing speed. `cpuprobe.c` is RAM-only and always resets CPU/PHY after
+testing. IMEM DDMA upload/readback is exact. Tiny custom MIPS16/MIPS32 stubs
+have NOT produced a marker yet. Positive control loading the local vendor
+NIC IMEM+DMEM DOES boot to MCUFW_CTRL=0xC078, so the download route works.
+`fw_inspect.py` extracts the NIC image from the pinned local vendor source
+into ignored `tmp/vendor-{imem,dmem}.bin` for analysis. No flash/efuse writes.
+The failed initial stub attempts in this historical paragraph were subsequently
+resolved by preserving vendor CP0 startup, as described at the top.
+
+## Critical correction: frozen-ring false positives (2026-10-17)
+
+**Read this first. Previous direct-live 2.5/5 MSPS claims below are retracted.**
+Disabling MAC RX (`CR 0x100 bit7`) freezes the ADC writer on this device.
+Exact overlap checks alone accepted the resulting repeated SRAM contents.
+In `tools/cap/direct-2p5m.cs16`, 99.9837% of IQ samples equal the sample one
+16,384-sample ring earlier. This was not a live 2.5 MSPS recording.
+Earlier DDMA live evidence with MAC RX disabled is likewise insufficient.
+
+`iqstream.h` now keeps MAC RX enabled and rejects ordinary Wi-Fi packets via
+RCR and RX filter maps 0x6a0/0x6a2/0x6a4. It restores these registers on exit.
+New `iqfresh.h` compares low 24-bit IQ at each address against the previous
+revolution, ignoring metadata; >=95% identical samples rejects the block.
+Near-constant input is deliberately considered unverified freshness.
+This supplements, rather than replaces, exact overlap and deadline checks.
+`test_iqfresh.c` rejects frozen and sparsely modified rings and accepts an
+advancing synthetic stream. Both iqstream and SpyServer use this check.
+
+Revalidated with MAC RX enabled and freshness checks:
+- `iqstream rate=6 seconds=30 out=NUL`: 37,499,584 samples,
+  29.999667 s RF / 30.005762 s wall, max fetch 1.765 ms; PASS.
+  Log: `tools/ddma-fresh-30s.txt`.
+- Three-second file `tools/cap/ddma-fresh.cs16`: 3,749,760 samples;
+  one-ring-lag equality 0.1005%, versus 99.9837% in the old direct file.
+- Rebuilt SpyServer: `test_live.ps1 -Seconds 3` PASS, 3,755,712 samples,
+  measured 1,248,452 samples/s, 100 distinct initial packet hashes.
+
+**At this checkpoint: 1.25 MSPS; superseded by the bank-scheduled 2.5 MSPS above.**
+The direct LA alias and stopped-SRAM throughput below remain valid, but
+`faststream` is diagnostic only: with the ADC running, individual words
+change (often to zero) between overlapping reads, even at 1.25 MSPS.
+`guard=1` compares the first 256 payload bytes before/after descriptor write
+and after C2H; observed a mutation during the C2H interval at offset 0xf800.
+This localizes an observation, not the underlying cause; other mutations
+occur before that interval. It must not be bypassed or repaired by filling.
+Descriptor bytes 12..23 can change in hardware; packet verification checks
+the first 12 plus length and status. OWN-bit clearing did not fix corruption;
+the established OWN=1 default has been restored.
+
+Negative experiments: disabling MAC TX, holding the embedded CPU, clearing
+descriptor OWN, and RXDMA_MODE low-byte values 0/2/12/14 did not fix live
+corruption. Disabling RXDMA or setting RW_RELEASE prevented C2H completion.
+`faststream dmamode=0|2|12|14` retains the reproducible mode experiment;
+default is 14. Async EP0 submission did not establish a working live rate.
+`ringprobe full=0` and `full=1` with an active ADC changed only upper 128 KiB
+of TX SRAM: 0x7cc bit30 did not extend the ring on this device. Both runs
+had positive controls (>100 KiB changed in the normal ring).
+Next investigation: isolate descriptor writes from C2H reads while the ADC
+runs, and identify the source of sparse SRAM mutations. Retain MAC RX and
+freshness checks in every future live experiment.
+
+## Historical direct LA SRAM -> USB experiments (live claims superseded above)
+
+**DDMA can be bypassed.** `routeprobe.c` found a direct C2H alias of LA SRAM;
+`lamap.c` verified every byte in all 32 distinct 4 KiB pages of the 128 KiB LA
+ring with LA stopped. Physical USB SRAM order differs from OCP/window order:
+
+| TX SRAM offset | C2H address (0x294) |
+| --- | --- |
+| 0x30000..0x3ffff | 0x06000..0x15fff |
+| 0x20000..0x2ffff | 0x16000..0x25fff |
+
+For address `a`, request `(a & 0xffff) | ((a >> 16) << 24) | 0x10000`.
+The request points at a 24-byte RX descriptor, followed by payload. Prior
+attempts using the OCP-relative TX address were wrong. A sweep of high address
+nibbles showed RX aliases at 0x01000/0x41000/0x81000/0xc1000; this alone did
+not discover TX. The lower-address sweep found the LA marker inside a packet
+starting at C2H=0x15000, then direct C2H=0x17000 returned exactly the marker
+at TX=0x21000. Logs: `tools/route-*.txt`, `tools/la-map.txt`.
+
+`membench la=1 n=2000`: 2000 verified 16128-byte payloads at **155.794 MB/s**
+direct from LA SRAM. This is memory-only throughput, not live ADC. No DDMA.
+
+**Correction to old handoff:** FWFF request 0x29c bit31 IS defined for 8822B,
+including the chip-specific `halmac_bit_8822b.h`. `routeprobe route=1` with
+0x29c=0x80011000 returns the unique marker at firmware RX SRAM 0x18681000,
+while normal RX SRAM remains unchanged. `membench fw=1 bytes=7936 n=2000`:
+90.035 MB/s without DDMA; with `dma=1`, 13.191 MB/s and 497.6 us average DDMA.
+This alternate output works but does not accelerate TX->FW copying.
+Vendor source pinned at d31ffa827bb95b8a436c2a469b5163b634ac4333 in ignored
+`tmp/vendor88x2bu`, from https://github.com/morrownr/88x2bu-20210702 .
+
+New experimental `tools/faststream.c`: continuous LA -> direct C2H -> cs16,
+with 1984 new samples / 32 exact-overlap samples per fetch. It writes an RX
+descriptor immediately BEFORE each fetched interval, into already-consumed
+samples (or a region the ADC will rewrite before future consumption). At
+C2H=0x6000 the descriptor is in the last 24 bytes of ordinary RX SRAM.
+It splits reads at the alias discontinuity and ring end, never triggers LA,
+and stops on malformed packets, overlap mismatch, or writer deadline failure.
+Full initialization/reinitialization occurs before/after; channel is fixed 11.
+Output is LE int16 I,Q, 12-bit values scaled by 16. `out=-` is NOT supported.
+Ctrl+C stops cleanly. Existing `iqstream`/SpyServer transport is unchanged.
+
+Build: `cd tools`, `mk.bat faststream`. Example:
+`faststream rate=5 seconds=30 out=cap\direct.cs16` (2.5 MS/s).
+Rate=4 is 5 MS/s; rate=3/2/1 request 10/20/40 MS/s.
+Initial 5 MS/s / 3 s run passed 14,999,040 samples, max fetch 0.926 ms.
+Longer 5 MS/s attempts stopped on scheduling lateness after 4.46 s and 2.40 s;
+raising process priority did not solve it and was removed. Initial 10/20/40
+MS/s attempts failed deadlines almost immediately. Do NOT call these rates
+sustained. The final reader permits catching up within the same conservative
+0.45-ring completion deadline; it never shifts the sample clock to hide gaps.
+
+Final validation:
+- **2.5 MS/s, 30 s to NUL: PASS**, 74,999,168 samples, 29.999667 s RF /
+  30.002611 s wall, max block work 1.281 ms, all overlap checks passed.
+- **2.5 MS/s, 3 s to cs16 file: PASS**, 7,499,520 samples / 29,998,080 bytes,
+  max block work 0.910 ms. Saved as `tools/cap/direct-2p5m.cs16`.
+- Final 5 MS/s file attempt stopped after 13,649,920 accepted samples
+  (2.729984 s RF), reporting host late 2.375 ms. Partial capture remains at
+  `tools/cap/direct-5m.cs16`; it is NOT a completed 30-second capture.
+- `faststream` defaults to tested rate=5 (2.5 MS/s); output defaults to NUL.
+  USB3 status remained intact. `git diff --check` passed.
+
+The new experimentally demonstrated 30-second live rate is **2.5 MS/s**,
+superseding the 1.25 MS/s limit of the DDMA implementation below. This is not
+a guarantee of indefinite operation. Logs: `tools/fast-*.txt`.
+
+Next: optimize descriptor publication/USB queuing or move it to firmware;
+the old DDMA bottleneck is no longer fundamental to capture transport.
+40 MS/s still requires 320 MB/s raw, or device-side packing (120 MB/s for
+12+12-bit IQ). Vendor LA source inspected so far supplies no compact packing
+mode or alternate ADC destination for 8822B. CPU-side packing throughput and
+custom firmware remain unmeasured. Do not claim 40 MS/s or loss-free operation
+under arbitrary host scheduling load.
+
+## DDMA matrix follow-up (2026-10-17; superseded by direct route above)
+
+Added `tools/ddmabench.c`: build `mk.bat ddmabench`, run `ddmabench n=30`.
+This is a **memory-only** test, not ADC streaming. Each copy uses fresh PRBS,
+verifies source and inverse destination before DMA, then verifies the complete
+destination after DMA. Setup/readback are excluded from timing; the EP0 command
+and completion polling are included. MAC TX/RX and LA capture are stopped.
+Hardware is reinitialized after each run. No production capture changes.
+
+Tested RX (0x18700000), TX (0x18780000), and LA-region TX (0x187a0000),
+all nine directions, 256/4096/8192/16128 bytes; RX->RX omits 16128 because
+two disjoint blocks do not fit the documented 24 KiB RX SRAM. Baseline:
+1050 verified copies, every supported cell passed. Large-block times are
+964-977 us (~16.5-16.7 MB/s); RX->RX at 8192 B is 544.5 us. LA->RX is
+973.0 us / 16.576 MB/s. No special penalty for TX->RX or the LA SRAM region.
+This supports a shared DDMA-path bottleneck, not proof of its hardware ceiling.
+
+Controlled experiments (each full matrix; logs in `tools/ddma-*.txt`):
+
+- `cpu=1 n=10`: MCUFW_CTRL[13:12]=1 sticks, but slows large copies to
+  ~1045-1054 us. `cpu=2` reads back selector 0; `cpu=3` reads back 1.
+  These two runs abort before timing, restore the old register, and reinitialize.
+  Do not assign MHz to selector values: the actual frequency is unverified.
+- `debug=0 n=10`: clear 0x106 during copying, restore 0x69 for verification.
+  No speedup (~971-978 us).
+- `gap=200 n=10`: busy-wait 200 us before each OWN read, reducing EP0 poll
+  traffic from ~22 to ~4 reads per large copy. No speedup; observed completion
+  is ~1.10-1.25 ms, including deliberate polling quantization.
+- `reset=1 n=20`: vendor `pltfm_reset_88xx` sequence (0x1082 bit0 off,
+  0x09 bit6 off, 0x1082 bit0 on, 0x09 bit6 on), explicitly described by
+  Realtek as a 8822B/8821C clock-sync fix. No improvement: LA->RX 971.5 us.
+  Source: https://github.com/morrownr/88x2bu-20210702/blob/main/hal/halmac/halmac_88xx/halmac_fw_88xx.c
+
+Note: an initial exploratory matrix used RX destinations beyond the documented
+24 KiB region. Its results were discarded; the saved baseline and current tool
+use bounded, disjoint ranges. Do not infer additional RX capacity from readback.
+
+After experiments, USB3 status is intact and `iqstream ch=11 rate=6 seconds=2
+out=NUL` passed all overlaps: 2,499,840 samples, max fetch 1.409 ms.
+**40 MS/s remains unachieved; proven live rate remains 1.25 MS/s.**
+
+Next: prioritize hypothesis 2/3 below (bypass DDMA / compact capture format).
+Inspect chip-qualified vendor definitions for alternate memory routing and
+diagnostic modes; do not reuse 8814B/8822C-only registers on 8822B. If revisiting
+DDMA, measure firmware SRAM / IMEM / DMEM paths with documented address bounds
+and verification before considering a packing firmware. The matrix above tests
+packet SRAM paths, not embedded CPU throughput or all possible buses.
+
+## Throughput investigation (2026-10-17)
+
+`tools/membench.c` isolates USB export from TX-to-RX DDMA. Build with
+`tools/mk.bat membench` from tools. Run `membench.exe n=2000 dma=0` versus
+`membench.exe n=2000 dma=1`. These repeatedly export a fixed PRBS block,
+**not live ADC samples**. Each received packet is compared byte-for-byte;
+DMA tests initialize the RX payload to the inverse of the expected TX payload.
+The tool reinitializes the device before and after each run.
+
+Measured USB3/WinUSB, payload 16128 bytes:
+
+- Ready RX SRAM -> USB -> host: 158.390 MB/s (2000 blocks).
+- TX SRAM -> DDMA -> RX SRAM -> USB: 15.110 MB/s (2000 blocks).
+- DDMA stage averages 964 us; control request averages 45 us, bulk wait 41 us.
+- DDMA at 4096/8192 bytes averages 289/537 us: substantial size-dependent cost.
+- Payload alignment at 32/64 bytes, DDMA_MODE bit 26, and channel 1 instead of
+  channel 0 did not materially improve throughput (~15.1 MB/s total).
+- Runtime DLL is libusb 1.0.23.11457; RAW_IO API is unavailable in this DLL.
+
+This corrects the earlier hypothesis that EP0 command overhead alone limits
+2.5 MS/s. DDMA currently dominates. At 8 bytes per LA sample, 15.1 MB/s is only
+~1.89 MS/s without overlap/timing margin; the proven live rate remains 1.25 MS/s.
+The 158 MB/s memory export benchmark is neither a physical USB maximum nor proof
+of live IQ at 19.8 MS/s. At the observed 40 MS/s BW20 sample rate, raw LA requires
+320 MB/s; hypothetical packed 12+12-bit IQ needs 120 MB/s, but on-chip packing
+and a faster/bypass capture route have NOT been implemented. The maximum unique
+ADC sample rate across wider channel configurations remains unverified.
+
+### Next experiments, in priority order
+
+User wants continuous IQ onto the PC, ideally limited by USB3 throughput or the
+chip sample rate. SpyServer is optional and is not the current bottleneck.
+The following are hypotheses to test, not established hardware capabilities:
+
+1. Explain slow DDMA: benchmark different source/destination SRAM regions and
+   block sizes, verifying copied data. Compare bus clocks, memory arbitration,
+   and initialization with the vendor driver before changing documented fields.
+   Separate TX read, RX write, and general DDMA limits where possible.
+2. Bypass TX -> RX copying: investigate USB DMA access to capture SRAM, address
+   aliases, or routing capture into USB-accessible memory. The simple direct
+   TX C2H request already failed; do not present this route as working.
+3. Search vendor diagnostic/ADC modes for an alternative continuous IQ path or
+   a more compact hardware capture format. Current LA stores 8 bytes per sample
+   for 3 useful IQ bytes. No alternative mode has been established yet.
+4. Consider custom firmware only after measuring embedded CPU/memory throughput.
+   It could manage buffers and possibly pack IQ on-device, but software packing
+   at 40 MS/s is unproven and firmware alone cannot fix a slow DDMA bus.
+5. Pipeline with double buffering and multiple USB requests once the internal
+   path is understood. This can overlap stages and reduce gaps, but cannot
+   overcome the measured DDMA throughput limit. Host-side packing cannot reduce
+   traffic already transferred through DDMA/USB.
+
+Immediate next experiment: a verified memory-to-memory DDMA throughput matrix,
+then clock/configuration comparison and direct USB access investigation. Keep
+memory-only benchmarks distinct from live ADC tests; validate any improvement
+with sustained capture and continuity checks before claiming a higher IQ rate.
+
 ## Session 5 (2026-10-17): continuous IQ reaches PC at 1.25 MS/s
 
 User priority: get continuous IQ onto the PC; SpyServer is only a viewer adapter.
@@ -109,9 +483,9 @@ uint8 after final transport changes: 3 s ~1,252,283 samples/s, 100 distinct bloc
   https://github.com/morrownr/88x2bu-20210702/blob/main/hal/phydm/phydm_adc_sampling.c
   and `hal/halmac/halmac_bit2.h`, `halmac_reg2.h` (downloaded under ignored tmp/).
   The known 8822B path captures into TX packet RAM and reads after trigger stop.
-  No working ADC-to-RX-bulk route identified. FWFF request bit31 at 0x29c and
-  RX_DBG_SEL bit7 at 0x290 are defined for other chips, **not 8822B**: do not
-  assume those newer-chip mechanisms apply here.
+  No working ADC-to-RX-bulk route was identified in that session. Correction:
+  FWFF request bit31 at 0x29c DOES support 8822B and now works (see top).
+  RX_DBG_SEL bit7 at 0x290 still lacks 8822B qualification in these headers.
 - **Outstanding user request:** genuine continuous IQ, without repeated snapshots.
   Requires discovering/implementing a device-side route from ADC/TX RAM to USB
   with overrun and continuity verification, potentially custom firmware.

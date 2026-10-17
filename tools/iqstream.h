@@ -7,6 +7,7 @@
  */
 #define _CRT_SECURE_NO_WARNINGS
 #include "la.h"
+#include "iqfresh.h"
 #include <stdlib.h>
 #define STEP 1984
 #define OVERLAP 32
@@ -43,19 +44,22 @@ static int iq_stream_run(int seconds,int rate,const char *path, int (*sink)(cons
     int oldpriority=GetThreadPriority(GetCurrentThread());
     InterlockedExchange(&stopped,0);
     double fs=80000000.0/(1u<<rate),period=STEP/fs,ring=LA_NSMP/fs;
-    unsigned regs[]={0x100,0x608,0x290,0x10c,0x106,0x140,0x294,0x1080,0x1200,0x1204,0x1208,0x8f8,0x8b4,0x95c,0x8fc,0x7c0};
-    int widths[]={2,4,1,1,1,2,4,4,4,4,4,4,4,4,4,1};
-    unsigned backup[16];int saved=0;
+    unsigned regs[]={0x100,0x608,0x290,0x10c,0x106,0x140,0x294,0x1080,0x1200,0x1204,0x1208,0x8f8,0x8b4,0x95c,0x8fc,0x7c0,0x6a0,0x6a2,0x6a4};
+    int widths[]={2,4,1,1,1,2,4,4,4,4,4,4,4,4,4,1,2,2,2};
+    unsigned backup[19];int saved=0;
+    struct iq_freshness fresh={0};
     unsigned char oldmem[PACKET], header[24]={0},rx[65536],tail[OVERLAP*8];
     int16_t iq[STEP*2];FILE *file=NULL;
     struct libusb_transfer *transfer=NULL;
     struct iq_bulk_wait wait={1,0,0};
     unsigned long long blocks=0;double begin=0,elapsed=0,maxcost=0;
     if(rd8(0xff)!=0x20){fprintf(stderr,"USB3 required\n");goto done;}
-    for(;saved<16;saved++){backup[saved]=rd(regs[saved],widths[saved]);if(backup[saved]==0xdeadbeef)goto done;}
+    for(;saved<19;saved++){backup[saved]=rd(regs[saved],widths[saved]);if(backup[saved]==0xdeadbeef)goto done;}
     if((backup[6]&0x10000)||(backup[10]&0x80000000)||(backup[15]&2)){fprintf(stderr,"Capture/DMA busy; reinitialize first\n");goto done;}
     if(path){file=fopen(path,"wb");if(!file){perror(path);goto done;}}
-    if(put(0x100,(backup[0]|0xa)&~0x80u,2)||put(0x608,backup[1]|0x80000,4)||put(0x290,0xe,1)||
+    /* MAC RX must remain enabled for the ADC writer; filter frames instead. */
+    if(put(0x100,backup[0]|0x8a,2)||put(0x608,(backup[1]|0x80000)&~0xffffu,4)||
+       put(0x6a0,0,2)||put(0x6a2,0,2)||put(0x6a4,0,2)||put(0x290,0xe,1)||
        put(0x10c,backup[3]&~4u,1)||put(0x1080,backup[7]|0x10100,4)||put(0x106,0x69,1))goto done;
     /* RX SRAM window is page 0x700; save the staging region at 0x1000. */
     for(unsigned off=0;off<PACKET;) {
@@ -65,7 +69,7 @@ static int iq_stream_run(int seconds,int rate,const char *path, int (*sink)(cons
     }memsaved=1;
     header[0]=PAYLOAD&255;header[1]=PAYLOAD>>8;header[3]=0x80;header[11]=0x10;
     if(put(0x140,0x701,2)||la_blk_wr(0x8000,header,24)!=24)goto done;
-    /* Flush old Wi-Fi traffic with MAC RX disabled. */
+    /* Flush old Wi-Fi traffic after applying receive filters. */
     for(int j=0;j<32;j++){int n=0;if(libusb_bulk_transfer(g_h,0x84,rx,sizeof rx,&n,10))break;}
     transfer=libusb_alloc_transfer(0);if(!transfer)goto done;
     libusb_fill_bulk_transfer(transfer,g_h,0x84,rx,sizeof rx,iq_bulk_done,&wait,100);
@@ -98,6 +102,7 @@ static int iq_stream_run(int seconds,int rate,const char *path, int (*sink)(cons
         if(blocks && memcmp(tail,rx+24,sizeof tail)) {
             fprintf(stderr,"DISCONTINUITY at sample %llu (overlap differs)\n",blocks*STEP);goto done;
         }
+        if(iq_check_freshness(&fresh,rx+24,STEP,blocks*STEP))goto done;
         memcpy(tail,rx+24+STEP*8,sizeof tail);
         for(int j=0;j<STEP;j++){uint64_t v;memcpy(&v,rx+24+j*8,8);iq[j*2]=(int16_t)(la_i(v)*16);iq[j*2+1]=(int16_t)(la_q(v)*16);}
         if(file && fwrite(iq,sizeof iq,1,file)!=1){perror(path);goto done;}
@@ -109,7 +114,7 @@ static int iq_stream_run(int seconds,int rate,const char *path, int (*sink)(cons
 done:
     if(begin)elapsed=now()-begin;
     if(transfer){if(!wait.done){libusb_cancel_transfer(transfer);while(!wait.done){struct timeval tv={0,10000};libusb_handle_events_timeout(g_ctx,&tv);}}libusb_free_transfer(transfer);}
-    if(saved==16){wr8(0x7c0,0);wr32(0x294,backup[6]&~0x10000u);wr32(0x1208,0);}
+    if(saved==19){wr8(0x7c0,0);wr32(0x294,backup[6]&~0x10000u);wr32(0x1208,0);}
     if(memsaved)for(unsigned off=0;off<PACKET;) {
         unsigned n=PACKET-off;if(n>504)n=504;if(n>4096-(off&4095))n=4096-(off&4095);
         if(put(0x140,0x701+(off>>12),2)||la_blk_wr(0x8000+(off&4095),oldmem+off,(uint16_t)n)!=(int)n)result=1;
@@ -119,5 +124,6 @@ done:
     if(file && fclose(file))result=1;
     SetThreadPriority(GetCurrentThread(),oldpriority);
     printf("%s: %llu samples, %.6f s RF, %.6f s wall, max fetch %.3f ms -> %s\n",result?"FAILED":"OK",blocks*STEP,blocks*STEP/fs,elapsed,maxcost*1000,path?path:"sink");
+    printf("freshness checks=%u\n",fresh.checks);
     return result;
 }
