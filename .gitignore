@@ -8,7 +8,7 @@ Desktop.ini
 .vscode/
 
 # Build / tool output
-tool/build/
+tools/build/
 *.obj
 *.o
 *.exe
@@ -28,6 +28,12 @@ ref/
 # Captures / device-specific dumps
 tools/cap/
 tools/*.bin
+tools/ss.log
+tools/ss.err
 *.cs16
 *.cf32
+__pycache__/
+*.pyc
+# Raw RF response captures stay local; tables, logs and plots are versionable.
+artifacts/response-*/*.bin
 

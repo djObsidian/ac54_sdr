@@ -1,0 +1,15 @@
+{
+  "sample_rate": 20000000,
+  "center_hz": 2462000000,
+  "samples": 39993344,
+  "rf_seconds": 1.9996672,
+  "video_fps": 30,
+  "frames": 60,
+  "fft_size": 2048,
+  "time_bin_ms": 1,
+  "color_dbfs_bin": [
+    -50.812522888183594,
+    -29.967180252075195
+  ],
+  "source": "tools\\cap\\waterfall-final.cs16"
+}

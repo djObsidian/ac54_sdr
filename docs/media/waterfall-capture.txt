@@ -1,0 +1,22 @@
+Recorded 2026-10-17. Real ambient RF; Pluto DDS muted.
+Command (from tools): cpustream.exe 2 2 cap/waterfall-final.cs16 1 1
+Receiver: RTL8822BU, channel 11 / 2462 MHz / BW20, path A.
+Firmware halfwords=842 banks=4882 rate=20000000
+CPU state seq=4882 error=0 remaining=0
+OK samples=39993344 RF_s=1.999667 wall_s=2.000665 max_bank_us=287 overlaps=19528 freshness=4880
+CPU/PHY restored after capture.
+
+Two earlier 3-second takes stopped on USB/CPU deadlines after 2.351514 and
+1.734246 RF seconds. Neither is used in this video. The successful take above
+was captured without simultaneous download/analysis activity. This demo does
+not establish unconditional long-term streaming reliability.
+
+Render (from repository root):
+python tools/render_waterfall.py tools/cap/waterfall-final.cs16 docs/media
+MP4: 1280x720, H.264, 30 fps, 60 frames, 2.000 seconds.
+GIF: 896x504, 30 frames, 67-ms requested frame delay, looping preview.
+Each waterfall row averages nine 2048-point Hann-windowed FFTs from a 1-ms
+time interval. Two adjacent bins are averaged for 1024 displayed bins.
+Color limits are fixed for the entire recording, derived from its percentiles.
+Video is a real-time replay; the GIF delay is quantized by the GIF format.
+Raw cs16 recording is kept locally and excluded from Git.

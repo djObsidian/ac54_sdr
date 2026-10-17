@@ -1,0 +1,206 @@
+[
+  {
+    "tx_gain_db": -20,
+    "offset_mhz": 1,
+    "power_dbfs": -23.436605277146022,
+    "snr_db": 24.9389638939209,
+    "detected": true,
+    "peak_mhz": 1.036376953125,
+    "snapshot_spread_db": 5.938511033774397,
+    "local_floor_dbfs": -48.37556917106692,
+    "pluto_rx1": {
+      "tone_dbfs": -33.24062782821042,
+      "peak_mhz": 0.999375,
+      "snr_db": 55.3733919746064,
+      "rms_dbfs": -33.043780323707125,
+      "clip_fraction": 0.0
+    }
+  },
+  {
+    "tx_gain_db": -20,
+    "offset_mhz": 4,
+    "power_dbfs": -15.699101780637406,
+    "snr_db": 26.25796947795552,
+    "detected": true,
+    "peak_mhz": 4.036865234375,
+    "snapshot_spread_db": 2.1061866439996226,
+    "local_floor_dbfs": -41.957071258592926,
+    "pluto_rx1": {
+      "tone_dbfs": -33.17612818386715,
+      "peak_mhz": 0.999375,
+      "snr_db": 56.471096638918695,
+      "rms_dbfs": -33.122302701842116,
+      "clip_fraction": 0.0
+    }
+  },
+  {
+    "tx_gain_db": -20,
+    "offset_mhz": 8,
+    "power_dbfs": -24.74527717029574,
+    "snr_db": 26.84980783335203,
+    "detected": true,
+    "peak_mhz": 8.037109375,
+    "snapshot_spread_db": 11.777523625885681,
+    "local_floor_dbfs": -51.59508500364777,
+    "pluto_rx1": {
+      "tone_dbfs": -33.14681034200045,
+      "peak_mhz": 0.999375,
+      "snr_db": 54.81221548008732,
+      "rms_dbfs": -32.880171434214716,
+      "clip_fraction": 0.0
+    }
+  },
+  {
+    "tx_gain_db": -20,
+    "offset_mhz": 10,
+    "power_dbfs": -23.431159967297624,
+    "snr_db": 24.03572665651627,
+    "detected": true,
+    "peak_mhz": -9.96337890625,
+    "snapshot_spread_db": 1.4831096875334815,
+    "local_floor_dbfs": -47.46688662381389,
+    "pluto_rx1": {
+      "tone_dbfs": -33.10340949797942,
+      "peak_mhz": 0.999375,
+      "snr_db": 55.76390691451497,
+      "rms_dbfs": -33.01193783961694,
+      "clip_fraction": 0.0
+    }
+  },
+  {
+    "tx_gain_db": -20,
+    "offset_mhz": 11,
+    "power_dbfs": -31.179330855472188,
+    "snr_db": 14.935766710977079,
+    "detected": true,
+    "peak_mhz": -8.963623046875,
+    "snapshot_spread_db": 5.6344445567799255,
+    "local_floor_dbfs": -46.11509756644927,
+    "pluto_rx1": {
+      "tone_dbfs": -33.08966267405524,
+      "peak_mhz": 0.999375,
+      "snr_db": 55.4157448781227,
+      "rms_dbfs": -32.99503640855089,
+      "clip_fraction": 0.0
+    }
+  },
+  {
+    "tx_gain_db": -20,
+    "offset_mhz": 12,
+    "power_dbfs": -43.841629459680036,
+    "snr_db": -0.14605088205568112,
+    "detected": false,
+    "peak_mhz": -7.962646484375,
+    "snapshot_spread_db": 167.04782440474594,
+    "local_floor_dbfs": -43.69557857762436,
+    "pluto_rx1": {
+      "tone_dbfs": -33.06944732464993,
+      "peak_mhz": 0.999375,
+      "snr_db": 56.82773782445554,
+      "rms_dbfs": -33.01657901191601,
+      "clip_fraction": 0.0
+    }
+  },
+  {
+    "tx_gain_db": -30,
+    "offset_mhz": 1,
+    "power_dbfs": -30.628954823666426,
+    "snr_db": 17.040723028344942,
+    "detected": true,
+    "peak_mhz": 1.036376953125,
+    "snapshot_spread_db": 6.947902042476979,
+    "local_floor_dbfs": -47.669677852011375,
+    "pluto_rx1": {
+      "tone_dbfs": -43.264550668054454,
+      "peak_mhz": 0.999375,
+      "snr_db": 46.715159977845396,
+      "rms_dbfs": -42.76599085558188,
+      "clip_fraction": 0.0
+    }
+  },
+  {
+    "tx_gain_db": -30,
+    "offset_mhz": 4,
+    "power_dbfs": -25.081018845816136,
+    "snr_db": 16.79570086886792,
+    "detected": true,
+    "peak_mhz": 4.036865234375,
+    "snapshot_spread_db": 8.58970772740134,
+    "local_floor_dbfs": -41.87671971468406,
+    "pluto_rx1": {
+      "tone_dbfs": -43.205099188122524,
+      "peak_mhz": 0.999375,
+      "snr_db": 46.75283255207005,
+      "rms_dbfs": -42.70118715087338,
+      "clip_fraction": 0.0
+    }
+  },
+  {
+    "tx_gain_db": -30,
+    "offset_mhz": 8,
+    "power_dbfs": -26.66540376031953,
+    "snr_db": 17.723999497896912,
+    "detected": true,
+    "peak_mhz": 8.037109375,
+    "snapshot_spread_db": 2.5189037971195276,
+    "local_floor_dbfs": -44.38940325821645,
+    "pluto_rx1": {
+      "tone_dbfs": -43.17496769301152,
+      "peak_mhz": 0.999375,
+      "snr_db": 46.83035577616874,
+      "rms_dbfs": -42.682161787439696,
+      "clip_fraction": 0.0
+    }
+  },
+  {
+    "tx_gain_db": -30,
+    "offset_mhz": 10,
+    "power_dbfs": -33.71008500577588,
+    "snr_db": 13.852668498904457,
+    "detected": true,
+    "peak_mhz": -9.96337890625,
+    "snapshot_spread_db": 3.4981929660499063,
+    "local_floor_dbfs": -47.56275350468034,
+    "pluto_rx1": {
+      "tone_dbfs": -43.09649531369833,
+      "peak_mhz": 0.999375,
+      "snr_db": 46.63599939927999,
+      "rms_dbfs": -42.406187477207965,
+      "clip_fraction": 0.0
+    }
+  },
+  {
+    "tx_gain_db": -30,
+    "offset_mhz": 11,
+    "power_dbfs": -40.8982019587058,
+    "snr_db": 5.235845162473924,
+    "detected": false,
+    "peak_mhz": -8.963623046875,
+    "snapshot_spread_db": 11.12852748969469,
+    "local_floor_dbfs": -46.13404712117973,
+    "pluto_rx1": {
+      "tone_dbfs": -43.07379859537341,
+      "peak_mhz": 0.999375,
+      "snr_db": 46.78431595607434,
+      "rms_dbfs": -42.589373485580175,
+      "clip_fraction": 0.0
+    }
+  },
+  {
+    "tx_gain_db": -30,
+    "offset_mhz": 12,
+    "power_dbfs": -49.268330229262716,
+    "snr_db": -5.3698136830110075,
+    "detected": false,
+    "peak_mhz": -7.952880859375,
+    "snapshot_spread_db": 172.85866750580718,
+    "local_floor_dbfs": -43.89851654625171,
+    "pluto_rx1": {
+      "tone_dbfs": -43.07515164669793,
+      "peak_mhz": 0.999375,
+      "snr_db": 45.59155661012309,
+      "rms_dbfs": -40.65073793950988,
+      "clip_fraction": 0.0
+    }
+  }
+]

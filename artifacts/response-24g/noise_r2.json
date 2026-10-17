@@ -1,0 +1,8 @@
+{
+  "tone_dbfs": -43.58632995729625,
+  "peak_mhz": -0.9326171875,
+  "snr_db": -1.5177552480798875,
+  "rms_dbfs": -8.162058540090372,
+  "clip_fraction": 0.0,
+  "capture": "8/8 snapshot(s) in 421 ms -> C:\\workspace\\vibeslop\\ac54_sdr\\artifacts\\response-24g\\noise_r2.bin"
+}

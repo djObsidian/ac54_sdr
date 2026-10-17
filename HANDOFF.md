@@ -1,6 +1,22 @@
 # HANDOFF — ASUS USB-AC54 (RTL8822BU) SDR via USB
 
-## RF coverage and remaining validation (2026-10-17)
+## OTA response measured (2026-10-17, latest)
+
+See [docs/frequency-response.md](docs/frequency-response.md) and
+`artifacts/response-24g/analyzed.csv`: Pluto TX1 swept 2442..2482 MHz,
+RTL center2462/BW20, 38 frequencies x 2 passes x LA rates20/40 MSPS.
+RX1 source-level check and two real CPU20-MSPS captures also passed.
+Positive RF offset gives positive IQ frequency; +11 MHz aliases to
+-8.964 MHz at20 MSPS (also confirmed in CPU stream). Relative oscillator
+offset is about +36..38 kHz. Response rolls off strongly beyond +/-10 MHz.
+This is an uncalibrated OTA link response: multipath and unverified fixed
+RX gain prevent a receiver-only ripple or -3-dB bandwidth claim. The
+20-MSPS sampling path is not alias-free. 5 GHz was not measured.
+Raw captures remain local/ignored; CSV, JSON, logs and PNG are versionable.
+Pluto DDS muted at completion. Initial probe exposed iio_attr -q suppressing
+readback; fixed before the saved main sweep; initial Pluto settings restored.
+
+## RF coverage and remaining validation (2026-10-17, before OTA sweep)
 
 - Current `cpustream` is hardcoded to channel11 / 2462 MHz / BW20. Its
   20-MSPS minute-long validation does not validate other RF channels or widths.
