@@ -70,7 +70,7 @@ int main(int argc, char **argv)
         put(0x10c,saved[3].value & ~4u,1) ||
         put(0x608,0x7000600f,4) || put(0x6a0,0xffff,2) ||
         put(0x6a2,0xffff,2) || put(0x6a4,0xffff,2) ||
-        put(0x60f,4,1) || put(0x100,saved[0].value | 0x20a,2)) {
+        put(0x60f,4,1) || put(0x100,saved[0].value | 0x8a,2)) {
         failed = 1; goto cleanup;
     }
     SetConsoleCtrlHandler(stop_handler, TRUE);

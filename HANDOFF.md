@@ -1,5 +1,77 @@
 # HANDOFF — ASUS USB-AC54 (RTL8822BU) SDR via USB
 
+## Session 5 (2026-10-17): continuous IQ reaches PC at 1.25 MS/s
+
+User priority: get continuous IQ onto the PC; SpyServer is only a viewer adapter.
+Previous checkpoint committed as `eb1aa8e` (USB3 + snapshot SpyServer).
+
+**Working device-side path, no firmware:**
+
+1. Arm LA once (`0x7c0=0xcb`), never trigger it. It keeps overwriting TX SRAM
+   `0x20000..0x3ffff`; `0x7c0` does NOT expose a live writer cursor.
+2. DDMA (`0x1200/04/08`) copies samples from `0x18780000 + LA_START + offset`
+   to RX SRAM `0x18701018`. Register writes can be batched into one 12-byte
+   vendor write; source/destination precede OWN/length. Poll OWN until done.
+3. A 24-byte RX descriptor at `0x18701000` contains payload length, OWN and C2H
+   flags. Request `0x294=0x00011000` sends descriptor + payload to bulk EP84.
+4. Host bulk read is submitted asynchronously before the copy/request.
+   Capture stays armed throughout; no snapshot repetition or crossfades.
+
+`tools/dmaprobe.c` proved exact transfer of a deterministic 256-byte marker,
+including DDMA copy TX -> RX. Direct C2H from TX and firmware RX space did not
+return the marker in the tried mappings; only normal RX staging is established.
+
+`tools/liveprobe.c` measured ring wrap time. **Correction: rate=7 is not a usable
+625 kS/s divider on this chip** (observed rapid wraps, consistent with fast ADC).
+rate=6 gives ~13.107 ms/ring = **1.25 MS/s**. Earlier minimum-rate claims below
+are superseded. Raw LA words are 8 B each -> ~10 MB/s transported plus overlap.
+
+Standalone usage (does its own full initialization to reset stale RX FIFO state):
+
+```
+cd tools
+mk.bat iqstream
+usb3.exe status
+iqstream.exe ch=11 rate=6 seconds=30 out=cap\continuous.cs16
+```
+
+Output: little-endian signed int16 I,Q; 12-bit ADC values scaled by 16.
+`out=-` produces **binary stdout**, all diagnostics go to stderr. This is the
+primary integration path for another PC application; no SpyServer dependency.
+For binary redirection under Windows PowerShell 5 use cmd, e.g.
+`cmd /c "iqstream.exe seconds=2 out=- > cap\stdout.cs16"`.
+
+Each fetch has 1984 new samples and 32 overlapping samples. Success requires exact
+byte agreement of each overlap with the previous fetch. The reader starts half
+a ring behind the writer, paces via QPC, and stops on late scheduling, missed DMA
+deadline, overlap mismatch, unexpected USB packet, or output error. It does not
+silently repeat/drop/fill samples. Timing is based on nominal sample clock;
+unbounded loss-free operation under arbitrary Windows load is NOT established.
+Reinitialization/retuning starts a new capture and has a gap.
+
+Verified:
+- Standalone 30 s: **37,499,584 samples**, 29.999667 s RF / 30.005890 s wall,
+  all overlap checks passed, max fetch 2.198 ms; file 149,998,336 bytes.
+- After batched DMA commands + prequeued USB read: standalone 10 s,
+  12,499,200 samples, all overlap checks passed, max fetch 1.947 ms.
+- Binary stdout: 2,499,840 samples / 9,999,360 bytes, no text in output.
+- **2.5 MS/s (rate=5) is not sustained by this implementation**, even without
+  SpyServer and after batching/prequeueing. Host misses the ring deadline after
+  a few blocks and exits nonzero. Not a demonstrated USB3 link bandwidth limit.
+  DDMA_MODE bit26 did not resolve it and is left clear.
+- LA rate division is sample dropping, not a verified anti-alias decimator;
+  BB remains BW20. Do not interpret 1.25 MS/s output as a clean 1.25 MHz RF band.
+  Higher-throughput transport and hardware filtering/packing remain next work.
+
+Optional viewer: `spyserver.exe` now defaults to `live=1`: advertises 1.25 MS/s,
+zero extra decimation, bounded queue, never replays samples, closes client on
+capture/queue failure. `live=0` explicitly selects the old snapshot-loop mode.
+Frequency retune restarts acquisition (~0.7 s gap); phase/DC removal are stateful
+inside each continuous run. The DLL/USB path is shared with standalone iqstream.
+`test_live.ps1` checks protocol sequencing, rate, 100 distinct blocks, format,
+and optional retune. int16: 10 s ~1,249,475 samples/s; float + retune passed;
+uint8 after final transport changes: 3 s ~1,252,283 samples/s, 100 distinct blocks.
+
 ## Session 4 (2026-10-17): USB3 verified; continuous IQ NOT implemented
 
 - Built and ran `tools/usb3.exe` (rtw88 switch sequence). Hardware now reports
